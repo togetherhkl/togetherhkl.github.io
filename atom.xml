@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Redamancy</title>
+  
+  <subtitle>学习学习再学习</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-12-21T14:44:48.729Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Redamancy</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>视频记录测试</title>
+    <link href="http://example.com/posts/18162.html"/>
+    <id>http://example.com/posts/18162.html</id>
+    <published>2022-12-21T01:25:00.000Z</published>
+    <updated>2022-12-21T14:44:48.729Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是视频记录&quot;&gt;&lt;a href=&quot;#1-这是视频记录&quot; class=&quot;headerlink&quot; title=&quot;1.这是视频记录&quot;&gt;&lt;/a&gt;1.这是视频记录&lt;/h2&gt;&lt;iframe class=&quot;my-movies&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="视频记录" scheme="http://example.com/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于django开发的博客系统</title>
+    <link href="http://example.com/posts/60118.html"/>
+    <id>http://example.com/posts/60118.html</id>
+    <published>2022-12-18T03:02:28.000Z</published>
+    <updated>2022-12-21T08:42:21.424Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-基于django开发的博客系统&quot;&gt;&lt;a href=&quot;#1-基于django开发的博客系统&quot; class=&quot;headerlink&quot; title=&quot;1.基于django开发的博客系统&quot;&gt;&lt;/a&gt;1.基于django开发的博客系统&lt;/h2&gt;&lt;h3</summary>
+        
+      
+    
+    
+    
+    <category term="web安全" scheme="http://example.com/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="pycharm" scheme="http://example.com/tags/pycharm/"/>
+    
+    <category term="django" scheme="http://example.com/tags/django/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web安全分类测试</title>
+    <link href="http://example.com/posts/54596.html"/>
+    <id>http://example.com/posts/54596.html</id>
+    <published>2022-12-18T03:02:28.000Z</published>
+    <updated>2022-12-19T08:41:37.214Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-文章标签名的修改&quot;&gt;&lt;a href=&quot;#1-文章标签名的修改&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="catrename" scheme="http://example.com/categories/catrename/"/>
+    
+    
+    <category term="testfile" scheme="http://example.com/tags/testfile/"/>
+    
+    <category term="rename" scheme="http://example.com/tags/rename/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web2的测试.md</title>
+    <link href="http://example.com/posts/38587.html"/>
+    <id>http://example.com/posts/38587.html</id>
+    <published>2022-12-18T01:11:21.000Z</published>
+    <updated>2022-12-18T01:13:32.246Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-SLHFLS&quot;&gt;&lt;a href=&quot;#1-SLHFLS&quot; class=&quot;headerlink&quot; title=&quot;1.SLHFLS&quot;&gt;&lt;/a&gt;1.SLHFLS&lt;/h2&gt;&lt;p&gt;LJLKJL&lt;/p&gt;
+&lt;h2 id=&quot;2-sfjsjfls&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="web安全" scheme="http://example.com/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="web" scheme="http://example.com/tags/web/"/>
+    
+    <category term="安全" scheme="http://example.com/tags/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试文章.md</title>
+    <link href="http://example.com/posts/30897.html"/>
+    <id>http://example.com/posts/30897.html</id>
+    <published>2022-12-17T13:44:06.000Z</published>
+    <updated>2022-12-18T01:16:01.209Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-first&quot;&gt;&lt;a href=&quot;#1-first&quot; class=&quot;headerlink&quot; title=&quot;1.first&quot;&gt;&lt;/a&gt;1.first&lt;/h1&gt;&lt;h2 id=&quot;1-1-shfle&quot;&gt;&lt;a href=&quot;#1-1-shfle&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="http://example.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+    <category term="musql" scheme="http://example.com/tags/musql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/posts/16107.html"/>
+    <id>http://example.com/posts/16107.html</id>
+    <published>2022-12-15T12:52:37.872Z</published>
+    <updated>2022-12-16T09:01:20.845Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CTF分类测试</title>
+    <link href="http://example.com/posts/53480.html"/>
+    <id>http://example.com/posts/53480.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-19T08:42:07.881Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是CTF分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是CTF分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTF练习" scheme="http://example.com/categories/CTF%E7%BB%83%E4%B9%A0/"/>
+    
+    
+    <category term="平常联系" scheme="http://example.com/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/"/>
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux分类测试</title>
+    <link href="http://example.com/posts/15209.html"/>
+    <id>http://example.com/posts/15209.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-19T08:41:37.194Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是Linux分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是Linux分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python分类测试</title>
+    <link href="http://example.com/posts/41756.html"/>
+    <id>http://example.com/posts/41756.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-19T08:41:37.202Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="http://example.com/categories/Python/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++分类测试</title>
+    <link href="http://example.com/posts/33284.html"/>
+    <id>http://example.com/posts/33284.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-20T07:32:10.559Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="与C相关" scheme="http://example.com/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>光与影的分类测试</title>
+    <link href="http://example.com/posts/10777.html"/>
+    <id>http://example.com/posts/10777.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-22T09:34:32.924Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是光与影分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是光与影分类下的文章&quot; class=&quot;headerlink&quot; title=&quot;1.这是光与影分类下的文章&quot;&gt;&lt;/a&gt;1.这是光与影分类下的文章&lt;/h2&gt;&lt;center class=&quot;half&quot;&gt;
+   </summary>
+        
+      
+    
+    
+    
+    <category term="光与影" scheme="http://example.com/categories/%E5%85%89%E4%B8%8E%E5%BD%B1/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>红蓝对抗测试</title>
+    <link href="http://example.com/posts/58351.html"/>
+    <id>http://example.com/posts/58351.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-19T08:41:37.190Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是红蓝对抗分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是红蓝对抗分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="红蓝对抗" scheme="http://example.com/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阅读测试</title>
+    <link href="http://example.com/posts/56380.html"/>
+    <id>http://example.com/posts/56380.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-19T08:41:37.182Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是阅读分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是阅读分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="阅读" scheme="http://example.com/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+    <category term="编成学习" scheme="http://example.com/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="http://example.com/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+</feed>
