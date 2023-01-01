@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>2022年度总结</title>
+      <link href="/posts/19562.html"/>
+      <url>/posts/19562.html</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><h2 id="1-年度计划的开始"><a href="#1-年度计划的开始" class="headerlink" title="1.年度计划的开始"></a>1.年度计划的开始</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计划和总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 年度总结 </tag>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/posts/16107.html"/>
       <url>/posts/16107.html</url>
@@ -33,36 +60,9 @@
       
         <tags>
             
-            <tag> 项目经历 </tag>
-            
             <tag> 编成学习 </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>基于django开发的博客系统</title>
-      <link href="/posts/60118.html"/>
-      <url>/posts/60118.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="1-基于django开发的博客系统"><a href="#1-基于django开发的博客系统" class="headerlink" title="1.基于django开发的博客系统"></a>1.基于django开发的博客系统</h2><h3 id="1-2-开始开发"><a href="#1-2-开始开发" class="headerlink" title="1.2 开始开发"></a>1.2 开始开发</h3><iframe class="my-movies" src="//player.bilibili.com/player.html?aid=55513374&amp;bvid=BV1d4411P7GR&amp;cid=97119880&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h3 id="1-3-在windows上进行文章的编写"><a href="#1-3-在windows上进行文章的编写" class="headerlink" title="1.3 在windows上进行文章的编写"></a>1.3 在windows上进行文章的编写</h3><blockquote><p>这是我的文章</p></blockquote><h3 id="1-4-如何才能更好的在windows上编写文章呢"><a href="#1-4-如何才能更好的在windows上编写文章呢" class="headerlink" title="1.4 如何才能更好的在windows上编写文章呢"></a>1.4 如何才能更好的在windows上编写文章呢</h3><blockquote><p>你写的每一篇文章都值得被记录</p></blockquote><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'hello word'</span><span class="token punctuation">)</span>    <span class="token comment"># 我明明修改了文章，但是就是GitHub就是不更新呢</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="1-5-感觉更新落后修改一步呀"><a href="#1-5-感觉更新落后修改一步呀" class="headerlink" title="1.5 感觉更新落后修改一步呀"></a>1.5 感觉更新落后修改一步呀</h3><blockquote><p>这是为什么？更新的比修改的内容要却少一步</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> web安全 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> pycharm </tag>
-            
-            <tag> django </tag>
+            <tag> 项目经历 </tag>
             
         </tags>
       
@@ -98,52 +98,25 @@
     
     
     <entry>
-      <title>web2的测试.md</title>
-      <link href="/posts/38587.html"/>
-      <url>/posts/38587.html</url>
+      <title>CTF分类测试</title>
+      <link href="/posts/53480.html"/>
+      <url>/posts/53480.html</url>
       
-        <content type="html"><![CDATA[<h2 id="1-SLHFLS"><a href="#1-SLHFLS" class="headerlink" title="1.SLHFLS"></a>1.SLHFLS</h2><p>LJLKJL</p><h2 id="2-sfjsjfls"><a href="#2-sfjsjfls" class="headerlink" title="2.sfjsjfls"></a>2.sfjsjfls</h2><p>fk;alkjkl</p><h2 id="3-sjlkw"><a href="#3-sjlkw" class="headerlink" title="3.sjlkw"></a>3.sjlkw</h2><p>sflsk</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-这是CTF分类下的文章"><a href="#1-这是CTF分类下的文章" class="headerlink" title="1.这是CTF分类下的文章"></a>1.这是CTF分类下的文章</h2>]]></content>
       
       
       <categories>
           
-          <category> web安全 </category>
+          <category> CTF练习 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> web </tag>
+            <tag> 平常联系 </tag>
             
-            <tag> 安全 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>测试文章.md</title>
-      <link href="/posts/30897.html"/>
-      <url>/posts/30897.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="1-first"><a href="#1-first" class="headerlink" title="1.first"></a>1.first</h1><h2 id="1-1-shfle"><a href="#1-1-shfle" class="headerlink" title="1.1 shfle"></a>1.1 shfle</h2><p>sfslkfjlsk</p><h1 id="2-second"><a href="#2-second" class="headerlink" title="2.second"></a>2.second</h1><h2 id="2-1-s"><a href="#2-1-s" class="headerlink" title="2.1 s"></a>2.1 s</h2><p>akjfakl</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Web安全 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CTF </tag>
-            
-            <tag> musql </tag>
+            <tag> 编成学习 </tag>
             
         </tags>
       
@@ -168,36 +141,9 @@
       
         <tags>
             
+            <tag> 编成学习 </tag>
+            
             <tag> 项目经历 </tag>
-            
-            <tag> 编成学习 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CTF分类测试</title>
-      <link href="/posts/53480.html"/>
-      <url>/posts/53480.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="1-这是CTF分类下的文章"><a href="#1-这是CTF分类下的文章" class="headerlink" title="1.这是CTF分类下的文章"></a>1.这是CTF分类下的文章</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> CTF练习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 编成学习 </tag>
-            
-            <tag> 平常联系 </tag>
             
         </tags>
       
@@ -222,36 +168,9 @@
       
         <tags>
             
-            <tag> 项目经历 </tag>
-            
             <tag> 编成学习 </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>光与影的分类测试</title>
-      <link href="/posts/10777.html"/>
-      <url>/posts/10777.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="1-这是光与影分类下的文章"><a href="#1-这是光与影分类下的文章" class="headerlink" title="1.这是光与影分类下的文章"></a>1.这是光与影分类下的文章</h2><center class="half">    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnfolw5kxj30u00u0qe5.jpg" width="150">    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnfolw5kxj30u00u0qe5.jpg" width="150">    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnfolw5kxj30u00u0qe5.jpg" width="150">    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnfolw5kxj30u00u0qe5.jpg" width="150"></center>]]></content>
-      
-      
-      <categories>
-          
-          <category> 光与影 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
             <tag> 项目经历 </tag>
-            
-            <tag> 编成学习 </tag>
             
         </tags>
       
@@ -276,9 +195,9 @@
       
         <tags>
             
-            <tag> 项目经历 </tag>
-            
             <tag> 编成学习 </tag>
+            
+            <tag> 项目经历 </tag>
             
         </tags>
       
@@ -303,9 +222,9 @@
       
         <tags>
             
-            <tag> 项目经历 </tag>
-            
             <tag> 编成学习 </tag>
+            
+            <tag> 项目经历 </tag>
             
         </tags>
       
@@ -330,9 +249,9 @@
       
         <tags>
             
-            <tag> 项目经历 </tag>
-            
             <tag> 编成学习 </tag>
+            
+            <tag> 项目经历 </tag>
             
         </tags>
       
