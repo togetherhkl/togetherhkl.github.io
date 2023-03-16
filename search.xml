@@ -4,7 +4,34 @@
   
     
     <entry>
-      <title>2022年终总结与2023年年度计划</title>
+      <title>2022年编程框架的使用总结</title>
+      <link href="/posts/4029.html"/>
+      <url>/posts/4029.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-专业上的收获"><a href="#1-专业上的收获" class="headerlink" title="1.专业上的收获"></a>1.专业上的收获</h2><h3 id="1-1-框架的使用"><a href="#1-1-框架的使用" class="headerlink" title="1.1 框架的使用"></a>1.1 框架的使用</h3><p>该部分的结构如下，绿色是概括，灰色是过度解释等，蓝色是描述，橙色多数是描述对应的例子，黄色是迁移</p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20230103124345.png" alt="image-20230103124343725" style="zoom:67%;"><img src="E:/markdown%E6%96%87%E4%BB%B6/typroaPic/image-20230103124226826.png" alt="image-20230103124226826" style="zoom: 67%;"><h4 id="1-1-1-背景"><a href="#1-1-1-背景" class="headerlink" title="1.1.1 背景"></a>1.1.1 背景</h4><p>#c 过渡 目标</p><p>2022年使用使用框架做了许多的东西，如下所示；我在使用这些框架时，大多数是需要使用这个框架来完成一些课程作业。这一年使用了这五个框架来完成课程任务，下面从五个框架进行「归纳」，然后「预测」自己在使用下一个框架时，能够更快的上手一个框架。</p><blockquote><ul><li>使用Qt框架写了一个CS模式的算法可视化</li><li>使用Django框架写一个BS模式个人博客网站</li><li>使用微信小程序+django做了一个电子投票的系统</li><li>学习了vue框架的部分知识</li><li>使用hexo框架搭建了个人静态网站</li></ul></blockquote><p>#c 解释 输入输出</p><blockquote><p>这里选择的输入是「学习框架的方式」，对输入进行细分，我提取了「目录结构」，「基础编程语言」，「开发工具」，「常用组件」，「框架文档」，「算法」这六元素作为输入，输出是「框架所作出的项目」，渐构的模型是「从六元素出发可以帮助我们快速掌握一个框架」</p></blockquote><h4 id="1-1-2-认识框架"><a href="#1-1-2-认识框架" class="headerlink" title="1.1.2 认识框架"></a>1.1.2 认识框架</h4><p>#d 框架</p><blockquote><p>框架是一组基础代码，它为应用程序或网站的开发提供了一组结构和标准。框架通常包含一些基本的功能和组件，并为开发者提供了一组编程接口，使开发者能够在框架的基础上开发应用程序或网站。</p><p>框架的目的是为开发者提供一组统一的架构和编程模型，使他们能够更快地开发应用程序或网站，并使这些应用程序或网站更具可维护性和扩展性。</p></blockquote><p>#t 修建房子 框架</p><blockquote><p>现在我们在看建筑工人修建房子的时候，其中修建房子所需要的「材料」，如门，窗户，砂浆，砖瓦等都是已经准备好了，这些材料就好比框架提供的「一组结构和标准」。我门在修建房子时不用再去拉沙子，水泥，然后自己弄泥浆；也不用再自己去山上砍树，自己切木头来做门了直接使用已经提供好的。</p></blockquote><p>#e 微信小程序 框架<br>微信小程序提供了一组组件和 API，让开发者可以使用这些组件和 API 开发小程序应用，比如：界面布局、数据存储、网络请求、地图、视频、音频等。所以微信程序是一个框架。</p><h4 id="1-1-3-掌握框架"><a href="#1-1-3-掌握框架" class="headerlink" title="1.1.3 掌握框架"></a>1.1.3 掌握框架</h4><p>#c 发现 框架的特点<br>这里再经过几个框架的使用，我发现框架有一下共同特点，「目录结构」，「常用组件」，「基础编程语言」，「高级组件」，「开发工具」，「文档」等。我们想快速使用一个框架来开发一个demo，可以从一下几点考虑。</p><p>#c 提问 快速掌握<br>那么，我们如何快速掌握框架呢？</p><p>#d 掌握基础编程语言</p><blockquote><p>框架是使用对应的「基础编程语言」，来对功能进行封装的。只有再掌握「基础编程语言」过后，才能更好的学习框架。<br>有时框架提供的组件不满足我们的需求时，就需要修改组件的源代码，如果不熟悉框架所使用的语言的话，就会导致学习困难。框架的文档有时也有代码，不熟悉框架使用的语言的话，也会导致阅读文档的困难。</p></blockquote><p>#e django框架<br>比如Django这个Web框架，的基础编程语言是python，Django在进行「数据库查询过滤」的时候就需要使用python的「字典」和「列表」，如果不清楚字典和列表的话，就会导致学习困难，失去信心。</p><p>#e 微信小程序框架<br>微信小程序的开发语言是 JavaScript，所以开发者在使用微信小程序框架时，需要掌握 JavaScript 的基础知识。同时还要了解HTML文本标记，CSS样式，注意HTML与CSS不是「编程语言」。</p><p>#d 熟悉开发工具与目录结构</p><blockquote><p>有可框架有自己特有的开发工具，比如了解开发工具如何创建一个项目，设置功能等等。主要的是明白框架的目录结构，比如每个文件夹有什么作用，那些是主要的文件，我们创建的文件因该放在那个位置。</p></blockquote><p>#e 微信小程序目录结构<br><img src="http://www.mpgcw.com/wp-content/uploads/2021/02/2021021201.jpg"></p><blockquote><p>pages：这里存放小程序的页面文件。每个页面文件包含 HTML、CSS 和 JavaScript 三个部分，用于描述页面的结构、样式和交互功能。</p><p>components：这里存放小程序的组件文件。组件是可复用的页面元素，可以在多个页面中使用。每个组件文件也包含 HTML、CSS 和 JavaScript 三个部分，用于描述组件的结构、样式和交互功能。</p><p>utils：这里存放小程序的工具文件。工具文件通常是一些 JavaScript 文件，包含一些常用的函数和方法，可以在多个页面或组件中使用。</p><p>images：这里存放小程序的图片文件。</p><p>app.js：这是小程序的入口文件，包含小程序的初始化代码。</p><p>app.json：这是小程序的配置文件，包含小程序的名称、版本、页面路径等信息。</p><p>app.wxss：这是小程序的全局样式文件，包含小程序的全局样式规则。</p><p>比较重要的文件，如pages，app.js，app.json需要掌握。</p></blockquote><p>#d 掌握常用组件</p><blockquote><p>如果我们想使用一个框架来完成老师布置的课程设计，我们需要把一个框架学完才开始吗？这显然是不行的，一是时间上不允许，二是在学习时持久做不出来项目，会逐渐失去信心。所以我认为在「掌握常用组件」后，就可以开始写老师的课程设计了，因为小demo或者项目的反馈，有助于提高学习的兴趣。每个框架都有其特色并且经常使用的功能，我们在知道自己需要使用的常用功能后，可以寻找对应的资料来学习，B站视频，官方文档等都可以，这样就可以按需学习了。当我们逐渐的对这个框架熟悉过后，可以根据自己的需要选择学习「高级组件」或者系统的学习整个框架。</p></blockquote><p>#e Qt常用功能</p><blockquote><p>布局管理器：Qt 提供了多种布局管理器，可以让你轻松地调整窗口内部各个部件的位置和大小。<br>信号和槽：Qt 提供了信号和槽机制，可以让你在不同的部件之间传递消息。<br>窗口部件：Qt 提供了多种窗口部件，包括按钮、菜单、文本框、列表框等，你可以使用这些部件来构建应用程序的用户界面。<br>事件处理：Qt 支持事件处理机制，你可以使用事件处理函数来响应用户的操作。<br>图形绘制：Qt 提供了图形绘制功能，你可以使用它来绘制线条、曲线、图形等</p></blockquote><p>#d 训练文档的阅读</p><blockquote><p>当我们确定需要掌握的知识，就开始选择相应的资料进行学习了。「选择方式」比较多，如视频，文档，周围的同学等方式，这一年我是在B站上跟着视频进行学习的。但是我发现视频学习的一个问题，在学习过一个知识点过后，时间长，忘记了，需要找来回顾时，找特定的视频位置比较困难。这时通过文档就能很快的找到，但需要我们「训练文档的阅读能力」，以便自己能够在文档中获取自己需要的信息。</p></blockquote><p>#d 算法的训练</p><blockquote><p>之前在训练算法的时候，我在想我花时间解这道算法题，有什么作用呢？推动我学算法的动力在哪里呢？有时因为花时间，最后解出一道算法题的一种成就感。但也因为长时间没有解答出来，而逐渐失去信心。还不如做出一个小项目后的成就感强呢。</p><p>但是在今年先项目的过程中，我发现算法的重要性，在训练算法时，不应该用「是否解出算法题来反馈」，这样会导致长时间未解答出来而失去信心，应该用这个算法题「是否训练了自己的编程思维」来作为反馈。</p><p>「训练编写算法的能力」特点之一就是帮助我们训练「编程时的思维能力」，当我们在做项目的过程中，想到某个功能需求时，可以快速的实现。</p></blockquote><p>#e 嵌套for循环<br>我今年在写个人博客系统时，用户的Django框架，在后端处理数据时需要使用嵌套for循环来处理数据，但是这个嵌套for循环的判断却然我思考了好长一段时间。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计划和总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 年度总结 </tag>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022年终总结与2023年度计划</title>
       <link href="/posts/56901.html"/>
       <url>/posts/56901.html</url>
       
@@ -13,7 +40,7 @@
       
       <categories>
           
-          <category> 计划与总结 </category>
+          <category> 计划和总结 </category>
           
       </categories>
       
@@ -31,20 +58,7 @@
     
     
     <entry>
-      <title></title>
-      <link href="/posts/0.html"/>
-      <url>/posts/0.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="1-默认标题测试"><a href="#1-默认标题测试" class="headerlink" title="1.默认标题测试"></a>1.默认标题测试</h1>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>2022年度总结</title>
+      <title>2022</title>
       <link href="/posts/19562.html"/>
       <url>/posts/19562.html</url>
       
@@ -138,6 +152,33 @@
     
     
     <entry>
+      <title>阅读测试</title>
+      <link href="/posts/56380.html"/>
+      <url>/posts/56380.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-这是阅读分类下的文章"><a href="#1-这是阅读分类下的文章" class="headerlink" title="1.这是阅读分类下的文章"></a>1.这是阅读分类下的文章</h2><h2 id="《如何阅读一本书》"><a href="#《如何阅读一本书》" class="headerlink" title="《如何阅读一本书》"></a>《如何阅读一本书》</h2><h3 id="书本信息"><a href="#书本信息" class="headerlink" title="书本信息"></a>书本信息</h3><blockquote><p>作者：</p></blockquote><h3 id="阅读记录"><a href="#阅读记录" class="headerlink" title="阅读记录"></a>阅读记录</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 阅读 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编成学习 </tag>
+            
+            <tag> 项目经历 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CTF分类测试</title>
       <link href="/posts/53480.html"/>
       <url>/posts/53480.html</url>
@@ -175,33 +216,6 @@
       <categories>
           
           <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 编成学习 </tag>
-            
-            <tag> 项目经历 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python分类测试</title>
-      <link href="/posts/41756.html"/>
-      <url>/posts/41756.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="1-这是C-分类下的文章"><a href="#1-这是C-分类下的文章" class="headerlink" title="1.这是C#分类下的文章"></a>1.这是C#分类下的文章</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> Python </category>
           
       </categories>
       
@@ -273,16 +287,16 @@
     
     
     <entry>
-      <title>阅读测试</title>
-      <link href="/posts/56380.html"/>
-      <url>/posts/56380.html</url>
+      <title>Python分类测试</title>
+      <link href="/posts/41756.html"/>
+      <url>/posts/41756.html</url>
       
-        <content type="html"><![CDATA[<h2 id="1-这是阅读分类下的文章"><a href="#1-这是阅读分类下的文章" class="headerlink" title="1.这是阅读分类下的文章"></a>1.这是阅读分类下的文章</h2>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-这是C-分类下的文章"><a href="#1-这是C-分类下的文章" class="headerlink" title="1.这是C#分类下的文章"></a>1.这是C#分类下的文章</h2>]]></content>
       
       
       <categories>
           
-          <category> 阅读 </category>
+          <category> Python </category>
           
       </categories>
       
