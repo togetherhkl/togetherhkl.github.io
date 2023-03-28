@@ -1,0 +1,2152 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="xss实验, Redamancy">
+    <meta name="description" content="不同的类型文件上传的方式有所不同，对上传漏洞的分类，对不同的漏洞实行不同的方法可以实现高效率准确的上传。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>xss实验 | Redamancy</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/matery.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/my.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/reward.css">
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Redamancy" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Redamancy</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-shield moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>安全</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/web%E5%AE%89%E5%85%A8">
+          
+          <i class="fas fa-globe moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF%E7%BB%83%E4%B9%A0">
+          
+          <i class="fas fa-flag moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>CTF练习</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97">
+          
+          <i class="fas fa-shield-halved moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>红蓝对抗</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-code-branch moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>编程</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/Python">
+          
+          <i class="fab fa-python moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3">
+          
+          <i class="fas fa-c moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>与C相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/Linux">
+          
+          <i class="fab fa-linux moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Linux</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-icons moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>生活</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1">
+          
+          <i class="fas fa-image moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>光与影</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E9%98%85%E8%AF%BB">
+          
+          <i class="fas fa-book-open moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>阅读</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>音乐</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95">
+          
+          <i class="fas fa-film moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>视频记录</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>整理</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/catstags">
+          
+          <i class="fas fa-bookmark moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>分类&标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-file-lines moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>归档</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-link moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>交流</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/friends">
+          
+          <i class="fas fa-address-book moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>友链</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/contact">
+          
+          <i class="fas fa-comments moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>留言</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search " title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--<li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>-->
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Redamancy</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-shield"></i>
+			
+			安全
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/web%E5%AE%89%E5%85%A8 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-globe" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Web安全</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/CTF%E7%BB%83%E4%B9%A0 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-flag" style="position: absolute;left:50px" ></i>
+			      
+		          <span>CTF练习</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-shield-halved" style="position: absolute;left:50px" ></i>
+			      
+		          <span>红蓝对抗</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-code-branch"></i>
+			
+			编程
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/Python " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-python" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Python</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-c" style="position: absolute;left:50px" ></i>
+			      
+		          <span>与C相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/Linux " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-linux" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Linux</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-icons"></i>
+			
+			生活
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px" ></i>
+			      
+		          <span>光与影</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E9%98%85%E8%AF%BB " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book-open" style="position: absolute;left:50px" ></i>
+			      
+		          <span>阅读</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>音乐</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>视频记录</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			整理
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/catstags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+		          <span>分类&标签</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-file-lines" style="position: absolute;left:50px" ></i>
+			      
+		          <span>归档</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-link"></i>
+			
+			交流
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/friends " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-address-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>友链</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/contact " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-comments" style="position: absolute;left:50px" ></i>
+			      
+		          <span>留言</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">xss实验</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                                <span class="chip bg-color">安全攻防</span>
+                            </a>
+                        
+                            <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
+                                <span class="chip bg-color">xss漏洞</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-03-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="xss-labs"><a href="#xss-labs" class="headerlink" title="xss-labs"></a>xss-labs</h1><h2 id="level1（url中的参数修改）"><a href="#level1（url中的参数修改）" class="headerlink" title="level1（url中的参数修改）"></a>level1（url中的参数修改）</h2><p>1.url中的参数值(反射型)，被原封不动的显示在页面上</p>
+<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>对url中的参数值进行修改过后，屏幕会显示相应的url的值。可以在这测试xss</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233522.png" style="zoom:50%;">
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>在url中写入测试代码</li>
+</ul>
+<img src="E:/markdown%E6%96%87%E4%BB%B6/typroaPic/64.png" style="zoom:50%;">
+
+<h2 id="level2（htmlspecialchars-str-过滤）"><a href="#level2（htmlspecialchars-str-过滤）" class="headerlink" title="level2（htmlspecialchars($str)过滤）"></a>level2（htmlspecialchars($str)过滤）</h2><p>2.js的&lt;&gt;过滤</p>
+<h3 id="尝试-1"><a href="#尝试-1" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>在页面输入测试语句</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233531.png" style="zoom:50%;">
+
+<ul>
+<li><p>查看网页源代码</p>
+<p>由源代码①可知，网页对js的&lt;&gt;进行了过滤。由②可知测试语句被完整的写在value的位置了，并没有被浏览器所执行。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233540.png"></p>
+<ul>
+<li><p>参考文件的后台代码</p>
+<p>在</p><h2>标签处使用了过滤函数，所以js代码的&lt;&gt;会被替换掉<p></p>
+</h2></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233548.png"></p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>代码被写在value中了，考虑使得value中的代码被执行。使用闭合的思想。</p>
+<p><strong>方法一</strong></p>
+<ul>
+<li><p>可以构造使value闭合，从而使浏览器执行测试代码</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span class="token comment">//&gt;</span>
+" 闭合value
+<span class="token operator">&gt;</span> 闭合input
+<span class="token comment">// 注释后面部分</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p><strong>方法二</strong></p>
+<ul>
+<li><p>闭合value，测试鼠标经过输入框</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">" onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
+" 闭合value
+<span class="token comment">// </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p><strong>方法三</strong></p>
+<ul>
+<li>闭合value，测试鼠标点击输入框</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">" onclick<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="level3（htmlspecialchars-str-过滤）"><a href="#level3（htmlspecialchars-str-过滤）" class="headerlink" title="level3（htmlspecialchars($str)过滤）"></a>level3（htmlspecialchars($str)过滤）</h2><h3 id="尝试-2"><a href="#尝试-2" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>后台对<h2>和input的value都进行了，htmlspecialchars($str)过滤。</h2></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233602.png"></p>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>考虑input自身的一些特殊属性，构造没有&lt;&gt;的攻击语句</p>
+<p>比如</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onfocus<span class="token operator">=</span>javascript<span class="token operator">:</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span>
+" onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
+" onclick<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="level4（htmlspecialchars-str-过滤-lt-gt-过滤）"><a href="#level4（htmlspecialchars-str-过滤-lt-gt-过滤）" class="headerlink" title="level4（htmlspecialchars($str)过滤+<>过滤）"></a>level4（htmlspecialchars($str)过滤+&lt;&gt;过滤）</h2><h3 id="尝试-3"><a href="#尝试-3" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>使用测试语句，根据反应查看网页源代码</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233609.png"></p>
+<p>由网页源代码，①使用了htmlspecialchars($str)过滤。②则是把&lt;&gt;给过滤掉了</p>
+<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>考虑使用没有&lt;&gt;的代码，参考第三关</p>
+</li>
+<li><p>查看后台代码</p>
+<p>可见后台是把&lt;&gt;进行了空替换</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233613.png"></p>
+<h2 id="level5（关键字替换）"><a href="#level5（关键字替换）" class="headerlink" title="level5（关键字替换）"></a>level5（关键字替换）</h2><h3 id="尝试-4"><a href="#尝试-4" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>通过script ，不含&lt;&gt;的poc测试，通过网页源代码可以知道，后台对其进行了过滤</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233619.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233622.png" alt="9"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233626.png" alt="QQ截图20220814162338"></p>
+<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>使用伪协议javascript: ，将javascript:后面的代码当JavaScript来执行，并将结果值返回给当前页面</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">"&gt; &lt;a href=javascript:alert(1)/a&gt;//<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>结果</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233635.png"></p>
+<ul>
+<li>后台代码的替换规则</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233638.png"></p>
+<h2 id="level6（关键字替换-伪协议过滤）"><a href="#level6（关键字替换-伪协议过滤）" class="headerlink" title="level6（关键字替换+伪协议过滤）"></a>level6（关键字替换+伪协议过滤）</h2><h3 id="尝试-5"><a href="#尝试-5" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>使用常规语句，input属性，伪协议发现都有过滤</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233642.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233645.png" alt="QQ截图20220814162338"></p>
+<h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>尝试大小写绕过</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">&gt;</span><span class="token operator">&lt;</span>Script<span class="token operator">&gt;</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233650.png"></p>
+<ul>
+<li><p>后台代码</p>
+<p>由后台代码可以知道，后台对特定的字符进行转换（并没有把字符串准换为小写来进行过滤），以及htmlspecialchars($str)过滤。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233656.png"></p>
+<h2 id="level7（关键字替换为空）"><a href="#level7（关键字替换为空）" class="headerlink" title="level7（关键字替换为空）"></a>level7（关键字替换为空）</h2><h3 id="尝试-6"><a href="#尝试-6" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>把<script>替换为空，伪协议的javascript替换为java，input自身的属性也进行了过滤，</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233700.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233702.png" alt="17"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233705.png" alt="18"></p>
+<h3 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>双写绕过</p>
+<p>注意value的闭合</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">></span><span class="token operator">&lt;</span>scscriptript<span class="token operator">></span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>scrscriptipt<span class="token operator">></span><span class="token comment">//</span>
+" oonnmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
+"<span class="token operator">></span> <span class="token operator">&lt;</span>a hhrefref<span class="token operator">=</span>javascscriptript<span class="token operator">:</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>后台代码</p>
+<p>后台使用了转小写的函数，把关键字script ,on,src,data,href进行了过滤。但缺点就是只过滤一次，可以进行双写，使过滤后的代码又闭合成代码</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233708.png"></p>
+<h2 id="level8（过滤齐全）"><a href="#level8（过滤齐全）" class="headerlink" title="level8（过滤齐全）"></a>level8（过滤齐全）</h2><h3 id="尝试-7"><a href="#尝试-7" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>大小写，伪协议，input属性都被过滤了</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233723.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233725.png"></p>
+<h3 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>将html转化为字符实体</li>
+</ul>
+<blockquote>
+<p>字符实体是用一个编号写入HTML代码中来代替一个字符，在使用浏览器访问网页时会将这个编号解析还原为字符以供阅读。</p>
+<p>这么做的目的主要有两个：<br>１、解决HTML代码编写中的一些问题。例如需要在网页上显示小于号（<）和大于号（>），由于它们是HTML的预留标签，可能会被误解析。这时就需要将小于号和大于号写成字符实体：<br>小于号这样写：&lt; 或 &#60;<br>大于号这样写：&gt; 或 &#62;</p>
+</blockquote>
+<ul>
+<li>转换结果</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233729.png"></p>
+<ul>
+<li><p>后台代码</p>
+<p>由过滤方式可知这次过滤得比较齐全</p>
+</li>
+</ul>
+<img src="E:/markdown%E6%96%87%E4%BB%B6/typroaPic/23-166046914652638.png" style="zoom:50%;" />
+
+<h2 id="level9（链接合法性检查）"><a href="#level9（链接合法性检查）" class="headerlink" title="level9（链接合法性检查）"></a>level9（链接合法性检查）</h2><h3 id="尝试-8"><a href="#尝试-8" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>这关与第九关有许多的相似之处，通过网页代码查看可以知道，该关增加了网页合法性的检查。其余的过滤都与第8关相似</li>
+</ul>
+<h3 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>将html转化为字符实体，并在后面添加注释“http://”来使得网站合法</li>
+</ul>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">&amp;#x6a;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3a;&amp;#x61;&amp;#x6c;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;//http://<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><p>后端代码</p>
+<p>关键字过滤的比较齐全，</p>
+<blockquote>
+<p>strpos() f函数查找字符串在另一字符串中第一次出现的位置（区分大小写）。</p>
+<p>注释：strpos() 函数是区分大小写的。</p>
+</blockquote>
+</li>
+</ul>
+<img src="E:/markdown%E6%96%87%E4%BB%B6/typroaPic/24.png" style="zoom:50%;" />
+
+<h2 id="level10（输入框隐藏）"><a href="#level10（输入框隐藏）" class="headerlink" title="level10（输入框隐藏）"></a>level10（输入框隐藏）</h2><h3 id="尝试-9"><a href="#尝试-9" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>没有输入框，尝试在地址栏进行输入测试代码，查看网页源代码发现<h2>使用了htmlspecialchars($str)过滤。</li>
+<li>由于是地址栏，不能像input那样利用自身属性进行绕过。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233743.png" style="zoom:50%;" />
+
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233747.png"></p>
+<ul>
+<li>检查网页时，发现有三个被隐藏的输入框，分别出去type值，让显示框出现，并输入测试代码。发现只有第三个输入框在输入测试代码过后，测试代码会被写进value里面。并且代码会过滤掉<></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233749.png" style="zoom:67%;" />
+
+<h3 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>去除第三个输入框的hidden，并且利用input的属性进行测试，注意代码的闭合</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">></span> onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>后台代码</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233753.png" style="zoom:50%;" />
+
+<h2 id="level11（http头部信息值）"><a href="#level11（http头部信息值）" class="headerlink" title="level11（http头部信息值）"></a>level11（http头部信息值）</h2><h3 id="尝试-10"><a href="#尝试-10" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li><p>通过查看网页源代码，和10关比起来多了一个隐藏的t_ref，利用10关相同的尝试</p>
+<p>发现测试语句">onmouseover-alert(1)//中的双引号和<>都被过滤了</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233812.png" style="zoom: 67%;" />
+
+<h3 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>t_ref的input属性value没有替换，可以看出是在参考referer的值</li>
+</ul>
+<blockquote>
+<p> referer，它的意思是要告诉服务器，该请求来自哪里。比如在一个网页里面插入一个超链接，链接到其他的网页，那么当点击这个超链接从而链接到另外一个页面的时候，相当于浏览器向 web 服务器发送了一个 http 请求，对于另外一个页面而言，这个 referer 就是上一个页面的 URL，而对于从地址栏里面直接输入 URL 或者是刷新网页的方式，则 referer = null，通过设置这个 referer 可以防止盗链的问题</p>
+</blockquote>
+<ul>
+<li><p>考虑抓包修改referer的值</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">">onmouseover=<span class="token function">alert</span><span class="token punctuation">(</span>1<span class="token punctuation">)</span>//
+这里构造的是input的属性，这里的referer值是放入到t_ref的value当中的，所以需要注意闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233816.png" style="zoom:50%;" />
+
+<p><img src="/"><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233837.png" alt="31" style="zoom:67%;" /></p>
+<ul>
+<li><p>后台代码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233828.png"></p>
+</li>
+</ul>
+<h2 id="level12（http头部信息值）"><a href="#level12（http头部信息值）" class="headerlink" title="level12（http头部信息值）"></a>level12（http头部信息值）</h2><h3 id="尝试-11"><a href="#尝试-11" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li><p>按F12进行检查发现，t_ua的input中的value值是http中User-Agent的信息</p>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233904.png" style="zoom:50%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233858.png" alt="34" style="zoom:50%;" />
+
+
+
+<h3 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>通过bp抓包修改User-Agent的值，来实现攻击代码</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233909.png" alt="35" style="zoom:67%;" />
+
+<ul>
+<li>修该一下参数</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233915.png" alt="36" style="zoom:50%;" />
+</li>
+<li><p>后端代码</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233925.png"></p>
+<h2 id="level13（http头部信息值）"><a href="#level13（http头部信息值）" class="headerlink" title="level13（http头部信息值）"></a>level13（http头部信息值）</h2><h3 id="尝试-12"><a href="#尝试-12" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>按F12检查</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233931.png"></p>
+<h3 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>同上一关抓包修改</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233956.png"></p>
+<ul>
+<li>修改一下参数</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234009.png" style="zoom:50%;" />
+
+<h2 id="level14（Exif检查）"><a href="#level14（Exif检查）" class="headerlink" title="level14（Exif检查）"></a>level14（Exif检查）</h2><h3 id="尝试-13"><a href="#尝试-13" class="headerlink" title="尝试"></a>尝试</h3><p><strong>知识点</strong></p>
+<blockquote>
+<p>  iframe一般用来包含别的页面，例如我们可以在我们自己的网站页面加载别人网站的内容，为了更好的效果，可能需要使iframe透明效果，那么就需要了解更多的iframe属性。</p>
+</blockquote>
+<blockquote>
+<p>Exif: 可交换图像文件格式（英语：Exchangeable image file format，官方简称Exif），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据。</p>
+</blockquote>
+<blockquote>
+<p>有些网站有读取图片exif信息的功能，当网站读取到的恶意的exif信息就会触发这个payload</p>
+</blockquote>
+<p>通过查询信息可以知道，该关是通过<iframe>标签包含一个可以读取exif的网页，但是该网页的地址失效了。<strong>考点就是想让我们知道exif可能有XSS的漏洞</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234015.png" style="zoom:50%;" />
+
+<h3 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>通过网上查询能够读取exif信息的网站，并且存在XSS漏洞的进行复现，参考网站：<a target="_blank" rel="noopener" href="https://exifdata.com/">https://exifdata.com/</a></p>
+</li>
+<li><p>修改图片的信息，填入测试代码</p>
+</li>
+</ul>
+<p>Windows：右击图片-属性-详细信息。让后进行修改</p>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234021.png" style="zoom:50%;" />
+
+<ul>
+<li>在网站上进行上传</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234029.png" style="zoom:50%;" />
+
+<h2 id="level15（文件包含）"><a href="#level15（文件包含）" class="headerlink" title="level15（文件包含）"></a>level15（文件包含）</h2><h3 id="尝试-14"><a href="#尝试-14" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>查看网页源代码</li>
+</ul>
+<p>发现body标签下的<span>的类名为ng-include。所以ng-include就相当于包含一个文件。</p>
+<blockquote>
+<p>ng-include 指令用于包含外部的 HTML 文件。</p>
+<p>包含的内容将作为指定元素的子节点。</p>
+<p>ng-include 属性的值可以是一个表达式，返回一个文件名。</p>
+<p>默认情况下，包含的文件需要包含在同一个域名下。</p>
+</blockquote>
+<blockquote>
+<p>特别值得注意的几点如下：</p>
+<p>1.ng-include,如果单纯指定地址，必须要加引号</p>
+<p>2.ng-include,加载外部html，script标签中的内容不执行</p>
+<p>3.ng-include,加载外部html中含有style标签样式可以识别</p>
+</blockquote>
+<h3 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>借助后台代码进行审计</li>
+</ul>
+<p>可见后台使用get的方式获取src的参数值，在放到ng-include的后面，并且还对src'进行了过滤</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234035.png"></p>
+<ul>
+<li>由于使用了过滤，不能使用<>，没有自身可利用的属性进行测试，伪协议涉及闭合，也需要<></li>
+<li>因为ng-include是文件包含，可以考虑使用文件包含的方式，包含一个存在XSS漏洞的文件，然后进行攻击。</li>
+</ul>
+<p>这里参考网上资料选择第一关的文件上传，由于第一关需要执行xss代码需要把需要把代码写在name上，直接构造语句就行了。注意需要加引号</p>
+<p>因为过滤了<>，所以使用的是<img>配合onerror来实现的。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">src<span class="token operator">=</span><span class="token string">'level1.php?name=&lt;img src=1 onerror=alert(1)>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234047.png"></p>
+<h2 id="level16（空格-关键字过滤）"><a href="#level16（空格-关键字过滤）" class="headerlink" title="level16（空格+关键字过滤）"></a>level16（空格+关键字过滤）</h2><h3 id="尝试-15"><a href="#尝试-15" class="headerlink" title="尝试"></a>尝试</h3><ul>
+<li>在url中的keyword的值会显示在页面，通过常规语句的尝试发现，对语句有关键字过滤，对空格也有过滤</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234054.png"></p>
+<h3 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>浏览器会对url中的非数字进行编码解码</p>
+<blockquote>
+<p>URL编码平时我们是用不到的，因为IE会自动将你输入到地址栏的非数字字母转换为url编码。</p>
+</blockquote>
+</li>
+<li><p>因为后台对url的空格进行url编码，那么就可以通过换行来使参数分开：换行的url编码为：%0a</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234100.png"></p>
+<ul>
+<li>后台代码</li>
+</ul>
+<p>可见后台把关键字都替换成了”&nbsp"</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234106.png"></p>
+<h2 id="level17（插件）"><a href="#level17（插件）" class="headerlink" title="level17（插件）"></a>level17（插件）</h2><h3 id="尝试-16"><a href="#尝试-16" class="headerlink" title="尝试"></a>尝试</h3><blockquote>
+<p><embed> 标签定义了一个容器，用来嵌入外部应用或者互动程序（插件）</p>
+</blockquote>
+<ul>
+<li>发现在url中写的参数都被写进<embed>的src的参数里面了</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234114.png"></p>
+<ul>
+<li>后台对<>有过滤</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234121.png"></p>
+<h3 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h3><p>尝试使用没有<>的属性，比如onmouseover</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234125.png"></p>
+<h2 id="level18"><a href="#level18" class="headerlink" title="level18"></a>level18</h2><p>与17关一样</p>
+</script></li></ul>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HKini</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.hkini.top/posts/121.html">https://www.hkini.top/posts/121.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HKini</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                                    <span class="chip bg-color">安全攻防</span>
+                                </a>
+                            
+                                <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
+                                    <span class="chip bg-color">xss漏洞</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+    <div class="addthis_inline_share_toolbox"></div>
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'fYv09ruBQuZf3CmZ2mocNTif-MdYXbMMI',
+        appKey: 'Oead34XGgjgRgu9PBpXkBBQi',
+        serverURLs: 'https://fyv09rub.api.lncldglobal.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/121.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="xss实验">
+                        
+                        <span class="card-title">xss实验</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            不同的类型文件上传的方式有所不同，对上传漏洞的分类，对不同的漏洞实行不同的方法可以实现高效率准确的上传。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                        <span class="chip bg-color">安全攻防</span>
+                    </a>
+                    
+                    <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">xss漏洞</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/59029.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="文件上传实验">
+                        
+                        <span class="card-title">文件上传实验</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            不同的类型文件上传的方式有所不同，对上传漏洞的分类，对不同的漏洞实行不同的方法可以实现高效率准确的上传。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                        <span class="chip bg-color">安全攻防</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                        <span class="chip bg-color">文件上传</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Redamancy<br />'
+            + '文章作者: HKini<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    
+<footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6638358192"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HKini</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">21k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "12";
+                        var startDate = "25";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="/www.hkini.top" target="_blank">蜀ICP备2023000334号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/togetherhkl" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:hekailin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1778267485" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1778267485" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/wei-lai-ke-qi-49-69" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/wei-lai-ke-qi-49-69" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="195339201" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

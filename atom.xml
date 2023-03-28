@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2023-03-16T05:07:48.693Z</updated>
+  <updated>2023-03-28T16:09:43.865Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -15,6 +15,114 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>xss实验</title>
+    <link href="https://www.hkini.top/posts/121.html"/>
+    <id>https://www.hkini.top/posts/121.html</id>
+    <published>2023-03-28T15:42:22.737Z</published>
+    <updated>2023-03-28T16:09:43.865Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;xss-labs&quot;&gt;&lt;a href=&quot;#xss-labs&quot; class=&quot;headerlink&quot; title=&quot;xss-labs&quot;&gt;&lt;/a&gt;xss-labs&lt;/h1&gt;&lt;h2 id=&quot;level1（url中的参数修改）&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="安全攻防" scheme="https://www.hkini.top/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    
+    <category term="xss漏洞" scheme="https://www.hkini.top/tags/xss%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文件上传实验</title>
+    <link href="https://www.hkini.top/posts/59029.html"/>
+    <id>https://www.hkini.top/posts/59029.html</id>
+    <published>2023-03-28T15:34:01.004Z</published>
+    <updated>2023-03-28T16:05:13.193Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;upload-labs&quot;&gt;&lt;a href=&quot;#upload-labs&quot; class=&quot;headerlink&quot; title=&quot;upload-labs&quot;&gt;&lt;/a&gt;upload-labs&lt;/h1&gt;&lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="安全攻防" scheme="https://www.hkini.top/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    
+    <category term="文件上传" scheme="https://www.hkini.top/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SQL注入实验</title>
+    <link href="https://www.hkini.top/posts/36173.html"/>
+    <id>https://www.hkini.top/posts/36173.html</id>
+    <published>2023-03-28T15:34:01.001Z</published>
+    <updated>2023-03-28T16:00:38.316Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一-SQL注入&quot;&gt;&lt;a href=&quot;#一-SQL注入&quot; class=&quot;headerlink&quot; title=&quot;一.SQL注入&quot;&gt;&lt;/a&gt;一.SQL注入&lt;/h1&gt;&lt;h2 id=&quot;（一）基础知识&quot;&gt;&lt;a href=&quot;#（一）基础知识&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="安全攻防" scheme="https://www.hkini.top/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    
+    <category term="SQL注入" scheme="https://www.hkini.top/tags/SQL%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSRF实验</title>
+    <link href="https://www.hkini.top/posts/64967.html"/>
+    <id>https://www.hkini.top/posts/64967.html</id>
+    <published>2023-03-28T15:34:00.991Z</published>
+    <updated>2023-03-28T15:56:27.573Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CSRF实验&quot;&gt;&lt;a href=&quot;#CSRF实验&quot; class=&quot;headerlink&quot; title=&quot;CSRF实验&quot;&gt;&lt;/a&gt;CSRF实验&lt;/h1&gt;&lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="CSRF" scheme="https://www.hkini.top/tags/CSRF/"/>
+    
+    <category term="安全攻防" scheme="https://www.hkini.top/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>2022年编程框架的使用总结</title>
@@ -201,33 +309,6 @@
   </entry>
   
   <entry>
-    <title>Python分类测试</title>
-    <link href="https://www.hkini.top/posts/41756.html"/>
-    <id>https://www.hkini.top/posts/41756.html</id>
-    <published>2018-09-07T01:25:00.000Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Python" scheme="https://www.hkini.top/categories/Python/"/>
-    
-    
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
-    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux分类测试</title>
     <link href="https://www.hkini.top/posts/15209.html"/>
     <id>https://www.hkini.top/posts/15209.html</id>
@@ -278,6 +359,33 @@
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
     <category term="平常联系" scheme="https://www.hkini.top/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python分类测试</title>
+    <link href="https://www.hkini.top/posts/41756.html"/>
+    <id>https://www.hkini.top/posts/41756.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-24T04:41:32.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="https://www.hkini.top/categories/Python/"/>
+    
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
