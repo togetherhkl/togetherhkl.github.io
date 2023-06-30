@@ -5,8 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Ubuntu22.2下C语言编程实现，首次，最佳适应算法, Redamancy">
-    <meta name="description" content="@TOC
-1.题目要求编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。假设下列作业请求序列：（1）作业">
+    <meta name="description" content="　
+
+@TOC
+1.题目要求编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。假设下列作业请求序列：（1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -50,7 +52,9 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/post.css">
+
 
 
 
@@ -623,10 +627,12 @@
 
 
 
-<main class="container content">
+<main class="post-container content">
 
     
-    <!-- 文章内容详情 -->
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -704,7 +710,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>@<a href="%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A">TOC</a></p>
+                　
+
+<p>@<a href="%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A">TOC</a></p>
 <h1 id="1-题目要求"><a href="#1-题目要求" class="headerlink" title="1.题目要求"></a>1.题目要求</h1><p>编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。<br>假设下列作业请求序列：<br>（1）作业1 申请130 KB   （2）作业2 申请60 KB  （3）作业3 申请100 KB<br>（4）作业2 释放60 KB    （5）作业3 释放100 KB （6）作业1 释放130 KB<br>显示每次作业申请或释放后当前内存情况。</p>
 <h1 id="2-分析设计"><a href="#2-分析设计" class="headerlink" title="2.分析设计"></a>2.分析设计</h1><p>根据题目，分析设计如下：<br>（1）程序初始需要提供用户选择方式。选择首次适应算法，还是最佳是适应算法，选择作业的回收，作业的展示，程序的退出能。<br>（2）当用户选择首次适应算法或者最佳适应算法，需要用户输入分配内存的大小。在输入大小时在根据算法的设计进行分配。<br>（3）当内存分配过后，如果分配成功就需要提示成功，如果失败则需要提示失败。<br>（4）内存回收需要用户输入回收作业的ID，根据作业的ID对内存进行回收。在回收时要分多种情况进行判断。<br>（5）作业展示，需要向用户展示，作业的ID，起始地址，内存大小，状态是已分配还是空闲。<br>（6）一个作业需要用到数据结构中的双向列表，用一个双向列表来表示节点。</p>
 <h1 id="3-程序代码"><a href="#3-程序代码" class="headerlink" title="3.程序代码"></a>3.程序代码</h1><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
@@ -1634,6 +1642,87 @@ partion <span class="token operator">*</span><span class="token function">create
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeShrink.js"></script>
 
 
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
 
     
 
