@@ -1,0 +1,2056 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Ubuntu22.2下C语言编程实现，首次，最佳适应算法, Redamancy">
+    <meta name="description" content="@TOC
+1.题目要求编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。假设下列作业请求序列：（1）作业">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>Ubuntu22.2下C语言编程实现，首次，最佳适应算法 | Redamancy</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/matery.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/my.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/post.css">
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/css/reward.css">
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Redamancy" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Redamancy</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-shield moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>安全</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/Web%E5%AE%89%E5%85%A8">
+          
+          <i class="fas fa-globe moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Web安全</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/CTF%E7%BB%83%E4%B9%A0">
+          
+          <i class="fas fa-flag moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>CTF练习</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97">
+          
+          <i class="fas fa-shield-halved moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>红蓝对抗</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-code-branch moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>编程</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/Python">
+          
+          <i class="fab fa-python moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Python</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3">
+          
+          <i class="fas fa-c moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>与C相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/Linux">
+          
+          <i class="fab fa-linux moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Linux</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-icons moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>生活</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1">
+          
+          <i class="fas fa-image moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>光与影</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E9%98%85%E8%AF%BB">
+          
+          <i class="fas fa-book-open moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>阅读</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>音乐</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95">
+          
+          <i class="fas fa-film moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>视频记录</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>整理</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/catstags">
+          
+          <i class="fas fa-bookmark moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>分类&标签</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-file-lines moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>归档</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-link moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>交流</span>
+      <i class="fas fa-chevron-down moz-zoom" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/friends">
+          
+          <i class="fas fa-address-book moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>友链</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/contact">
+          
+          <i class="fas fa-comments moz-zoom" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>留言</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle moz-zoom" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search " title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!--<li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>-->
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Redamancy</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-shield"></i>
+			
+			安全
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-globe" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Web安全</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/CTF%E7%BB%83%E4%B9%A0 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-flag" style="position: absolute;left:50px" ></i>
+			      
+		          <span>CTF练习</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-shield-halved" style="position: absolute;left:50px" ></i>
+			      
+		          <span>红蓝对抗</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-code-branch"></i>
+			
+			编程
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/Python " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-python" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Python</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-c" style="position: absolute;left:50px" ></i>
+			      
+		          <span>与C相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/Linux " style="margin-left:75px">
+				  
+				   <i class="fa fab fa-linux" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Linux</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-icons"></i>
+			
+			生活
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E5%85%89%E4%B8%8E%E5%BD%B1 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px" ></i>
+			      
+		          <span>光与影</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E9%98%85%E8%AF%BB " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book-open" style="position: absolute;left:50px" ></i>
+			      
+		          <span>阅读</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>音乐</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95 " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>视频记录</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			整理
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/catstags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+		          <span>分类&标签</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-file-lines" style="position: absolute;left:50px" ></i>
+			      
+		          <span>归档</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-link"></i>
+			
+			交流
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/friends " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-address-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>友链</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/contact " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-comments" style="position: absolute;left:50px" ></i>
+			      
+		          <span>留言</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Ubuntu22.2下C语言编程实现，首次，最佳适应算法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">编程学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-06-30
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>@<a href="%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A">TOC</a></p>
+<h1 id="1-题目要求"><a href="#1-题目要求" class="headerlink" title="1.题目要求"></a>1.题目要求</h1><p>编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。<br>假设下列作业请求序列：<br>（1）作业1 申请130 KB   （2）作业2 申请60 KB  （3）作业3 申请100 KB<br>（4）作业2 释放60 KB    （5）作业3 释放100 KB （6）作业1 释放130 KB<br>显示每次作业申请或释放后当前内存情况。</p>
+<h1 id="2-分析设计"><a href="#2-分析设计" class="headerlink" title="2.分析设计"></a>2.分析设计</h1><p>根据题目，分析设计如下：<br>（1）程序初始需要提供用户选择方式。选择首次适应算法，还是最佳是适应算法，选择作业的回收，作业的展示，程序的退出能。<br>（2）当用户选择首次适应算法或者最佳适应算法，需要用户输入分配内存的大小。在输入大小时在根据算法的设计进行分配。<br>（3）当内存分配过后，如果分配成功就需要提示成功，如果失败则需要提示失败。<br>（4）内存回收需要用户输入回收作业的ID，根据作业的ID对内存进行回收。在回收时要分多种情况进行判断。<br>（5）作业展示，需要向用户展示，作业的ID，起始地址，内存大小，状态是已分配还是空闲。<br>（6）一个作业需要用到数据结构中的双向列表，用一个双向列表来表示节点。</p>
+<h1 id="3-程序代码"><a href="#3-程序代码" class="headerlink" title="3.程序代码"></a>3.程序代码</h1><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">area</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> id<span class="token punctuation">;</span>             <span class="token comment">// 编号</span>
+  <span class="token keyword">int</span> addr_front<span class="token punctuation">;</span>     <span class="token comment">//首地址</span>
+  <span class="token keyword">int</span> addr_end<span class="token punctuation">;</span>      <span class="token comment">//结束地址</span>
+  <span class="token keyword">int</span> size<span class="token punctuation">;</span>           <span class="token comment">//分区大小</span>
+  <span class="token keyword">int</span> flag<span class="token punctuation">;</span>           <span class="token comment">//分配标志,0表示空闲，1表示占用</span>
+  <span class="token keyword">struct</span> <span class="token class-name">area</span> <span class="token operator">*</span>front<span class="token punctuation">;</span> <span class="token comment">//上一分区</span>
+  <span class="token keyword">struct</span> <span class="token class-name">area</span> <span class="token operator">*</span>next<span class="token punctuation">;</span>  <span class="token comment">//下一分区</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">area</span> partion<span class="token punctuation">;</span>
+
+partion <span class="token operator">*</span>head <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment">//分区队列头节点</span>
+<span class="token keyword">int</span> need<span class="token punctuation">;</span>             <span class="token comment">//需求</span>
+<span class="token keyword">int</span> choice <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>       <span class="token comment">//操作选项</span>
+
+partion <span class="token operator">*</span><span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">,</span> <span class="token keyword">int</span> addr_front<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> <span class="token keyword">int</span> flag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//生成一个节点</span>
+<span class="token keyword">void</span> <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                   <span class="token comment">//输入需求量</span>
+<span class="token keyword">void</span> <span class="token function">assign</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>                                <span class="token comment">//分配分区</span>
+<span class="token keyword">void</span> <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                   <span class="token comment">//首次适应算法</span>
+<span class="token keyword">void</span> <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                    <span class="token comment">//最佳适应算法</span>
+<span class="token keyword">void</span> <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                              <span class="token comment">//打印分区分配状况</span>
+<span class="token keyword">void</span> <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                    <span class="token comment">//分区回收</span>
+<span class="token keyword">void</span> <span class="token function">changeIdValue</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> delta<span class="token punctuation">)</span><span class="token punctuation">;</span>                        <span class="token comment">//改变从ptr开始所有节点的id值</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  head <span class="token operator">=</span> <span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>choice <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-------------------\n请选择操作:\n1:首次适应;\n2:最佳适应;\n3:内存回收;\n4:展示详细信息;\n0:推出......\n-------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>choice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>choice<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
+      <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
+      <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">3</span><span class="token operator">:</span>
+      <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">4</span><span class="token operator">:</span>
+      <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span>
+      <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"byebye"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//创建一个节点</span>
+partion <span class="token operator">*</span><span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">,</span> <span class="token keyword">int</span> addr_front<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> <span class="token keyword">int</span> flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token punctuation">(</span>partion <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>partion<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>addr_front <span class="token operator">=</span> addr_front<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>addr_end<span class="token operator">=</span>addr_front<span class="token operator">+</span>size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>size <span class="token operator">=</span> size<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入需要的内存大小:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>fit <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>size <span class="token operator">&gt;=</span> need <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment">//如果是空闲并且大小大于则给予分配</span>
+    <span class="token punctuation">{</span>
+      fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>fit <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">assign</span><span class="token punctuation">(</span>fit<span class="token punctuation">,</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"内存分配成功,分配如下：\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"抱歉，内存分配失败!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>fit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>fit <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//flag 表示是否找到可分配的分区</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>size <span class="token operator">&gt;=</span> need<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">//只有遇到的第一个可分配分区会执行此操作</span>
+        fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+        flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">else</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">//若遇到可分配且分区更小即更适合的则更新</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>size <span class="token operator">&lt;</span> fit<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+          fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//先处理没找到合适分区的情况</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"抱歉，未找到合适的分区!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>fit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//找到则分配</span>
+  <span class="token function">assign</span><span class="token punctuation">(</span>fit<span class="token punctuation">,</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"内存分配成功，分配如下:\n!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"\n\n---------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"总内存分配情况如下:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"---------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"序号ID****开始地址****结束地址****内存大小****状态****"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-12d%-12d%-12d%-12d"</span><span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>addr_front<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>addr_end<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// printf("序号id:%21d%10c\n开始地址:%10d%10c\n", ptr-&gt;id, '|', ptr-&gt;addr_front, '|');</span>
+    <span class="token comment">//printf("结束地址:%10d%10c\n", ptr-&gt;addr_end, '|');</span>
+    <span class="token comment">//printf("内存大小:%11d%10c\n", ptr-&gt;size, '|');</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-12s\n"</span><span class="token punctuation">,</span> ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token string">"空闲"</span> <span class="token operator">:</span> <span class="token string">"已分配"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-----------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"---------------------------------------------\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">assign</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> need<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>need <span class="token operator">==</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span><span class="token comment">//空闲的空间恰好等同需要的空间</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//空闲的空间大于需要的空间</span>
+  partion <span class="token operator">*</span>assigned <span class="token operator">=</span> <span class="token function">createPartion</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">,</span> ptr<span class="token operator">-&gt;</span>addr_front<span class="token punctuation">,</span> need<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  assigned<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+  assigned<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+  <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//把后面的节点的id值都增加1</span>
+  ptr<span class="token operator">-&gt;</span>addr_front <span class="token operator">+=</span> need<span class="token punctuation">;</span>
+  ptr<span class="token operator">-&gt;</span>size <span class="token operator">-=</span> need<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token comment">//空闲区的头不空，就在前一个节点后面添加分配的节点</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> assigned<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span><span class="token comment">//空闲节点前没有节点</span>
+  <span class="token punctuation">{</span>
+    head <span class="token operator">=</span> assigned<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  ptr<span class="token operator">-&gt;</span>front <span class="token operator">=</span> assigned<span class="token punctuation">;</span><span class="token comment">//空闲节点的头指向新分配的</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入需要回收作业的ID号："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> id<span class="token punctuation">,</span> flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">==</span> ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"没有找到你需要回收的作业！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"该ID已经是空闲的了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//第一个分区</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//后面不空或后面没有</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//后面空</span>
+      ptr<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//标记为空闲</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token comment">//把下一个节点的头指向该节点</span>
+      <span class="token punctuation">{</span>
+        ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      ptr<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span><span class="token comment">//合并两个节点</span>
+
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//真实释放节点</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//最后一个分区</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//前面不空或者前没有</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//前面为空</span>
+      ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+      ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上下都空</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size <span class="token operator">+</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//更改id</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上空下不空</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上不空下空</span>
+    ptr<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    partion <span class="token operator">*</span>p_next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>  <span class="token comment">//保存一下下方为空的那个分区，以便一会释放 </span>
+    ptr<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p_next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上下都不空</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">changeIdValue</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> delta<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>id <span class="token operator">+=</span> delta<span class="token punctuation">;</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="4-运行截图"><a href="#4-运行截图" class="headerlink" title="4.运行截图"></a>4.运行截图</h1><p>首次适应算法<br>开始<br><img src="https://img-blog.csdnimg.cn/fcb17327ab0d430b86a1c4c2f3234812.png" alt="在这里插入图片描述"><br>（1）作业1 申请130 KB<br><img src="https://img-blog.csdnimg.cn/4bdc7d552f1b49a98cff15009a34ceb6.png" alt="在这里插入图片描述"></p>
+<p>（2）作业2 申请60 KB<br><img src="https://img-blog.csdnimg.cn/aef238e2bf574a3d934ff66633b772fc.png" alt="在这里插入图片描述"></p>
+<p>（3）作业3 申请100 KB<br><img src="https://img-blog.csdnimg.cn/e6f05c87f7b0423eb43cd4d55dce6773.png" alt="在这里插入图片描述"></p>
+<p>（4）作业2 释放60 KB<br><img src="https://img-blog.csdnimg.cn/7e9f582a2cbf4b8b815813bb84affe0a.png" alt="在这里插入图片描述"></p>
+<p>（5）作业3 释放100 KB<br><img src="https://img-blog.csdnimg.cn/f547f14756284619ba37a759a1edd81d.png" alt="在这里插入图片描述"></p>
+<p>（6）作业1 释放130 KB</p>
+<p><img src="https://img-blog.csdnimg.cn/fe5867fae214433d868b300ffc01bbad.png" alt="在这里插入图片描述"></p>
+<p>最佳适应算法<br>开始：<br><img src="https://img-blog.csdnimg.cn/586d71f7428a43f180400d4212914938.png" alt="在这里插入图片描述"></p>
+<p>（1）作业1 申请130 KB<br><img src="https://img-blog.csdnimg.cn/0cac0760d9da40d4a6cfeb60bde49878.png" alt="在这里插入图片描述"></p>
+<p>（2）作业2 申请60 KB<br><img src="https://img-blog.csdnimg.cn/bf71cca8e17b44c89d84122259b1285b.png" alt="在这里插入图片描述"></p>
+<p>（3）作业3 申请100 KB<br><img src="https://img-blog.csdnimg.cn/41a2e81d15b24215919c40a5532eb619.png" alt="在这里插入图片描述"></p>
+<p>（4）作业2 释放60 KB<br><img src="https://img-blog.csdnimg.cn/93c561a256684af4a5a01d3feceb6495.png" alt="在这里插入图片描述"></p>
+<p>（5）作业3 释放100 KB<br><img src="https://img-blog.csdnimg.cn/10b407c46e654f9dbe4b8642e317a9fa.png" alt="在这里插入图片描述"></p>
+<p>（6）作业1 释放130 KB<br><img src="https://img-blog.csdnimg.cn/54bdc2c9ab4143e294e054aa66d43a9c.png" alt="在这里插入图片描述"></p>
+<h1 id="5-程序说明"><a href="#5-程序说明" class="headerlink" title="5.程序说明"></a>5.程序说明</h1><p>总流程图：<br><img src="https://img-blog.csdnimg.cn/7a8681fc296a414aa027f4949091e5d1.png" alt="在这里插入图片描述"></p>
+<p>总流程图是提供程序开始运行的界面图，供用户选择，其中用户可以选择的选项有，首次适应算法，最佳适应算法，内存回收，内存作业的显示。每选择一个功能就执行相应的函数代码。</p>
+<p>首次适应算法流程图：<br><img src="https://img-blog.csdnimg.cn/3ddb1c3129df48709c31d5b1da236c0d.png" alt="在这里插入图片描述"></p>
+<p>首次适应算法，首先用户输入作业需要的内存大小，然后程序从低地址向高地址寻找空间空间，如果找到空闲空间，如果空闲空间的大小比作业需要的空间大则进行分配，如果空闲空间比作业需要的空间小，则继续寻找下一个空闲空间。如果所有的空闲空间都寻找完也没有符合要求的，那么作业的内存分配失败。</p>
+<p>最佳适应算法流程图<br><img src="https://img-blog.csdnimg.cn/193e3580bd5643cb97e5980ed7db801b.png" alt="在这里插入图片描述"></p>
+<p>最佳适应算法，首页用户输入作业需要的内存空间，程序从低地址开始寻找空闲空间，如果第一次找合适的空间分配，就临时存储这个空间地址，继续向下继续寻找符合的地址空间，如果寻找到合适的空间空间范围，且新的空间大小比临时存储的空间大小还小，则新的符合空间更新为临时符合空间，依次类推到最后。如果程序没有临时最佳的地址空间，则并没有分配到内存，所以作业内存分配失败。如果有临时最佳空间地址，则把最佳的地址空间分配给作业。</p>
+<p>内存回收流程图：<br><img src="https://img-blog.csdnimg.cn/9609cfb69f8b4e3fb6df405aec5913e1.png" alt="在这里插入图片描述"></p>
+<p>作业回收，首先需要需要输入回收作业的ID，先判断作业ID是否存在，存在才能进行释放，在ID存在的前提下判断，该ID的作业状态，只有为已分配状态猜才进行释放。释放则的分情况讨论。释放的节点分为头部，中间，尾部。如果释放的节点前后已经有空闲空间，就需要进行合并。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HeKing</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.hkini.top/posts/1376.html">https://www.hkini.top/posts/1376.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HeKing</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">编程学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+    <div class="addthis_inline_share_toolbox"></div>
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'fYv09ruBQuZf3CmZ2mocNTif-MdYXbMMI',
+        appKey: 'Oead34XGgjgRgu9PBpXkBBQi',
+        serverURLs: 'https://fyv09rub.api.lncldglobal.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/54596.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="web安全分类测试">
+                        
+                        <span class="card-title">web安全分类测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/catrename/" class="post-category">
+                                    catrename
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/testfile/">
+                        <span class="chip bg-color">testfile</span>
+                    </a>
+                    
+                    <a href="/tags/rename/">
+                        <span class="chip bg-color">rename</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/56380.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="阅读测试">
+                        
+                        <span class="card-title">阅读测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            阅读下的文章测试
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%98%85%E8%AF%BB/" class="post-category">
+                                    阅读
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">编成学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
+                        <span class="chip bg-color">项目经历</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Redamancy<br />'
+            + '文章作者: HKini<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    
+
+</main>
+
+
+
+
+    
+<footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6638358192"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">HKini</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">24.3k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "12";
+                        var startDate = "25";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2023000334号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/togetherhkl" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:hekailin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1778267485" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1778267485" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/wei-lai-ke-qi-49-69" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/wei-lai-ke-qi-49-69" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="195339201" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/togetherhkl/togetherhkl.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2023-03-28T16:12:06.968Z</updated>
+  <updated>2023-06-30T15:20:06.212Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue项目初始化</title>
+    <link href="https://www.hkini.top/posts/4224.html"/>
+    <id>https://www.hkini.top/posts/4224.html</id>
+    <published>2023-05-22T15:10:00.000Z</published>
+    <updated>2023-06-30T15:20:06.212Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1-node-js版本管理nvm&quot;&gt;&lt;a href=&quot;#1-node-js版本管理nvm&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://www.hkini.top/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+    <category term="vue" scheme="https://www.hkini.top/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>xss实验</title>
@@ -156,7 +185,7 @@
     <link href="https://www.hkini.top/posts/56901.html"/>
     <id>https://www.hkini.top/posts/56901.html</id>
     <published>2023-01-01T09:48:15.000Z</published>
-    <updated>2023-03-16T04:47:42.267Z</updated>
+    <updated>2023-06-30T15:21:04.670Z</updated>
     
     
       
@@ -172,58 +201,9 @@
     <category term="计划和总结" scheme="https://www.hkini.top/categories/%E8%AE%A1%E5%88%92%E5%92%8C%E6%80%BB%E7%BB%93/"/>
     
     
-    <category term="年终总结" scheme="https://www.hkini.top/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
-    
-    <category term="编辑" scheme="https://www.hkini.top/tags/%E7%BC%96%E8%BE%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2022</title>
-    <link href="https://www.hkini.top/posts/19562.html"/>
-    <id>https://www.hkini.top/posts/19562.html</id>
-    <published>2023-01-01T06:39:00.000Z</published>
-    <updated>2023-03-16T04:56:17.843Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h2 id=&quot;1-年度计划的开始&quot;&gt;&lt;a href=&quot;#1-年度计划的开始&quot; class=&quot;headerlink&quot; title=&quot;1.年度计划的开始&quot;&gt;&lt;/a&gt;1.年度计划的开始&lt;/h2&gt;&lt;h2 id=&quot;hexo&quot;&gt;&lt;a href=&quot;#hexo&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="计划和总结" scheme="https://www.hkini.top/categories/%E8%AE%A1%E5%88%92%E5%92%8C%E6%80%BB%E7%BB%93/"/>
-    
-    
-    <category term="年度总结" scheme="https://www.hkini.top/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
     <category term="编程" scheme="https://www.hkini.top/tags/%E7%BC%96%E7%A8%8B/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://www.hkini.top/posts/16107.html"/>
-    <id>https://www.hkini.top/posts/16107.html</id>
-    <published>2022-12-24T06:41:50.635Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
+    <category term="年终总结" scheme="https://www.hkini.top/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -248,9 +228,9 @@
     <category term="视频记录" scheme="https://www.hkini.top/categories/%E8%A7%86%E9%A2%91%E8%AE%B0%E5%BD%95/"/>
     
     
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
     
   </entry>
   
@@ -282,6 +262,32 @@
   </entry>
   
   <entry>
+    <title>Ubuntu22.2下C语言编程实现，首次，最佳适应算法</title>
+    <link href="https://www.hkini.top/posts/1376.html"/>
+    <id>https://www.hkini.top/posts/1376.html</id>
+    <published>2022-11-25T01:25:00.000Z</published>
+    <updated>2023-06-30T15:21:26.542Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;@&lt;a href=&quot;%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A&quot;&gt;TOC&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;1-题目要求&quot;&gt;&lt;a href=&quot;#1-题目要求&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="https://www.hkini.top/categories/Linux/"/>
+    
+    
+    <category term="编程学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>阅读测试</title>
     <link href="https://www.hkini.top/posts/56380.html"/>
     <id>https://www.hkini.top/posts/56380.html</id>
@@ -302,7 +308,34 @@
     <category term="阅读" scheme="https://www.hkini.top/categories/%E9%98%85%E8%AF%BB/"/>
     
     
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
     <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CTF分类测试</title>
+    <link href="https://www.hkini.top/posts/53480.html"/>
+    <id>https://www.hkini.top/posts/53480.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-24T04:41:32.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-这是CTF分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是CTF分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTF练习" scheme="https://www.hkini.top/categories/CTF%E7%BB%83%E4%B9%A0/"/>
+    
+    
+    <category term="平常联系" scheme="https://www.hkini.top/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/"/>
     
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
@@ -329,36 +362,9 @@
     <category term="Linux" scheme="https://www.hkini.top/categories/Linux/"/>
     
     
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
     <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
-    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CTF分类测试</title>
-    <link href="https://www.hkini.top/posts/53480.html"/>
-    <id>https://www.hkini.top/posts/53480.html</id>
-    <published>2018-09-07T01:25:00.000Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-这是CTF分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是CTF分类下的文章&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="CTF练习" scheme="https://www.hkini.top/categories/CTF%E7%BB%83%E4%B9%A0/"/>
-    
-    
-    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="平常联系" scheme="https://www.hkini.top/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/"/>
     
   </entry>
   
@@ -383,9 +389,9 @@
     <category term="与C相关" scheme="https://www.hkini.top/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3/"/>
     
     
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
     
   </entry>
   
@@ -410,9 +416,9 @@
     <category term="Python" scheme="https://www.hkini.top/categories/Python/"/>
     
     
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
     
   </entry>
   
@@ -437,9 +443,9 @@
     <category term="红蓝对抗" scheme="https://www.hkini.top/categories/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
     
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
     
   </entry>
   
