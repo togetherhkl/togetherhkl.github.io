@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2023-06-30T15:20:06.212Z</updated>
+  <updated>2023-07-21T15:05:10.455Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简单同学录（C+SQLserver）</title>
+    <link href="https://www.hkini.top/posts/29688.html"/>
+    <id>https://www.hkini.top/posts/29688.html</id>
+    <published>2023-07-16T14:54:00.000Z</published>
+    <updated>2023-07-21T15:05:10.455Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://www.hkini.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="C#" scheme="https://www.hkini.top/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法可视化（C++，QT，SQLserver开发的GUI项目）</title>
+    <link href="https://www.hkini.top/posts/13368.html"/>
+    <id>https://www.hkini.top/posts/13368.html</id>
+    <published>2023-07-09T15:27:00.000Z</published>
+    <updated>2023-07-21T15:05:18.965Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://www.hkini.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="C++" scheme="https://www.hkini.top/tags/C/"/>
+    
+    <category term="Qt" scheme="https://www.hkini.top/tags/Qt/"/>
+    
+    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue项目初始化</title>
@@ -212,7 +268,7 @@
     <link href="https://www.hkini.top/posts/18162.html"/>
     <id>https://www.hkini.top/posts/18162.html</id>
     <published>2022-12-21T01:25:00.000Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
+    <updated>2023-07-10T15:55:00.630Z</updated>
     
     
       

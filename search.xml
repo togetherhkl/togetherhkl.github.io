@@ -4,6 +4,62 @@
   
     
     <entry>
+      <title>简单同学录（C+SQLserver）</title>
+      <link href="/posts/29688.html"/>
+      <url>/posts/29688.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-项目简单介绍"><a href="#1-项目简单介绍" class="headerlink" title="1.项目简单介绍"></a>1.项目简单介绍</h1><p>关于同学录管理系统，其开发主要包括后台数据库的建立、后台管理以及前台页面管理的UI设计。系统使用的是Microsoft公司的.NET开发工具，利用微软提供的C#运行环境，再结合Mircrosoft SQL Server 2019建立数据库连接关系。利用C#窗体提供的各种控件，设计交互界面，建立数据库链接，对数据库进行同学信息的增加，删除，查询，修改等操作。</p><p>利用C#中的.NET开发环境，通过不同的控件相互组合，以及控件之间的外观设计，设计出交互界面。每个同学的信息都储存在数据库当中，数据库作为后台。通过对数据库的访问来访问和修改储存同学的信息。设计有一个音乐播放器，在进入时选择想播放的音乐，目的是在用户在查看自己的同学信息时，营造出氛围使之能够享受这份美好的时间。在查询到相应的同学时，循环播放当初我们在那个阶段一起学习的生活的点点滴滴的照片和视频。</p><p>开发工具与环境：Microsoft&nbsp;visual&nbsp;studio&nbsp;2019，Windows10</p><p><strong>项目地址：</strong><br>GitHub地址：<a href="https://github.com/togetherhkl/MyPractice">C#学习过程中的小项目</a></p><p><strong>视频演示：</strong></p><iframe src="//player.bilibili.com/player.html?aid=403524192&amp;bvid=BV1yV411N7RH&amp;cid=1198937443&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h1 id="2-系统功能简单介绍"><a href="#2-系统功能简单介绍" class="headerlink" title="2.系统功能简单介绍"></a>2.系统功能简单介绍</h1><p>（1）用户登录：供同学录用户登录，选择已经注册添加的某个的人的同学录，进入该同学的主页。</p><p>（2）查询功能：查询当前登录使用者信息，通过不同的查询方式查询各个学习阶段添加的同学，查看基本信息，查看曾今留存的照片与视频。</p><p>（3）修改功能：修改当前登录使用者信息，修改每个阶段的里面某个同学的信息，包括修改已经添加的照片和视频。</p><p>（4）删除功能：删除不同阶段的某个同学的信息。</p><p>（5）添加功能：在不同的学习阶段添加某个同学的信息。</p><p>（6）设置功能：设置当前的背景图片，设置音乐播放器中的音乐。</p><p>（7）音乐播放功能：设计音乐播放器，在应用软件时享受音乐。</p><p>（8）退出登录：通出当前用户使用的登录状态。<br><img src="https://i.imgtg.com/2023/07/16/Oz80AS.png" alt="Oz80AS.png"></p><h1 id="3-相应的功能界面截图"><a href="#3-相应的功能界面截图" class="headerlink" title="3.相应的功能界面截图"></a>3.相应的功能界面截图</h1><p><strong>登录界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/Oz8f6X.png" alt="Oz8f6X.png"></p><p><strong>主页界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/Oz8jpx.png" alt="Oz8jpx.png"></p><p><strong>音乐播放器：</strong><br><img src="https://i.imgtg.com/2023/07/16/OzXxHb.png" alt="OzXxHb.png"></p><p><strong>查询界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/Oz82Yj.png" alt="Oz82Yj.png"></p><p><img src="https://i.imgtg.com/2023/07/16/Oz885p.png" alt="Oz885p.png"></p><p><strong>修改界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/Oz8XKU.png" alt="Oz8XKU.png"></p><p><img src="https://i.imgtg.com/2023/07/16/Oz8uSY.png" alt="Oz8uSY.png"></p><p><strong>删除界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/OzXaxM.png" alt="OzXaxM.png"></p><p><img src="https://i.imgtg.com/2023/07/16/OzXopG.png" alt="OzXopG.png"></p><p><strong>添加界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/OzXB5I.png" alt="OzXB5I.png"></p><p><img src="https://i.imgtg.com/2023/07/16/OzXU0F.png" alt="OzXU0F.png"></p><p><strong>设置界面：</strong></p><p><img src="https://i.imgtg.com/2023/07/16/OzXk1P.png" alt="OzXk1P.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>算法可视化（C++，QT，SQLserver开发的GUI项目）</title>
+      <link href="/posts/13368.html"/>
+      <url>/posts/13368.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-项目简单介绍"><a href="#1-项目简单介绍" class="headerlink" title="1.项目简单介绍"></a>1.项目简单介绍</h3><p>该项目是在完成相应的课程设计前提下，完成基本要求上进行的自我扩展与学习。因为只课程只允许使用c++进行GUI编程，所以选择了QT作为开发框架。在原有的c++基础上，边学习QT边进行开发。目的不仅仅是完成课程设计，更多的是想「通过项目来学习新的东西」，锻炼自己的「学习能力」。</p><p>该项目主要实现了登录，注册，数据库设计，用户查看题库下题目的文字，图片，视频解答。用户给某个题库下的头目提供文字，图片，视频解答。下面是简单的设计。</p><p><strong>学习收获</strong></p><ol><li>巩固了数据库的设计。</li><li>认识了框架，为学习框架提供了经验，通过查阅文档、阅读教程、尝试示例代码等方式来获取新知识和解决问题。</li><li>学习了关于QT相关的知识，如“信号与槽”，QT中的信号与槽机制是一种强大的事件处理方式。通过信号与槽，可以实现对象之间的通信，使得代码的组织更加清晰和模块化。学习和使用信号与槽机制可以帮助你理解事件驱动编程的概念，并且提供了一种方便灵活的方式来处理用户交互和系统事件。</li><li>熟悉了QT的GUI编程：通过使用QT框架进行GUI编程，你可以学习和掌握如何设计和实现各种用户界面元素，例如窗口、按钮、文本框、表格等等。</li></ol><p><strong>项目地址：</strong><br>GitHub地址：<a href="https://github.com/togetherhkl/Algorithm-visualization"> 基于QT实现的”算法可视化“小项目</a><br>CSDN地址：<a href="https://download.csdn.net/download/qq_45031509/85624558">C++，QT，SQLserver开发GUI项目-C++文档类资源-CSDN文库</a></p><p><strong>项目视频演示：</strong></p><iframe src="//player.bilibili.com/player.html?aid=658369296&amp;bvid=BV1Rh4y1Z7QA&amp;cid=1192062762&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h3 id="2-数据库设计"><a href="#2-数据库设计" class="headerlink" title="2.数据库设计"></a>2.数据库设计</h3><h4 id="（1）数据库E-R图"><a href="#（1）数据库E-R图" class="headerlink" title="（1）数据库E-R图"></a>（1）数据库E-R图</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613082733.PNG"></p><h4 id="（2）数字字典"><a href="#（2）数字字典" class="headerlink" title="（2）数字字典"></a>（2）数字字典</h4><p><strong>只提供了数字字典的部分展示</strong></p><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613082849.PNG"></p><h3 id="3-系统介绍"><a href="#3-系统介绍" class="headerlink" title="3.系统介绍"></a>3.系统介绍</h3><h4 id="（1）系统功能模块"><a href="#（1）系统功能模块" class="headerlink" title="（1）系统功能模块"></a>（1）系统功能模块</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083015.PNG"></p><h4 id="（2）系统流程图"><a href="#（2）系统流程图" class="headerlink" title="（2）系统流程图"></a>（2）系统流程图</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083151.PNG"></p><h3 id="4-详细设计"><a href="#4-详细设计" class="headerlink" title="4.详细设计"></a>4.详细设计</h3><h4 id="（1）登录界面"><a href="#（1）登录界面" class="headerlink" title="（1）登录界面"></a>（1）登录界面</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083507.png" alt="image-20220613083507294"></p><h4 id="（2）注册功能"><a href="#（2）注册功能" class="headerlink" title="（2）注册功能"></a>（2）注册功能</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083443.png" alt="image-20220613083443453"></p><h4 id="（3）主界面"><a href="#（3）主界面" class="headerlink" title="（3）主界面"></a>（3）主界面</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083537.png" alt="image-20220613083536875"></p><h4 id="（4）选择题库功能"><a href="#（4）选择题库功能" class="headerlink" title="（4）选择题库功能"></a>（4）选择题库功能</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083700.png" alt="image-20220613083700108"></p><h4 id="（5）题目查看功能"><a href="#（5）题目查看功能" class="headerlink" title="（5）题目查看功能"></a>（5）题目查看功能</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083738.png" alt="image-20220613083738602"></p><h4 id="（6）视频演示功能"><a href="#（6）视频演示功能" class="headerlink" title="（6）视频演示功能"></a>（6）视频演示功能</h4><p><img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220613083822.png" alt="image-20220613083822081"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Qt </tag>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue项目初始化</title>
       <link href="/posts/4224.html"/>
       <url>/posts/4224.html</url>
@@ -199,7 +255,7 @@
       <link href="/posts/18162.html"/>
       <url>/posts/18162.html</url>
       
-        <content type="html"><![CDATA[<h2 id="1-这是视频记录"><a href="#1-这是视频记录" class="headerlink" title="1.这是视频记录"></a>1.这是视频记录</h2><iframe class="my-movies" src="//player.bilibili.com/player.html?aid=55513374&amp;bvid=BV1d4411P7GR&amp;cid=97119880&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h2 id="2-这是第二个视频"><a href="#2-这是第二个视频" class="headerlink" title="2.这是第二个视频"></a>2.这是第二个视频</h2><iframe class="my-movies" src="https://blog-pic-1314840905.cos.ap-chengdu.myqcloud.com/test.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-这是视频记录"><a href="#1-这是视频记录" class="headerlink" title="1.这是视频记录"></a>1.这是视频记录</h2><iframe class="my-movies" src="//player.bilibili.com/player.html?aid=55513374&amp;bvid=BV1d4411P7GR&amp;cid=97119880&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><h2 id="2-这是第二个视频"><a href="#2-这是第二个视频" class="headerlink" title="2.这是第二个视频"></a>2.这是第二个视频</h2><iframe class="my-movies" src="https://blog-pic-1314840905.cos.ap-chengdu.myqcloud.com/test.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe><iframe src="//player.bilibili.com/player.html?aid=658369296&amp;bvid=BV1Rh4y1Z7QA&amp;cid=1192062762&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>]]></content>
       
       
       <categories>
