@@ -68,7 +68,11 @@
 .toc-list.evoldown span{
     display: flex;
     align-items: center; /* 垂直居中 */
+}
 
+.toc-list.evoldown span a{
+    display: flex;
+    align-items: center; /* 垂直居中 */
 }
 .toc-list.evoldown{
     background-color: white;
