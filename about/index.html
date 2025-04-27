@@ -30,6 +30,8 @@
 
     <title>关于 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -1068,7 +1070,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"CTF练习","value":1},{"name":"Web安全","value":6},{"name":"Linux","value":1},{"name":"Python","value":1},{"name":"Web渗透","value":2},{"name":"catrename","value":1},{"name":"与C相关","value":1},{"name":"编程","value":2},{"name":"Web安全工具","value":1},{"name":"红蓝对抗","value":1},{"name":"Web漏洞","value":1},{"name":"前端","value":1},{"name":"计划和总结","value":2},{"name":"视频记录","value":1},{"name":"阅读","value":1}],
+                data: [{"name":"Web安全","value":6},{"name":"catrename","value":1},{"name":"Linux","value":1},{"name":"Web渗透","value":2},{"name":"与C相关","value":1},{"name":"CTF练习","value":1},{"name":"编程","value":2},{"name":"Python","value":1},{"name":"Web漏洞","value":1},{"name":"前端","value":1},{"name":"Web安全工具","value":1},{"name":"红蓝对抗","value":1},{"name":"视频记录","value":1},{"name":"计划和总结","value":2},{"name":"阅读","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -1092,7 +1094,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["编成学习","项目经历","安全攻防","项目","编程","平常联系","编程学习","testfile","rename","CSRF"]
+                data: ["编成学习","项目经历","安全攻防","项目","编程","CSRF","testfile","rename","xss漏洞","编程学习"]
             }
         ],
         yAxis: [
@@ -1275,26 +1277,14 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/">
-                <span class="chip center-align waves-effect waves-light chip-default">平常联系</span>
+            <a href="/tags/CSRF/">
+                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
             </a>
             
             
             
-            <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
-                <span class="chip center-align waves-effect waves-light chip-default">编成学习</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
-                <span class="chip center-align waves-effect waves-light chip-default">项目经历</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
-                <span class="chip center-align waves-effect waves-light chip-default">编程学习</span>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
+                <span class="chip center-align waves-effect waves-light chip-default">安全攻防</span>
             </a>
             
             
@@ -1311,14 +1301,14 @@
             
             
             
-            <a href="/tags/CSRF/">
-                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
+            <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
+                <span class="chip center-align waves-effect waves-light chip-default">xss漏洞</span>
             </a>
             
             
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">
-                <span class="chip center-align waves-effect waves-light chip-default">安全攻防</span>
+            <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+                <span class="chip center-align waves-effect waves-light chip-default">编程学习</span>
             </a>
             
             
@@ -1335,8 +1325,20 @@
             
             
             
-            <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
-                <span class="chip center-align waves-effect waves-light chip-default">xss漏洞</span>
+            <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
+                <span class="chip center-align waves-effect waves-light chip-default">项目经历</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                <span class="chip center-align waves-effect waves-light chip-default">编成学习</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/">
+                <span class="chip center-align waves-effect waves-light chip-default">平常联系</span>
             </a>
             
             
@@ -1371,8 +1373,8 @@
             
             
             
-            <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-                <span class="chip center-align waves-effect waves-light chip-default">年度总结</span>
+            <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
+                <span class="chip center-align waves-effect waves-light chip-default">年终总结</span>
             </a>
             
             
@@ -1383,8 +1385,8 @@
             
             
             
-            <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
-                <span class="chip center-align waves-effect waves-light chip-default">年终总结</span>
+            <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+                <span class="chip center-align waves-effect waves-light chip-default">年度总结</span>
             </a>
             
             

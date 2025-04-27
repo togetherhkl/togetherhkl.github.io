@@ -30,6 +30,8 @@
 
     <title>Vue项目初始化 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -810,12 +812,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">编成学习</span>
-                            </a>
-                        
                             <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
                                 <span class="chip bg-color">项目经历</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">编成学习</span>
                             </a>
                         
                             <a href="/tags/vue/">
@@ -892,63 +894,66 @@
                 <html><head></head><body><h3 id="1-node-js版本管理nvm"><a href="#1-node-js版本管理nvm" class="headerlink" title="1.node.js版本管理nvm"></a>1.node.js版本管理nvm</h3><ul>
 <li>Ubuntu安装node.js</li>
 </ul>
-<pre><code class="shell">#更新源安装必要的依赖项
-sudo apt-get update
-sudo apt-get install build-essential libssl-dev
-#nvm的GitHub地址https://github.com/nvm-sh/nvm
-#官方命令安装
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-#安装完过后系统会提示以下命令，执行以下命令使得「终端会话」能够识别nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#更新源安装必要的依赖项</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev
+<span class="token comment">#nvm的GitHub地址https://github.com/nvm-sh/nvm</span>
+<span class="token comment">#官方命令安装</span>
+<span class="token function">curl</span> -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh <span class="token operator">|</span> <span class="token function">bash</span>
+<span class="token comment">#安装完过后系统会提示以下命令，执行以下命令使得「终端会话」能够识别nvm</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">NVM_DIR</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$HOME</span>/.nvm"</span>
+<span class="token punctuation">[</span> <span class="token parameter variable">-s</span> <span class="token string">"<span class="token variable">$NVM_DIR</span>/nvm.sh"</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>. <span class="token string">"<span class="token variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="token comment"># This loads nvm</span>
+<span class="token punctuation">[</span> <span class="token parameter variable">-s</span> <span class="token string">"<span class="token variable">$NVM_DIR</span>/bash_completion"</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>. <span class="token string">"<span class="token variable">$NVM_DIR</span>/bash_completion"</span>  <span class="token comment"># This loads nvm bash_completion</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="https://i.imgtg.com/2023/05/22/OaoL8p.png"></p>
 <ul>
 <li>nvm相关命令</li>
 </ul>
-<pre><code class="shell">nvm ls-remote                          #列出服务器上所有可用版本
-nvm list                               #列出目前nvm里面安装的所有版本
-nvm install node版本号                  #安装指定的node版本
-nvm uninstall node版本号               #卸载指定的node版本
-nvm use node版本号                     #使用指定的node版本
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nvm ls-remote                          <span class="token comment">#列出服务器上所有可用版本</span>
+nvm list                               <span class="token comment">#列出目前nvm里面安装的所有版本</span>
+nvm <span class="token function">install</span> node版本号                  <span class="token comment">#安装指定的node版本</span>
+nvm uninstall node版本号               <span class="token comment">#卸载指定的node版本</span>
+nvm use node版本号                     <span class="token comment">#使用指定的node版本</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h3 id="2-项目构建工具Vue-cli"><a href="#2-项目构建工具Vue-cli" class="headerlink" title="2.项目构建工具Vue-cli"></a>2.项目构建工具Vue-cli</h3><ul>
 <li><p>node.js下的npm包管理工具</p>
 </li>
 <li><p>yarn包管理工具</p>
 <p>因为npm的包管理工具的不够完善，在安装包的过程中可能会提示许多的warn，本来是没有错的，让人以为发生了错误。所以使用yarn来进行包管理。</p>
-<pre><code class="bash">Ubuntu安装yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update &amp;&amp; sudo apt install yarn
-#注意，官网注释说，如果已经安装了nvm，避免node的影响，使用下面的语句进行安装
-sudo apt update &amp;&amp; sudo apt install --no-install-recommends yarn
-yarn --version
-#卸载
-sudo apt remove yarn#卸载yarn
-sudo apt remove autoremove#卸载yarn相关的依赖
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Ubuntu安装yarn
+<span class="token function">curl</span> <span class="token parameter variable">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
+<span class="token builtin class-name">echo</span> <span class="token string">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/yarn.list
+<span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">yarn</span>
+<span class="token comment">#注意，官网注释说，如果已经安装了nvm，避免node的影响，使用下面的语句进行安装</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> --no-install-recommends <span class="token function">yarn</span>
+<span class="token function">yarn</span> <span class="token parameter variable">--version</span>
+<span class="token comment">#卸载</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> remove <span class="token function">yarn</span><span class="token comment">#卸载yarn</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> remove autoremove<span class="token comment">#卸载yarn相关的依赖</span>
 
-#基本命令使用
-yarn global add 包名           全局安装模块
-yarn install                   自动下载安装包的列表
-yarn init                      在当前目录下自动生成一个package.json配置文件，用于自动构建前端项目
-yarn remove                    卸载，移除包，或者模块
-#注意如果使global方式下载的，需要使用global的方式进行卸载
-yarn global remove 包名
-yarn publish                   作为一个开源包到官方维护的列表当中
-</code></pre>
+<span class="token comment">#基本命令使用</span>
+<span class="token function">yarn</span> global <span class="token function">add</span> 包名           全局安装模块
+<span class="token function">yarn</span> <span class="token function">install</span>                   自动下载安装包的列表
+<span class="token function">yarn</span> init                      在当前目录下自动生成一个package.json配置文件，用于自动构建前端项目
+<span class="token function">yarn</span> remove                    卸载，移除包，或者模块
+<span class="token comment">#注意如果使global方式下载的，需要使用global的方式进行卸载</span>
+<span class="token function">yarn</span> global remove 包名
+<span class="token function">yarn</span> publish                   作为一个开源包到官方维护的列表当中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="https://i.imgtg.com/2023/05/22/OaoGxU.png" alt="image-20221204202230474"></p>
 <p><img src="https://i.imgtg.com/2023/05/22/OaoQpY.png" alt="image-20221204205108383"></p>
 </li>
 <li><p>安装vue/cli</p>
 </li>
 </ul>
-<pre><code class="bash">yarn global add@vue/cli
-#要想Ubuntu终端使用安装好的包vue以及其他包，需要添加yarn包环境变量
-yarn global bin #查看环境变量
-export PATH="$PATH:/home/xxx/.yarn/bin"#这里的路径未yarn global bin显示出来的路径
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> global add@vue/cli
+<span class="token comment">#要想Ubuntu终端使用安装好的包vue以及其他包，需要添加yarn包环境变量</span>
+<span class="token function">yarn</span> global bin <span class="token comment">#查看环境变量</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PATH</span>:/home/xxx/.yarn/bin"</span>#这里的路径未yarn global bin显示出来的路径
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="https://i.imgtg.com/2023/05/22/OaTWZ6.png"></p>
 <p><img src="https://i.imgtg.com/2023/05/22/OaTbcP.png"></p>
 <ul>
@@ -956,16 +961,16 @@ export PATH="$PATH:/home/xxx/.yarn/bin"#这里的路径未yarn global bin显示�
 <p>创建项目</p>
 </li>
 </ul>
-<pre><code class="Vue">vue crate 项目名
-</code></pre>
+<pre class="line-numbers language-Vue" data-language="Vue"><code class="language-Vue">vue crate 项目名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><img src="https://i.imgtg.com/2023/05/22/OaTxOb.png" alt="OaTxOb.png"></p>
 <pre><code> 选择项目类型
 </code></pre>
-<pre><code class="shell"> Please pick a preset: (Use arrow keys)#安装配置
-❯ Default ([Vue 3] babel, eslint) #vue3.0，babel：语法转换器，转换成版本兼容      exlint：语法检测器
-  Default ([Vue 2] babel, eslint) #vue2.0
-  Manually select features #手动自己选择
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> Please pick a preset: <span class="token punctuation">(</span>Use arrow keys<span class="token punctuation">)</span><span class="token comment">#安装配置</span>
+❯ Default <span class="token punctuation">(</span><span class="token punctuation">[</span>Vue <span class="token number">3</span><span class="token punctuation">]</span> babel, eslint<span class="token punctuation">)</span> <span class="token comment">#vue3.0，babel：语法转换器，转换成版本兼容      exlint：语法检测器</span>
+  Default <span class="token punctuation">(</span><span class="token punctuation">[</span>Vue <span class="token number">2</span><span class="token punctuation">]</span> babel, eslint<span class="token punctuation">)</span> <span class="token comment">#vue2.0</span>
+  Manually <span class="token keyword">select</span> features <span class="token comment">#手动自己选择</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>​	选择包管理器：默认选择yarn</p>
 <p><img src="https://i.imgtg.com/2023/05/22/OaTz7l.png" alt="OaTz7l.png"></p>
 <p>​	如果安装过程中出现错误，需要进行多次安装</p>
@@ -975,38 +980,41 @@ export PATH="$PATH:/home/xxx/.yarn/bin"#这里的路径未yarn global bin显示�
 <h3 id="3-使用vite进行项目构建"><a href="#3-使用vite进行项目构建" class="headerlink" title="3.使用vite进行项目构建"></a>3.使用vite进行项目构建</h3><ul>
 <li>命令</li>
 </ul>
-<pre><code class="vue">yarn create vite-app &lt;项目名称&gt;
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">yarn create vite-app &lt;项目名称&gt;
 cd frontend
 npm install (or `yarn`)
 npm run dev (or `yarn dev`)
-</code></pre>
-<h3 id="4-使用yarn管理下的vite目录结构"><a href="#4-使用yarn管理下的vite目录结构" class="headerlink" title="4.使用yarn管理下的vite目录结构"></a>4.使用yarn管理下的vite目录结构</h3><pre><code class="js">my-app/
-├── node_modules/  //项目所需要的依赖项，文件比较大，在上传到GitHub或者发给别人时，需要删除，然后利用                yarn.lock。使用yarn install 来在本地安装
-├── public/        //静态文件
-│   ├── favicon.ico
-│   ├── index.html
-│   └── robots.txt
-├── src/          //项目源码
-│   ├── App.vue   //根组件
-│   ├── assets/
-│   │   └── logo.png
-│   ├── components/ //该文件夹包含应用程序中的所有组件，每个组件都是一个 Vue 实例
-│   │   └── HelloWorld.vue
-│   ├── main.js  //程序的入口
-│   ├── router/ //该文件夹包含 Vue.js 的路由管理器，用于管理应用程序的 URL 和页面切换。每个路由文件都是一个函数，用于定义路由，通常包含一个 path 和一个 redirect 对象。
-│   │   └── index.js
-│   ├── store/ //该文件夹包含 Vuex 的状态管理库，用于管理应用程序的状态
-│   │   └── index.js
-│   └── views/
-│       ├── About.vue
-│       └── Home.vue
-├── .gitignore//该文件用于指定不应该被 Git 跟踪的文件和文件夹，例如 node_modules/
-├── babel.config.js//该文件用于指定 Babel 的配置文件，用于优化 JavaScript 代码的语法和功能
-├── index.html//vue程序的入口
-├── package.json//该文件用于指定项目的依赖项、版本号、插件等，是项目的依赖管理配置文件。
-├── README.md
-└── yarn.lock //确切的依赖版本号
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="4-使用yarn管理下的vite目录结构"><a href="#4-使用yarn管理下的vite目录结构" class="headerlink" title="4.使用yarn管理下的vite目录结构"></a>4.使用yarn管理下的vite目录结构</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">my<span class="token operator">-</span>app<span class="token operator">/</span>
+├── node_modules<span class="token operator">/</span>  <span class="token comment">//项目所需要的依赖项，文件比较大，在上传到GitHub或者发给别人时，需要删除，然后利用                yarn.lock。使用yarn install 来在本地安装</span>
+├── <span class="token keyword">public</span><span class="token operator">/</span>        <span class="token comment">//静态文件</span>
+│   ├── favicon<span class="token punctuation">.</span>ico
+│   ├── index<span class="token punctuation">.</span>html
+│   └── robots<span class="token punctuation">.</span>txt
+├── src<span class="token operator">/</span>          <span class="token comment">//项目源码</span>
+│   ├── App<span class="token punctuation">.</span>vue   <span class="token comment">//根组件</span>
+│   ├── assets<span class="token operator">/</span>
+│   │   └── logo<span class="token punctuation">.</span>png
+│   ├── components<span class="token operator">/</span> <span class="token comment">//该文件夹包含应用程序中的所有组件，每个组件都是一个 Vue 实例</span>
+│   │   └── HelloWorld<span class="token punctuation">.</span>vue
+│   ├── main<span class="token punctuation">.</span>js  <span class="token comment">//程序的入口</span>
+│   ├── router<span class="token operator">/</span> <span class="token comment">//该文件夹包含 Vue.js 的路由管理器，用于管理应用程序的 URL 和页面切换。每个路由文件都是一个函数，用于定义路由，通常包含一个 path 和一个 redirect 对象。</span>
+│   │   └── index<span class="token punctuation">.</span>js
+│   ├── store<span class="token operator">/</span> <span class="token comment">//该文件夹包含 Vuex 的状态管理库，用于管理应用程序的状态</span>
+│   │   └── index<span class="token punctuation">.</span>js
+│   └── views<span class="token operator">/</span>
+│       ├── About<span class="token punctuation">.</span>vue
+│       └── Home<span class="token punctuation">.</span>vue
+├── <span class="token punctuation">.</span>gitignore<span class="token comment">//该文件用于指定不应该被 Git 跟踪的文件和文件夹，例如 node_modules/</span>
+├── babel<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js<span class="token comment">//该文件用于指定 Babel 的配置文件，用于优化 JavaScript 代码的语法和功能</span>
+├── index<span class="token punctuation">.</span>html<span class="token comment">//vue程序的入口</span>
+├── <span class="token keyword">package</span><span class="token punctuation">.</span>json<span class="token comment">//该文件用于指定项目的依赖项、版本号、插件等，是项目的依赖管理配置文件。</span>
+├── <span class="token constant">README</span><span class="token punctuation">.</span>md
+└── yarn<span class="token punctuation">.</span>lock <span class="token comment">//确切的依赖版本号</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 </body></html>
                 
             </div>
@@ -1071,12 +1079,12 @@ npm run dev (or `yarn dev`)
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">编成学习</span>
-                                </a>
-                            
                                 <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
                                     <span class="chip bg-color">项目经历</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">编成学习</span>
                                 </a>
                             
                                 <a href="/tags/vue/">

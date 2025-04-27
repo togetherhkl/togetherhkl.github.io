@@ -81,10 +81,6 @@
   align-items: center;
 }
 
-.evoldown span a{
-  display: inline-flex;
-  align-items: center;
-}
 .evoldown .icon.c {
   margin-right: .25em;
 }
@@ -118,4 +114,18 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+}
+
+/* 字体修改 */
+@font-face {
+  font-family: 'tzy';
+  /* 字体名自定义即可 */
+  /* src: url('https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/font/ZhuZiAWan.woff2'); */
+  src: url('https://npm.elemecdn.com/ethan4116-blog/lib/font/ZhuZiAWan.ttf');
+  /* 字体文件路径 */
+  font-display: swap;
+}
+
+body, .gitcalendar {
+  font-family: tzy !important;
 }

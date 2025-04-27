@@ -30,6 +30,8 @@
 
     <title>文件上传实验 | Hkini</title>
     <link rel="icon" type="image/png" href="/medias/logo.png">
+    <link rel="stylesheet" type="text/css" href="/libs/prism/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/prism/1.9.0/plugins/line-numbers/prism-line-numbers.css">
     
 
 
@@ -1089,72 +1091,72 @@
 </li>
 </ul>
 <h2 id="Pass-02（MIME）"><a href="#Pass-02（MIME）" class="headerlink" title="Pass-02（MIME）"></a>Pass-02（MIME）</h2><h3 id="验证方式-1"><a href="#验证方式-1" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端（MIME验证）：</strong>验证文件的MIME信息</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-/*
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token comment">/*
 isset -- 检测变量是否设置
 判断post过来的数据是否被提交过来
-*/
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {//判断UPLOAD_PATH上传目录是否存在
-        if (($_FILES['upload_file']['type'] == 'image/jpeg') || ($_FILES['upload_file']['type'] == 'image/png') || ($_FILES['upload_file']['type'] == 'image/gif')) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];//获取临时存储的文件名
-            $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'] //上床目录+上传时的文件名           
-            if (move_uploaded_file($temp_file, $img_path)) {//把临时文件移到UPLOAD_PATH目录
-                $is_upload = true;
-            } else {
-                $msg = '上传出错！';
-            }
-        } else {
-            $msg = '文件类型不正确，请重新上传！';
-        }
-    } else {
-        $msg = UPLOAD_PATH.'文件夹不存在,请手工创建！';
-    }
-}
-/*
+*/</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token constant">UPLOAD_PATH</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//判断UPLOAD_PATH上传目录是否存在</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string single-quoted-string">'image/jpeg'</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string single-quoted-string">'image/png'</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string single-quoted-string">'image/gif'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//获取临时存储的文件名</span>
+            <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/'</span> <span class="token operator">.</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span> <span class="token comment">//上床目录+上传时的文件名           </span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span> <span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//把临时文件移到UPLOAD_PATH目录</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'文件类型不正确，请重新上传！'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
 $_FILES数组内容如下: 
 $_FILES['myFile']['name'] 客户端文件的原名称。 
 $_FILES['myFile']['type'] 文件的 MIME 类型，需要浏览器提供该信息的支持，例如"image/gif"。 
 $_FILES['myFile']['size'] 已上传文件的大小，单位为字节。 
 $_FILES['myFile']['tmp_name'] 文件被上传后在服务端储存的临时文件名，一般是系统默认。可以在php.ini的upload_tmp_dir 指定，但 用 putenv() 函数设置是不起作用的。 
 $_FILES['myFile']['error'] 和该文件上传相关的错误代码。['error'] 是在 PHP 4.2.0 版本中增加的
-*/
-</code></pre>
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>抓包更改content_type为验证的类型</li>
 </ul>
 <h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232956.png" style="zoom: 50%;">
 
 <h2 id="Pass-03（黑名单不全）"><a href="#Pass-03（黑名单不全）" class="headerlink" title="Pass-03（黑名单不全）"></a>Pass-03（黑名单不全）</h2><h3 id="验证方式-2"><a href="#验证方式-2" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单的方式（黑名单不全）：</strong>通过指定不能上传的文件类型，在后端提取上传文件的后缀，然后与黑名单进行比对。</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array('.asp','.aspx','.php','.jsp');
-        $file_name = trim($_FILES['upload_file']['name']);
-        $file_name = deldot($file_name);//删除文件名末尾的点
-        $file_ext = strrchr($file_name, '.');//获取上传文件的后缀名
-        $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-        $file_ext = trim($file_ext); //收尾去空
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token constant">UPLOAD_PATH</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$deny_ext</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'.asp'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'.aspx'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'.php'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'.jsp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">deldot</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//删除文件名末尾的点</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strrchr</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取上传文件的后缀名</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strtolower</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//转换为小写</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">str_ireplace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'::$DATA'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去除字符串::$DATA</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//收尾去空</span>
 
-        if(!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;            
-            if (move_uploaded_file($temp_file,$img_path)) {
-                 $is_upload = true;
-            } else {
-                $msg = '上传出错！';
-            }
-        } else {
-            $msg = '不允许上传.asp,.aspx,.php,.jsp后缀文件！';
-        }
-    } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
-    }
-}
-</code></pre>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">,</span> <span class="token variable">$deny_ext</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"YmdHis"</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token variable">$file_ext</span><span class="token punctuation">;</span>            
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                 <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'不允许上传.asp,.aspx,.php,.jsp后缀文件！'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>在Apache服务器中，在配置文件httpd.conf中有如下配置代码：AddType application/x-httpd-php .php .phtml .phps .php5 .pht，如果不配置他是无法解析php5代码的，访问的时候就是一个空白页。可以随便写一个后缀名，入.hhh,那么上传.hhh的文件都会被当成php来执行。</p>
 <p>所以，就是在httpd.com的配置文件中，没有被黑名单限制的后缀。</p>
 <p>在上传的时候抓包，修改filename的文件后缀绕过黑名单限制</p>
@@ -1176,34 +1178,35 @@ if (isset($_POST['submit'])) {
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233000.png" style="zoom:67%;">
 
 <h2 id="Pass-04（-htaccess）"><a href="#Pass-04（-htaccess）" class="headerlink" title="Pass-04（.htaccess）"></a>Pass-04（.htaccess）</h2><h3 id="验证方式-3"><a href="#验证方式-3" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单（黑名单齐全），.htacces解析：</strong></p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array(".php",".php5",".php4",".php3",".php2",".php1",".html",".htm",".phtml",".pht",".pHp",".pHp5",".pHp4",".pHp3",".pHp2",".pHp1",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".jSp",".jSpx",".jSpa",".jSw",".jSv",".jSpf",".jHtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".aSp",".aSpx",".aSa",".aSax",".aScx",".aShx",".aSmx",".cEr",".sWf",".swf",".ini");
-        $file_name = trim($_FILES['upload_file']['name']);
-        $file_name = deldot($file_name);//删除文件名末尾的点
-        $file_ext = strrchr($file_name, '.');
-        $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-        $file_ext = trim($file_ext); //收尾去空
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token constant">UPLOAD_PATH</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$deny_ext</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string double-quoted-string">".php"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php5"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php4"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php3"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php2"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php1"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".html"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".htm"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".phtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pht"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp5"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp4"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp3"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp2"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp1"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".Html"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".Htm"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsw"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsv"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSw"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSv"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jHtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aspx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asax"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".ascx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".ashx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asmx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".cer"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSpx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSax"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aScx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aShx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSmx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".cEr"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".sWf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".swf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".ini"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">deldot</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//删除文件名末尾的点</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strrchr</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strtolower</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//转换为小写</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">str_ireplace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'::$DATA'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去除字符串::$DATA</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//收尾去空</span>
 
-        if (!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.$file_name;
-            if (move_uploaded_file($temp_file, $img_path)) {
-                $is_upload = true;
-            } else {
-                $msg = '上传出错！';
-            }
-        } else {
-            $msg = '此文件不允许上传!';
-        }
-    } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
-    }
-}
-</code></pre>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">,</span> <span class="token variable">$deny_ext</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token variable">$file_name</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span> <span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'此文件不允许上传!'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><p>针对Apache，有一个.htaccess的配置文件，</p>
 <blockquote>
 <p>.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。</p>
@@ -1213,10 +1216,10 @@ if (isset($_POST['submit'])) {
 <h3 id="过程-3"><a href="#过程-3" class="headerlink" title="过程"></a>过程</h3><ul>
 <li>配置.htaccess文件，并上传</li>
 </ul>
-<pre><code class="text">&lt;FilesMatch "test4.jpg"&gt;
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">&lt;FilesMatch "test4.jpg"&gt;
 SetHandler application/x-httpd-php
-&lt;/FilesMatch&gt;
-</code></pre>
+&lt;/FilesMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>匹配到test4.jpg的文件，就以php格式运行</p>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233001.png"></p>
 <ul>
@@ -1229,34 +1232,34 @@ SetHandler application/x-httpd-php
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233003.png"></p>
 <h2 id="Pass-05（点绕过）"><a href="#Pass-05（点绕过）" class="headerlink" title="Pass-05（点绕过）"></a>Pass-05（点绕过）</h2><h3 id="验证方式-4"><a href="#验证方式-4" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单，点绕过：</strong>其实于04关代码相同</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".pHp",".pHp5",".pHp4",".pHp3",".pHp2",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".jSp",".jSpx",".jSpa",".jSw",".jSv",".jSpf",".jHtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".aSp",".aSpx",".aSa",".aSax",".aScx",".aShx",".aSmx",".cEr",".sWf",".swf",".htaccess");
-        $file_name = trim($_FILES['upload_file']['name']);
-        $file_name = deldot($file_name);//删除文件名末尾的点
-        $file_ext = strrchr($file_name, '.');
-        $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-        $file_ext = trim($file_ext); //首尾去空
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token constant">UPLOAD_PATH</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$deny_ext</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string double-quoted-string">".php"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php5"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php4"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php3"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".php2"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".html"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".htm"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".phtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pht"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp5"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp4"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp3"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHp2"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".Html"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".Htm"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".pHtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsw"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jsv"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jspf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSw"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSv"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jSpf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".jHtml"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aspx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asax"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".ascx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".ashx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".asmx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".cer"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSp"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSpx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSa"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSax"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aScx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aShx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".aSmx"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".cEr"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".sWf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".swf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">".htaccess"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token function">deldot</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//删除文件名末尾的点</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strrchr</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">strtolower</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//转换为小写</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">str_ireplace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'::$DATA'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去除字符串::$DATA</span>
+        <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//首尾去空</span>
         
-        if (!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.$file_name;
-            if (move_uploaded_file($temp_file, $img_path)) {
-                $is_upload = true;
-            } else {
-                $msg = '上传出错！';
-            }
-        } else {
-            $msg = '此文件类型不允许上传！';
-        }
-    } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
-    }
-}
-</code></pre>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">,</span> <span class="token variable">$deny_ext</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token variable">$file_name</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span> <span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'此文件类型不允许上传！'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><p><strong>点绕过：</strong>由于后端去除后缀名的点只有一次，所以构造“.  .”，点空格点的形式，由于Windows的特性，在文件后缀名过后追加一个点，或者一个空格，还是原文件本身。</p>
 <p>比如绕过黑名单验证过后得到的文件后缀为.php.  ，由于Windows的特性最后在服务器的文件为.php</p>
 <h3 id="过程-4"><a href="#过程-4" class="headerlink" title="过程"></a>过程</h3><ul>
@@ -1299,8 +1302,8 @@ if (isset($_POST['submit'])) {
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233011.png"></p>
 <h2 id="Pass-09（-DATA）"><a href="#Pass-09（-DATA）" class="headerlink" title="Pass-09（::$DATA）"></a>Pass-09（::$DATA）</h2><h3 id="验证方式-8"><a href="#验证方式-8" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单，::$DATA：</strong>此次的验证代码中缺失</p>
-<pre><code class="php">$file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-</code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">str_ireplace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'::$DATA'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去除字符串::$DATA</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h3 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h3><p>在window的时候如果文件名+<code>"::$DATA"</code>会把<code>::$DATA</code>之后的数据当成文件流处理,不会检测后缀名，且保持<code>::$DATA</code>之前的文件名，他的目的就是不检查后缀名</p>
 <p>在文件中添加后缀就行了</p>
 <h3 id="过程-8"><a href="#过程-8" class="headerlink" title="过程"></a>过程</h3><ul>
@@ -1327,25 +1330,28 @@ if (isset($_POST['submit'])) {
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233015.png" alt="23"></p>
 <h2 id="Pass-12（-00，0x00，-x2F-00截断）"><a href="#Pass-12（-00，0x00，-x2F-00截断）" class="headerlink" title="Pass-12（%00，0x00，/00截断）"></a>Pass-12（%00，0x00，/00截断）</h2><h3 id="验证方式-11"><a href="#验证方式-11" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>只有允许上传指定的文件</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-if(isset($_POST['submit'])){
-    $ext_arr = array('jpg','png','gif');
-    $file_ext = substr($_FILES['upload_file']['name'],strrpos($_FILES['upload_file']['name'],".")+1);//抓取上传文件的后缀名
-    if(in_array($file_ext,$ext_arr)){
-        $temp_file = $_FILES['upload_file']['tmp_name'];
-        $img_path = $_GET['save_path']."/".rand(10, 99).date("YmdHis").".".$file_ext;
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$ext_arr</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'jpg'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'png'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'gif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token function">strrpos</span><span class="token punctuation">(</span><span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"."</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//抓取上传文件的后缀名</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">,</span><span class="token variable">$ext_arr</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'save_path'</span><span class="token punctuation">]</span><span class="token operator">.</span><span class="token string double-quoted-string">"/"</span><span class="token operator">.</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"YmdHis"</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"."</span><span class="token operator">.</span><span class="token variable">$file_ext</span><span class="token punctuation">;</span>
 
-        if(move_uploaded_file($temp_file,$img_path)){
-            $is_upload = true;
-        } else {
-            $msg = '上传出错！';
-        }
-    } else{
-        $msg = "只允许上传.jpg|.png|.gif类型文件！";
-    }
-}
-</code></pre>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"只允许上传.jpg|.png|.gif类型文件！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h3 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h3><blockquote>
 <p>00截断是操作系统层的漏洞，由于操作系统是C语言或汇编语言编写的，这两种语言在定义字符串时，都是以\0（即0x00）作为字符串的结尾。</p>
 <p>操作系统在识别字符串时，当读取到\0字符时，就认为读取到了一个字符串的结束符号。</p>
@@ -1411,11 +1417,11 @@ if(isset($_POST['submit'])){
 <li>制作图片码</li>
 </ul>
 <p>Linux</p>
-<pre><code class="text">cat init.jpg test14.php &gt;&gt;webshell.jpg
-</code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">cat init.jpg test14.php &gt;&gt;webshell.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>windows</p>
-<pre><code class="test">copy init.jpg /b + test14.php /a webshell.jpg 
-</code></pre>
+<pre class="line-numbers language-test" data-language="test"><code class="language-test">copy init.jpg /b + test14.php /a webshell.jpg <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li><p>上传并获得文件路径</p>
 </li>
@@ -1424,11 +1430,11 @@ if(isset($_POST['submit'])){
 </li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233020.png"></p>
-<h2 id="Pass-15（文件包含）"><a href="#Pass-15（文件包含）" class="headerlink" title="Pass-15（文件包含）"></a>Pass-15（文件包含）</h2><h3 id="验证方式-14"><a href="#验证方式-14" class="headerlink" title="验证方式"></a>验证方式</h3><pre><code class="php">function isImage($filename){
-    $types = '.jpeg|.png|.gif';
-    if(file_exists($filename)){
-        $info = getimagesize($filename);//获取图像的信息
-      /*  getimagesize() 函数将测定任何 GIF，JPG，PNG，SWF，SWC，PSD，TIFF，BMP，IFF，JP2，JPX，JB2，JPC，XBM 或 WBMP 图像文件的大小并返回图像的尺寸以及文件类型及图片高度与宽度。函数成功返回的就是一个数组，失败则返回 FALSE 并产生一条 E_WARNING 级的错误信息。
+<h2 id="Pass-15（文件包含）"><a href="#Pass-15（文件包含）" class="headerlink" title="Pass-15（文件包含）"></a>Pass-15（文件包含）</h2><h3 id="验证方式-14"><a href="#验证方式-14" class="headerlink" title="验证方式"></a>验证方式</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">function</span> <span class="token function-definition function">isImage</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$types</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'.jpeg|.png|.gif'</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">getimagesize</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取图像的信息</span>
+      <span class="token comment">/*  getimagesize() 函数将测定任何 GIF，JPG，PNG，SWF，SWC，PSD，TIFF，BMP，IFF，JP2，JPX，JB2，JPC，XBM 或 WBMP 图像文件的大小并返回图像的尺寸以及文件类型及图片高度与宽度。函数成功返回的就是一个数组，失败则返回 FALSE 并产生一条 E_WARNING 级的错误信息。
 返回的值是一个七位的数组
 索引 0 给出的是图像宽度的像素值
 索引 1 给出的是图像高度的像素值
@@ -1437,194 +1443,194 @@ if(isset($_POST['submit'])){
 索引 bits 给出的是图像的每种颜色的位数，二进制格式
 索引 channels 给出的是图像的通道值，RGB 图像默认是 3
 索引 mime 给出的是图像的 MIME 信息，此信息可以用来在 HTTP Content-type 头信息中发送正确的信息，如： header("Content-type: image/jpeg");
-*/
-        $ext = image_type_to_extension($info[2]);//获取文件的类型
-        if(stripos($types,$ext)&gt;=0){//查找 $ext在字符串$types中第一次出现的位置
-            return $ext;
-        }else{
-            return false;
-        }
-    }else{
-        return false;
-    }
-}
+*/</span>
+        <span class="token variable">$ext</span> <span class="token operator">=</span> <span class="token function">image_type_to_extension</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取文件的类型</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">stripos</span><span class="token punctuation">(</span><span class="token variable">$types</span><span class="token punctuation">,</span><span class="token variable">$ext</span><span class="token punctuation">)</span><span class="token operator">&gt;=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment">//查找 $ext在字符串$types中第一次出现的位置</span>
+            <span class="token keyword">return</span> <span class="token variable">$ext</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-$is_upload = false;
-$msg = null;
-if(isset($_POST['submit'])){
-    $temp_file = $_FILES['upload_file']['tmp_name'];
-    $res = isImage($temp_file);
-    if(!$res){
-        $msg = "文件未知，上传失败！";
-    }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").$res;
-        if(move_uploaded_file($temp_file,$img_path)){
-            $is_upload = true;
-        } else {
-            $msg = "上传出错！";
-        }
-    }
-}
-</code></pre>
+<span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$res</span> <span class="token operator">=</span> <span class="token function">isImage</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"文件未知，上传失败！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string double-quoted-string">"/"</span><span class="token operator">.</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"YmdHis"</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token variable">$res</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"上传出错！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h3><p>同14关一模一样的方式</p>
 <h3 id="过程-14"><a href="#过程-14" class="headerlink" title="过程"></a>过程</h3><p>参见14关</p>
 <h2 id="Pass-16"><a href="#Pass-16" class="headerlink" title="Pass-16"></a>Pass-16</h2><h3 id="验证方式-15"><a href="#验证方式-15" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：exif_imagetype()</strong></p>
 <blockquote>
 <p>知识补充： exif_imagetype()读取一个图像的第一个字节并检查其后缀名。<br>返回值与getimage()函数返回的索引2相同，但是速度比getimage快得多。需要开启<code>php_exif</code>模块。</p>
 </blockquote>
-<pre><code class="php">function isImage($filename){
-    //需要开启php_exif模块
-    $image_type = exif_imagetype($filename);
-    switch ($image_type) {
-        case IMAGETYPE_GIF:
-            return "gif";
-            break;
-        case IMAGETYPE_JPEG:
-            return "jpg";
-            break;
-        case IMAGETYPE_PNG:
-            return "png";
-            break;    
-        default:
-            return false;
-            break;
-    }
-}
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">function</span> <span class="token function-definition function">isImage</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//需要开启php_exif模块</span>
+    <span class="token variable">$image_type</span> <span class="token operator">=</span> <span class="token function">exif_imagetype</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token variable">$image_type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token constant">IMAGETYPE_GIF</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string double-quoted-string">"gif"</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token constant">IMAGETYPE_JPEG</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string double-quoted-string">"jpg"</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token constant">IMAGETYPE_PNG</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string double-quoted-string">"png"</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>    
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-$is_upload = false;
-$msg = null;
-if(isset($_POST['submit'])){
-    $temp_file = $_FILES['upload_file']['tmp_name'];
-    $res = isImage($temp_file);
-    if(!$res){
-        $msg = "文件未知，上传失败！";
-    }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$res;
-        if(move_uploaded_file($temp_file,$img_path)){
-            $is_upload = true;
-        } else {
-            $msg = "上传出错！";
-        }
-    }
-}
-</code></pre>
+<span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$res</span> <span class="token operator">=</span> <span class="token function">isImage</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"文件未知，上传失败！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string double-quoted-string">"/"</span><span class="token operator">.</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"YmdHis"</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"."</span><span class="token operator">.</span><span class="token variable">$res</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"上传出错！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h3><p>参见14，15关，主要是需要在php中开启相应的模块</p>
 <h3 id="过程-15"><a href="#过程-15" class="headerlink" title="过程"></a>过程</h3><p>参见14，15关</p>
 <h2 id="Pass-17-二次渲染"><a href="#Pass-17-二次渲染" class="headerlink" title="Pass-17(二次渲染)"></a>Pass-17(二次渲染)</h2><h3 id="验证方式-16"><a href="#验证方式-16" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>同时验证文件后缀，MIME文件类型。如果前两步验证成功，则使用imagecreatefromjpeg($target_path);函数对其进行二次渲染。根据图片的大小尺寸进行渲染，这样就会使得我们写的木马代码被渲染无效，不能执行。</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
-if (isset($_POST['submit'])){
-    // 获得上传文件的基本信息，文件名，类型，大小，临时文件路径
-    $filename = $_FILES['upload_file']['name'];
-    $filetype = $_FILES['upload_file']['type'];
-    $tmpname = $_FILES['upload_file']['tmp_name'];
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// 获得上传文件的基本信息，文件名，类型，大小，临时文件路径</span>
+    <span class="token variable">$filename</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$filetype</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'type'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$tmpname</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    $target_path=UPLOAD_PATH.'/'.basename($filename);//basename返回路劲文的文件名部分
+    <span class="token variable">$target_path</span><span class="token operator">=</span><span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token function">basename</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//basename返回路劲文的文件名部分</span>
 
-    // 获得上传文件的扩展名
-    $fileext= substr(strrchr($filename,"."),1);
+    <span class="token comment">// 获得上传文件的扩展名</span>
+    <span class="token variable">$fileext</span><span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token function">strrchr</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"."</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //判断文件后缀与类型，合法才进行上传操作
-    if(($fileext == "jpg") &amp;&amp; ($filetype=="image/jpeg")){
-        if(move_uploaded_file($tmpname,$target_path)){
-            //使用上传的图片生成新的图片
-            $im = imagecreatefromjpeg($target_path);
-            //由文件或 URL 创建一个新图象
+    <span class="token comment">//判断文件后缀与类型，合法才进行上传操作</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$fileext</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"jpg"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token variable">$filetype</span><span class="token operator">==</span><span class="token string double-quoted-string">"image/jpeg"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$tmpname</span><span class="token punctuation">,</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//使用上传的图片生成新的图片</span>
+            <span class="token variable">$im</span> <span class="token operator">=</span> <span class="token function">imagecreatefromjpeg</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//由文件或 URL 创建一个新图象</span>
 
-            if($im == false){
-                $msg = "该文件不是jpg格式的图片！";
-                @unlink($target_path);//删除文件
-            }else{
-                //给新图片指定文件名
-                srand(time());
-                $newfilename = strval(rand()).".jpg";
-                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
-                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                imagejpeg($im,$img_path);
-                //用于向浏览器或文件显示图像。此函数的主要用途是在浏览器中查看图像，将任何其他图像类型转换为JPEG并更改图像质量
-                @unlink($target_path);//删除原始文件
-                $is_upload = true;
-            }
-        } else {
-            $msg = "上传出错！";
-        }
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$im</span> <span class="token operator">==</span> <span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"该文件不是jpg格式的图片！"</span><span class="token punctuation">;</span>
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//删除文件</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                <span class="token comment">//给新图片指定文件名</span>
+                <span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$newfilename</span> <span class="token operator">=</span> <span class="token function">strval</span><span class="token punctuation">(</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">".jpg"</span><span class="token punctuation">;</span>
+                <span class="token comment">//显示二次渲染后的图片（使用用户上传图片生成的新图片）</span>
+                <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token variable">$newfilename</span><span class="token punctuation">;</span>
+                <span class="token function">imagejpeg</span><span class="token punctuation">(</span><span class="token variable">$im</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">//用于向浏览器或文件显示图像。此函数的主要用途是在浏览器中查看图像，将任何其他图像类型转换为JPEG并更改图像质量</span>
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//删除原始文件</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"上传出错！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-    }else if(($fileext == "png") &amp;&amp; ($filetype=="image/png")){
-        if(move_uploaded_file($tmpname,$target_path)){
-            //使用上传的图片生成新的图片
-            $im = imagecreatefrompng($target_path);
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$fileext</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"png"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token variable">$filetype</span><span class="token operator">==</span><span class="token string double-quoted-string">"image/png"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$tmpname</span><span class="token punctuation">,</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//使用上传的图片生成新的图片</span>
+            <span class="token variable">$im</span> <span class="token operator">=</span> <span class="token function">imagecreatefrompng</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            if($im == false){
-                $msg = "该文件不是png格式的图片！";
-                @unlink($target_path);
-            }else{
-                 //给新图片指定文件名
-                srand(time());
-                $newfilename = strval(rand()).".png";
-                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
-                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                imagepng($im,$img_path);
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$im</span> <span class="token operator">==</span> <span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"该文件不是png格式的图片！"</span><span class="token punctuation">;</span>
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                 <span class="token comment">//给新图片指定文件名</span>
+                <span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$newfilename</span> <span class="token operator">=</span> <span class="token function">strval</span><span class="token punctuation">(</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">".png"</span><span class="token punctuation">;</span>
+                <span class="token comment">//显示二次渲染后的图片（使用用户上传图片生成的新图片）</span>
+                <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token variable">$newfilename</span><span class="token punctuation">;</span>
+                <span class="token function">imagepng</span><span class="token punctuation">(</span><span class="token variable">$im</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-                @unlink($target_path);
-                $is_upload = true;               
-            }
-        } else {
-            $msg = "上传出错！";
-        }
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>               
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"上传出错！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-    }else if(($fileext == "gif") &amp;&amp; ($filetype=="image/gif")){
-        if(move_uploaded_file($tmpname,$target_path)){
-            //使用上传的图片生成新的图片
-            $im = imagecreatefromgif($target_path);
-            if($im == false){
-                $msg = "该文件不是gif格式的图片！";
-                @unlink($target_path);
-            }else{
-                //给新图片指定文件名
-                srand(time());
-                $newfilename = strval(rand()).".gif";
-                //显示二次渲染后的图片（使用用户上传图片生成的新图片）
-                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                imagegif($im,$img_path);
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$fileext</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"gif"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token variable">$filetype</span><span class="token operator">==</span><span class="token string double-quoted-string">"image/gif"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$tmpname</span><span class="token punctuation">,</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//使用上传的图片生成新的图片</span>
+            <span class="token variable">$im</span> <span class="token operator">=</span> <span class="token function">imagecreatefromgif</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$im</span> <span class="token operator">==</span> <span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"该文件不是gif格式的图片！"</span><span class="token punctuation">;</span>
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                <span class="token comment">//给新图片指定文件名</span>
+                <span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$newfilename</span> <span class="token operator">=</span> <span class="token function">strval</span><span class="token punctuation">(</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">".gif"</span><span class="token punctuation">;</span>
+                <span class="token comment">//显示二次渲染后的图片（使用用户上传图片生成的新图片）</span>
+                <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span><span class="token operator">.</span><span class="token string single-quoted-string">'/'</span><span class="token operator">.</span><span class="token variable">$newfilename</span><span class="token punctuation">;</span>
+                <span class="token function">imagegif</span><span class="token punctuation">(</span><span class="token variable">$im</span><span class="token punctuation">,</span><span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-                @unlink($target_path);
-                $is_upload = true;
-            }
-        } else {
-            $msg = "上传出错！";
-        }
-    }else{
-        $msg = "只允许上传后缀为.jpg|.png|.gif的图片文件！";
-    }
-}
-</code></pre>
+                @<span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$target_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"上传出错！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"只允许上传后缀为.jpg|.png|.gif的图片文件！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h3><p>找到渲染前后没有改变的地方，然后把木马写在不变的位置。而且不同格式的修改方式是不一样的。在自己的多次尝试下，都未成功。先留着。</p>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-2">upload-labs之pass 16详细分析 - 先知社区 (aliyun.com)</a></p>
 <h2 id="Pass-18"><a href="#Pass-18" class="headerlink" title="Pass-18"></a>Pass-18</h2><h3 id="验证方式-17"><a href="#验证方式-17" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>先获上传文件的后缀，全名，类型。先把文件暂时上传，然后检验文件的后缀是否合理，如果合理就重新更改名字，否则就删除。</p>
-<pre><code class="php">$is_upload = false;
-$msg = null;
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 
-if(isset($_POST['submit'])){
-    $ext_arr = array('jpg','png','gif');
-    $file_name = $_FILES['upload_file']['name'];
-    $temp_file = $_FILES['upload_file']['tmp_name'];
-    $file_ext = substr($file_name,strrpos($file_name,".")+1);
-    $upload_file = UPLOAD_PATH . '/' . $file_name;
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$ext_arr</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'jpg'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'png'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'gif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$file_name</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$temp_file</span> <span class="token operator">=</span> <span class="token variable">$_FILES</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'upload_file'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'tmp_name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">,</span><span class="token function">strrpos</span><span class="token punctuation">(</span><span class="token variable">$file_name</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"."</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$upload_file</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/'</span> <span class="token operator">.</span> <span class="token variable">$file_name</span><span class="token punctuation">;</span>
 
-    if(move_uploaded_file($temp_file, $upload_file)){//先上传文件
-        if(in_array($file_ext,$ext_arr)){//判断后缀是否合理
-             $img_path = UPLOAD_PATH . '/'. rand(10, 99).date("YmdHis").".".$file_ext;
-             rename($upload_file, $img_path);
-             $is_upload = true;
-        }else{
-            $msg = "只允许上传.jpg|.png|.gif类型文件！";
-            unlink($upload_file);
-        }
-    }else{
-        $msg = '上传出错！';
-    }
-}
-</code></pre>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">move_uploaded_file</span><span class="token punctuation">(</span><span class="token variable">$temp_file</span><span class="token punctuation">,</span> <span class="token variable">$upload_file</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment">//先上传文件</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$file_ext</span><span class="token punctuation">,</span><span class="token variable">$ext_arr</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment">//判断后缀是否合理</span>
+             <span class="token variable">$img_path</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/'</span><span class="token operator">.</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"YmdHis"</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"."</span><span class="token operator">.</span><span class="token variable">$file_ext</span><span class="token punctuation">;</span>
+             <span class="token function">rename</span><span class="token punctuation">(</span><span class="token variable">$upload_file</span><span class="token punctuation">,</span> <span class="token variable">$img_path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"只允许上传.jpg|.png|.gif类型文件！"</span><span class="token punctuation">;</span>
+            <span class="token function">unlink</span><span class="token punctuation">(</span><span class="token variable">$upload_file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h3><p>知识点：当一个文件被修改的时候，是不能对这个文件进行修改的，所以当我们把文件上传上去，在后端还没开始验证的时候去访问这个文件，就不能删除了。</p>
 </body></html>
                 
