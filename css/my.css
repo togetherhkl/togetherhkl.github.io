@@ -1,1 +1,121 @@
 /* Here is your custom css styles. */
+/*渐构模式展示的css样式*/
+:root{
+  --heroui-content2: 240 26.32% 88.82%;
+  --sxd: 1.2em;
+  --heroui-block-d: 203.66999999999996 69.01% 41.76%;
+  --heroui-block-e: 358.36 46.22% 53.33%;
+  --heroui-block-t: 37.889999999999986 59.38% 37.65%;
+  --heroui-block-c: 240 .43% 45.69%;
+  --heroui-block-v: 246.47000000000003 51.52% 61.18%;
+  --heroui-block-a: 282 47.01% 54.12%;
+  --block-color: var(--heroui-block-c);
+  --heroui-primary-900: 240 16.98% 10.39%;
+}
+
+.evoldown {
+  display: block;
+  width: 100%;
+  border-radius: .5em .5em 0 0 / .5em .5em 0px 0px;
+  background-color: hsl(var(--heroui-content2) / .2);
+  padding-left: var(--sxd);
+  padding-right: var(--sxd);
+  padding-top: min(1em, var(--sxd));
+  --sb: .25em;
+  position: relative;
+  margin-bottom: var(--sb);
+}
+
+.evoldown{
+  display: inline-flex;
+  align-items: center;
+}
+
+.evoldown p {
+  padding: 0;
+  margin: 2px 2px 10px !important;
+  font-size: var(--sxd) !important;
+}
+
+.evoldown svg {
+  width: 1.7em;
+  height: 1.7em;
+  vertical-align: middle;
+  margin-bottom:0.5em ;
+  border-radius: 5px; /* 设置圆角半径 */
+}
+
+.evoldown svg[type="c"] {
+  color: hsl(var(--heroui-block-c));
+  background-color:hsl(var(--heroui-block-c) / .2); ;
+}
+
+.evoldown svg[type="d"] {
+  color: hsl(var(--heroui-block-d));
+  background-color:hsl(var(--heroui-block-d) / .2); ;
+}
+
+.evoldown svg[type="e"] {
+  color: hsl(var(--heroui-block-e));
+  background-color:hsl(var(--heroui-block-e) / .2); ;
+}
+
+.evoldown svg[type="t"] {
+  color: hsl(var(--heroui-block-t));
+  background-color:hsl(var(--heroui-block-t) / .2); ;
+}
+
+.evoldown svg[type="v"] {
+  color: hsl(var(--heroui-block-v));
+  background-color:hsl(var(--heroui-block-v) / .2); ;
+}
+
+.evoldown svg[type="a"] {
+  color: hsl(var(--heroui-block-a));
+  background-color:hsl(var(--heroui-block-a) / .2); ;
+}
+
+
+.evoldown span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.evoldown span a{
+  display: inline-flex;
+  align-items: center;
+}
+.evoldown .icon.c {
+  margin-right: .25em;
+}
+
+.evoldown  p[name=label] {
+  margin-right: .15em;
+  height: 1.667em;
+  border-radius: .333em;
+  padding: .1em .5em .15em;
+  font-size: 1em !important;
+  line-height: 1.4em !important;
+  --tw-text-opacity: 1;
+  color: hsl(var(--heroui-block-c) / var(--heroui-block-c-opacity, var(--tw-text-opacity)));
+  background-color: hsl(var(--block-color) / .2);
+}
+
+.evoldown p[name=id]{
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: hsl(var(--heroui-primary-900) / var(--heroui-primary-900-opacity, var(--tw-text-opacity)));
+  font-family: Source Han Sans;
+  font-variation-settings: "opsz" auto;
+  letter-spacing: .07em;
+}
+
+.evoldown .link-icon {
+  display: inline-flex;
+  width: 1.4em !important;
+  height: 1.4em !important;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}

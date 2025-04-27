@@ -1192,9 +1192,9 @@ article .article-tags .chip {
 }
 
 #articleContent p {
-    margin: 2px 2px 10px;
-    font-size: 1.05rem;
-    line-height: 1.85rem;
+    margin: 2px 16px 10px;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
 }
 
 #articleContent blockquote p {
@@ -1236,8 +1236,8 @@ article .article-tags .chip {
 #articleContent ul li,
 #articleContent ol li {
     display: list-item;
-    line-height: 1.8rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
 }
 
 #articleContent ul li {
@@ -1256,14 +1256,14 @@ article .article-tags .chip {
     overflow: auto;
 }
 
-/**
-#articleContent table,
+
+/* #articleContent table,
 th,
 td {
     padding: 12px 13px;
     border: 1px solid #dfe2e5;
-}
-**/
+} */
+
 
 table tr:nth-child(2n),
 thead {
@@ -2067,12 +2067,13 @@ p.search-result-summary {
     list-style: none;
     margin-left: -20px;
     display: none;
+    padding-left: 6px;
 }
 
 .nav-menu li .sub-nav li {
     text-align: left;
     clear: left;
-    width: 140px;
+    width: 100px;
     height: 35px;
     line-height: 35px;
     position: relative;
@@ -2081,14 +2082,14 @@ p.search-result-summary {
 .nav-menu li .sub-nav li a {
     height: 34px;
     line-height: 34px;
-    width: 138px;
+    width: 100px;
     padding: 0;
     display: inline-block;
     border-radius: 5px;
     color: #000;
 }
 
-.nav-show i[aria-hidden=true] {
+.nav-show>a>i[aria-hidden=true] {
     -webkit-transform: rotate(180deg) !important;
     -moz-transform: rotate(180deg) scale(0.7, 0.7) !important;
     -moz-transform-origin: 60% 50% !important;
@@ -2173,6 +2174,32 @@ p.search-result-summary {
     padding: 0;
     margin: 0;
 }
+
+/*三级菜单*/
+.menus_item_child_level {
+    /* position: relative !important;
+    display: block !important;
+    margin-left: 100px !important; */
+    position: absolute;
+    top: 0px !important;
+    list-style: none;
+    margin-left: 100px !important;
+    display: block;
+    /* padding-left: 6px; */
+    background-color: rgba(255, 255, 255, .8);
+    width: fit-content;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 5px 20px -4px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 20px -4px rgba(0, 0, 0, .5);
+    opacity: 0.98;
+    -ms-filter: none;
+    filter: none;
+    -webkit-animation: sub_menus .3s .1s ease both;
+    -moz-animation: sub_menus .3s .1s ease both;
+    -o-animation: sub_menus .3s .1s ease both;
+    animation: sub_menus .3s .1s ease both;
+}
+
 
 /* tag button */
 body.DarkMode .theme-btn {

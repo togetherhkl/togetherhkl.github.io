@@ -18,6 +18,8 @@
 .toc-fixed {
     position: fixed;
     top: 64px;
+    height: 90vh;
+    overflow: auto;
 }
 
 .toc-widget {
@@ -49,6 +51,31 @@
 #toc-content ol li {
     padding-left: 10px;
 }
+
+/*toc中标题折叠*/
+.toc-item-wrapper svg {
+    width: 1.2em;
+    height: 1.2em; 
+    rotate: 0deg;
+    
+}
+.toc-item-wrapper{
+    align-items: center; /* 垂直居中 */
+    display: flex; /* 使用flex布局 */
+    font-size: 1.2rem; /* 调整字体大小 */
+    font-weight: bold; /* 设置字体加粗 */
+}
+.toc-list.evoldown span{
+    display: flex;
+    align-items: center; /* 垂直居中 */
+
+}
+.toc-list.evoldown{
+    background-color: white;
+    width: 100%;
+    border-radius: .5em .5em .5em .5em / .5em .5em .5em .5em;
+}
+
 
 #toc-content .toc-link:hover {
     color: #42b983;

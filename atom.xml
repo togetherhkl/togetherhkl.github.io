@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Redamancy</title>
+  <title>Hkini</title>
   
-  <subtitle>学习学习再学习</subtitle>
+  <subtitle>Hkini的「学习学习再学习」</subtitle>
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
@@ -10,7 +10,7 @@
   <id>https://www.hkini.top/</id>
   
   <author>
-    <name>HKini</name>
+    <name>Hkini</name>
     
   </author>
   
@@ -28,7 +28,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -37,9 +37,9 @@
     <category term="编程" scheme="https://www.hkini.top/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
     <category term="C#" scheme="https://www.hkini.top/tags/C/"/>
+    
+    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
@@ -55,7 +55,7 @@
       
         
         
-    <summary type="html">&lt;h3 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h3 id=&quot;1-项目简单介绍&quot;&gt;&lt;a href=&quot;#1-项目简单介绍&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -64,11 +64,11 @@
     <category term="编程" scheme="https://www.hkini.top/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
+    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
     <category term="C++" scheme="https://www.hkini.top/tags/C/"/>
     
     <category term="Qt" scheme="https://www.hkini.top/tags/Qt/"/>
-    
-    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
@@ -84,7 +84,7 @@
       
         
         
-    <summary type="html">&lt;h3 id=&quot;1-node-js版本管理nvm&quot;&gt;&lt;a href=&quot;#1-node-js版本管理nvm&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h3 id=&quot;1-node-js版本管理nvm&quot;&gt;&lt;a href=&quot;#1-node-js版本管理nvm&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -113,7 +113,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;xss-labs&quot;&gt;&lt;a href=&quot;#xss-labs&quot; class=&quot;headerlink&quot; title=&quot;xss-labs&quot;&gt;&lt;/a&gt;xss-labs&lt;/h1&gt;&lt;h2 id=&quot;level1（url中的参数修改）&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;xss-labs&quot;&gt;&lt;a href=&quot;#xss-labs&quot; class=&quot;headerlink&quot; title=&quot;xss-labs&quot;&gt;&lt;/a&gt;xss-labs&lt;/h1&gt;&lt;h2</summary>
         
       
     
@@ -140,7 +140,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;upload-labs&quot;&gt;&lt;a href=&quot;#upload-labs&quot; class=&quot;headerlink&quot; title=&quot;upload-labs&quot;&gt;&lt;/a&gt;upload-labs&lt;/h1&gt;&lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;upload-labs&quot;&gt;&lt;a href=&quot;#upload-labs&quot; class=&quot;headerlink&quot; title=&quot;upload-labs&quot;&gt;&lt;/a&gt;upload-labs&lt;/h1&gt;&lt;h2</summary>
         
       
     
@@ -167,7 +167,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;一-SQL注入&quot;&gt;&lt;a href=&quot;#一-SQL注入&quot; class=&quot;headerlink&quot; title=&quot;一.SQL注入&quot;&gt;&lt;/a&gt;一.SQL注入&lt;/h1&gt;&lt;h2 id=&quot;（一）基础知识&quot;&gt;&lt;a href=&quot;#（一）基础知识&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;一-SQL注入&quot;&gt;&lt;a href=&quot;#一-SQL注入&quot; class=&quot;headerlink&quot; title=&quot;一.SQL注入&quot;&gt;&lt;/a&gt;一.SQL注入&lt;/h1&gt;&lt;h2 id=&quot;（一）基础知识&quot;&gt;&lt;a</summary>
         
       
     
@@ -194,7 +194,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;CSRF实验&quot;&gt;&lt;a href=&quot;#CSRF实验&quot; class=&quot;headerlink&quot; title=&quot;CSRF实验&quot;&gt;&lt;/a&gt;CSRF实验&lt;/h1&gt;&lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;CSRF实验&quot;&gt;&lt;a href=&quot;#CSRF实验&quot; class=&quot;headerlink&quot; title=&quot;CSRF实验&quot;&gt;&lt;/a&gt;CSRF实验&lt;/h1&gt;&lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot;</summary>
         
       
     
@@ -221,7 +221,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-专业上的收获&quot;&gt;&lt;a href=&quot;#1-专业上的收获&quot; class=&quot;headerlink&quot; title=&quot;1.专业上的收获&quot;&gt;&lt;/a&gt;1.专业上的收获&lt;/h2&gt;&lt;h3 id=&quot;1-1-框架的使用&quot;&gt;&lt;a href=&quot;#1-1-框架的使用&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-专业上的收获&quot;&gt;&lt;a href=&quot;#1-专业上的收获&quot; class=&quot;headerlink&quot; title=&quot;1.专业上的收获&quot;&gt;&lt;/a&gt;1.专业上的收获&lt;/h2&gt;&lt;h3 id=&quot;1-1-框架的使用&quot;&gt;&lt;a</summary>
         
       
     
@@ -248,7 +248,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -275,7 +275,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是视频记录&quot;&gt;&lt;a href=&quot;#1-这是视频记录&quot; class=&quot;headerlink&quot; title=&quot;1.这是视频记录&quot;&gt;&lt;/a&gt;1.这是视频记录&lt;/h2&gt;&lt;iframe class=&quot;my-movies&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是视频记录&quot;&gt;&lt;a href=&quot;#1-这是视频记录&quot; class=&quot;headerlink&quot; title=&quot;1.这是视频记录&quot;&gt;&lt;/a&gt;1.这是视频记录&lt;/h2&gt;&lt;iframe</summary>
         
       
     
@@ -302,7 +302,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-文章标签名的修改&quot;&gt;&lt;a href=&quot;#1-文章标签名的修改&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-文章标签名的修改&quot;&gt;&lt;a href=&quot;#1-文章标签名的修改&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -329,10 +329,10 @@
       
         
         
-    <summary type="html">　
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;　
 
 &lt;p&gt;@&lt;a href=&quot;%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95%EF%BC%9A&quot;&gt;TOC&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;1-题目要求&quot;&gt;&lt;a href=&quot;#1-题目要求&quot; class=&quot;headerlink&quot;</summary>
+&lt;h1 id=&quot;1-题目要求&quot;&gt;&lt;a href=&quot;#1-题目要求&quot;</summary>
         
       
     
@@ -357,7 +357,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是阅读分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是阅读分类下的文章&quot; class=&quot;headerlink&quot; title=&quot;1.这是阅读分类下的文章&quot;&gt;&lt;/a&gt;1.这是阅读分类下的文章&lt;/h2&gt;&lt;h2 id=&quot;《如何阅读一本书》&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是阅读分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是阅读分类下的文章&quot; class=&quot;headerlink&quot; title=&quot;1.这是阅读分类下的文章&quot;&gt;&lt;/a&gt;1.这是阅读分类下的文章&lt;/h2&gt;&lt;h2</summary>
         
       
     
@@ -384,7 +384,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是CTF分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是CTF分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是CTF分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是CTF分类下的文章&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -400,51 +400,29 @@
   </entry>
   
   <entry>
-    <title>Linux分类测试</title>
-    <link href="https://www.hkini.top/posts/15209.html"/>
-    <id>https://www.hkini.top/posts/15209.html</id>
+    <title>渐构标签测试</title>
+    <link href="https://www.hkini.top/posts/15211.html"/>
+    <id>https://www.hkini.top/posts/15211.html</id>
     <published>2018-09-07T01:25:00.000Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
+    <updated>2025-04-27T04:16:39.979Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是Linux分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是Linux分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;1-一级标题&quot;&gt;&lt;a href=&quot;#1-一级标题&quot; class=&quot;headerlink&quot; title=&quot;1.一级标题&quot;&gt;&lt;/a&gt;1.一级标题&lt;/h1&gt;
+        &lt;div class=&quot;evoldown&quot;</summary>
         
       
     
     
     
-    <category term="Linux" scheme="https://www.hkini.top/categories/Linux/"/>
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
     
+    <category term="Web渗透" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/"/>
     
-    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++分类测试</title>
-    <link href="https://www.hkini.top/posts/33284.html"/>
-    <id>https://www.hkini.top/posts/33284.html</id>
-    <published>2018-09-07T01:25:00.000Z</published>
-    <updated>2022-12-24T04:41:32.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="与C相关" scheme="https://www.hkini.top/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3/"/>
+    <category term="Web漏洞" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/Web%E6%BC%8F%E6%B4%9E/"/>
     
     
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
@@ -465,13 +443,71 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
         
       
     
     
     
     <category term="Python" scheme="https://www.hkini.top/categories/Python/"/>
+    
+    
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多级目录测试</title>
+    <link href="https://www.hkini.top/posts/15210.html"/>
+    <id>https://www.hkini.top/posts/15210.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2025-04-27T11:16:32.143Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-多级目录测试&quot;&gt;&lt;a href=&quot;#1-多级目录测试&quot; class=&quot;headerlink&quot; title=&quot;1.多级目录测试&quot;&gt;&lt;/a&gt;1.多级目录测试&lt;/h2&gt;&lt;pre&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="Web安全" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="Web渗透" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/"/>
+    
+    <category term="Web安全工具" scheme="https://www.hkini.top/categories/Web%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/Web%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="项目经历" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++分类测试</title>
+    <link href="https://www.hkini.top/posts/33284.html"/>
+    <id>https://www.hkini.top/posts/33284.html</id>
+    <published>2018-09-07T01:25:00.000Z</published>
+    <updated>2022-12-24T04:41:32.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是C-分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是C-分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="与C相关" scheme="https://www.hkini.top/categories/%E4%B8%8EC%E7%9B%B8%E5%85%B3/"/>
     
     
     <category term="编成学习" scheme="https://www.hkini.top/tags/%E7%BC%96%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
@@ -492,7 +528,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-这是红蓝对抗分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是红蓝对抗分类下的文章&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 id=&quot;1-这是红蓝对抗分类下的文章&quot;&gt;&lt;a href=&quot;#1-这是红蓝对抗分类下的文章&quot; class=&quot;headerlink&quot;</summary>
         
       
     
