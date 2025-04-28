@@ -35,7 +35,7 @@
     
     <style>
         body{
-            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-image: url(/medias/images/3.png);
             background-repeat:no-repeat;
             background-size: 100% 100%;
             background-attachment:fixed;
@@ -74,7 +74,11 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hkini" type="application/atom+xml">
 </head>
@@ -796,7 +800,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -856,6 +860,7 @@
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2023-03-28
                 </div>
+
                 
 
                 
@@ -900,14 +905,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <html><head></head><body><h1 id="upload-labs"><a href="#upload-labs" class="headerlink" title="upload-labs"></a>upload-labs</h1><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p><strong>实战思路：</strong></p>
+                <html><head></head><body><h1 id="upload-labs"><a class="markdownIt-Anchor" href="#upload-labs"></a> upload-labs</h1>
+<h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点</h2>
+<p><strong>实战思路：</strong></p>
 <ul>
 <li>判断中间件的类型，看是否存在解析漏洞</li>
 <li>CMS（公共漏洞和暴露，意思是用了别人的组件，而别人的组件有漏洞）</li>
 <li>编辑器漏洞</li>
 <li>CVE</li>
 </ul>
-<h2 id="1-文件上传漏洞的过滤方式"><a href="#1-文件上传漏洞的过滤方式" class="headerlink" title="1.文件上传漏洞的过滤方式"></a>1.文件上传漏洞的过滤方式</h2>
+<h2 id="1文件上传漏洞的过滤方式"><a class="markdownIt-Anchor" href="#1文件上传漏洞的过滤方式"></a> 1.文件上传漏洞的过滤方式</h2>
+
         <div class="evoldown" id="对文件上传进行分类" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -917,7 +925,6 @@
       
 <p>不同的类型文件上传的方式有所不同，对上传漏洞的分类，对不同的漏洞实行不同的方法可以实现高效率准确的上传。</p>
 <img src="https://raw.githubusercontent.com/togetherhkl/Mypictures/main/20220729211126.png" alt="image-20220729211126109" style="zoom:67%;">
-
 
         <div class="evoldown" id="解析类漏洞" type="e">
           <span class="icon">
@@ -952,7 +959,8 @@
         </div>
       
 <p>在cms和cve漏洞中有太多的细节，需要参考别人已经实现了的，自己实现起来可能会有大麻烦，因为很多细节不能注意到。</p>
-<h2 id="2-解析漏洞-文件上传"><a href="#2-解析漏洞-文件上传" class="headerlink" title="2.解析漏洞+文件上传"></a>2.解析漏洞+文件上传</h2>
+<h2 id="2解析漏洞文件上传"><a class="markdownIt-Anchor" href="#2解析漏洞文件上传"></a> 2.解析漏洞+文件上传</h2>
+
         <div class="evoldown" id="中间件解析漏洞" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -961,7 +969,7 @@
         </div>
       
 <blockquote>
-<p> 文件解析漏洞,是指Web容器（Apache、Nginx、IIS等在服务器一个端口就有一个提供相应服务的程序，而这个程序就是处理从客户端发出的请求。）在解析文件时将文件解析成脚本文件格式并得以执行而产生的漏洞。从而,黑客可以利用该漏洞实现非法文件的解析。</p>
+<p>文件解析漏洞,是指Web容器（Apache、Nginx、IIS等在服务器一个端口就有一个提供相应服务的程序，而这个程序就是处理从客户端发出的请求。）在解析文件时将文件解析成脚本文件格式并得以执行而产生的漏洞。从而,黑客可以利用该漏洞实现非法文件的解析。</p>
 </blockquote>
 <p>中间件使用特定的方式，使得非脚本文件变成脚本文件执行的情况。</p>
 
@@ -980,8 +988,9 @@
           </span>
         </div>
       
-<p>在Nginx中在url最后添加”/x.php”一个任意的php文件，会导致把前面的文件当成脚本执行</p>
-<h2 id="3-编辑器漏洞-文件上传"><a href="#3-编辑器漏洞-文件上传" class="headerlink" title="3.编辑器漏洞+文件上传"></a>3.编辑器漏洞+文件上传</h2>
+<p>在Nginx中在url最后添加"/x.php"一个任意的php文件，会导致把前面的文件当成脚本执行</p>
+<h2 id="3编辑器漏洞文件上传"><a class="markdownIt-Anchor" href="#3编辑器漏洞文件上传"></a> 3.编辑器漏洞+文件上传</h2>
+
         <div class="evoldown" id="编辑器漏洞" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -998,7 +1007,8 @@
           </span>
         </div>
       
-<h2 id="4-文件上传-WAF绕过"><a href="#4-文件上传-WAF绕过" class="headerlink" title="4.文件上传+WAF绕过"></a>4.文件上传+WAF绕过</h2>
+<h2 id="4文件上传waf绕过"><a class="markdownIt-Anchor" href="#4文件上传waf绕过"></a> 4.文件上传+WAF绕过</h2>
+
         <div class="evoldown" id="绕过的方法" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -1008,7 +1018,7 @@
       
 <p>确定数据包中可以修改的项，不可修改的项。通过更改可修改的项的内容对数据进行修改来绕过waf的过程。</p>
 <blockquote>
-<p>#上传参数名解析：明确哪些东西能修改？ </p>
+<p>#上传参数名解析：明确哪些东西能修改？</p>
 <p>Content-Disposition：一般可更改</p>
 <p>name：表单参数值，不能更改</p>
 <p>filename：文件名，可以更改 Content-Type：</p>
@@ -1052,26 +1062,34 @@
         </div>
       
 <ul>
-<li><p>数据溢出-防匹配(xxx…)</p>
+<li>
+<p>数据溢出-防匹配(xxx…)</p>
 <p>通过添加许多无用的数据使得waf验证的数据包被填满</p>
 </li>
-<li><p>符号变异-防匹配（’ “ ;）</p>
+<li>
+<p>符号变异-防匹配（’ " ;）</p>
 <p>引用编程思想，验证数据的匹配方式</p>
 </li>
-<li><p>数据截断-防匹配(%00 ; 换行) </p>
+<li>
+<p>数据截断-防匹配(%00 ; 换行)</p>
 <p>换行方式使得waf得到的数据中有\n标准，从而使得验证失败</p>
 </li>
-<li><p>重复数据-防匹配(参数多次</p>
+<li>
+<p>重复数据-防匹配(参数多次</p>
 <p>相同的数据重复多次使得绕过</p>
 </li>
 </ul>
-<h2 id="Pass-01（前端）"><a href="#Pass-01（前端）" class="headerlink" title="Pass-01（前端）"></a>Pass-01（前端）</h2><h3 id="验证方式"><a href="#验证方式" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>前端：</strong>通过前端的js代码进行验证（防护）。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<h2 id="pass-01前端"><a class="markdownIt-Anchor" href="#pass-01前端"></a> Pass-01（前端）</h2>
+<h3 id="验证方式"><a class="markdownIt-Anchor" href="#验证方式"></a> 验证方式</h3>
+<p>**前端：**通过前端的js代码进行验证（防护）。</p>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<ul>
 <li>方法一：在浏览器禁用js代码，缺点会导致其他正常js代码无法正常使用</li>
 <li>方法二：bp抓包，更改文（filename属性）件后缀名</li>
 <li>方法三：下载html文件，删除相应的js代码</li>
 </ul>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p><strong>方法一：</strong></p>
+<h3 id="过程"><a class="markdownIt-Anchor" href="#过程"></a> 过程</h3>
+<p><strong>方法一：</strong></p>
 <ul>
 <li>在浏览器中禁用js，此时想上传什么类型文件就可以上传什么类型文件了（也就是脚本文件）</li>
 <li>上床成功后右击图片获取图片链接，访问链接就可以查看上传的脚本。</li>
@@ -1081,25 +1099,29 @@
 <li>把编辑好的脚本改成jpg格式，抓取上传的包，修改filename的文件格式为php，即可上传脚本成功。</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232953.png" style="zoom:67%;">
-
-
-
 <p><strong>方法三：</strong></p>
 <ul>
-<li><p>–右击–查看网页源代码</p>
+<li>
+<p>–右击–查看网页源代码</p>
 </li>
-<li><p>复制网页源代码到一个txt文档中，删除检查的文件类型的js代码</p>
+<li>
+<p>复制网页源代码到一个txt文档中，删除检查的文件类型的js代码</p>
 </li>
-<li><p>通过长传一次正常的图片，右击–检查–网络，可以查看上传到的服务器的地址</p>
+<li>
+<p>通过长传一次正常的图片，右击–检查–网络，可以查看上传到的服务器的地址</p>
 </li>
-<li><p>在<from>标签添加服务器地址到action，（指向何处发送表单数据，即需要发送的服务器的地址）</from></p>
+<li>
+<p>在<from>标签添加服务器地址到action，（指向何处发送表单数据，即需要发送的服务器的地址）</from></p>
 </li>
-<li><p>把txt文档改成html文档，用浏览器访问进行上传（会出现乱码，但是不影响）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232954.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232955.png"></p>
+<li>
+<p>把txt文档改成html文档，用浏览器访问进行上传（会出现乱码，但是不影响）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232954.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232955.png" alt=""></p>
 </li>
 </ul>
-<h2 id="Pass-02（MIME）"><a href="#Pass-02（MIME）" class="headerlink" title="Pass-02（MIME）"></a>Pass-02（MIME）</h2><h3 id="验证方式-1"><a href="#验证方式-1" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端（MIME验证）：</strong>验证文件的MIME信息</p>
+<h2 id="pass-02mime"><a class="markdownIt-Anchor" href="#pass-02mime"></a> Pass-02（MIME）</h2>
+<h3 id="验证方式-2"><a class="markdownIt-Anchor" href="#验证方式-2"></a> 验证方式</h3>
+<p>**后端（MIME验证）：**验证文件的MIME信息</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token comment">/*
@@ -1131,13 +1153,15 @@ $_FILES['myFile']['size'] 已上传文件的大小，单位为字节。
 $_FILES['myFile']['tmp_name'] 文件被上传后在服务端储存的临时文件名，一般是系统默认。可以在php.ini的upload_tmp_dir 指定，但 用 putenv() 函数设置是不起作用的。 
 $_FILES['myFile']['error'] 和该文件上传相关的错误代码。['error'] 是在 PHP 4.2.0 版本中增加的
 */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<h3 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h3>
+<ul>
 <li>抓包更改content_type为验证的类型</li>
 </ul>
-<h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232956.png" style="zoom: 50%;">
-
-<h2 id="Pass-03（黑名单不全）"><a href="#Pass-03（黑名单不全）" class="headerlink" title="Pass-03（黑名单不全）"></a>Pass-03（黑名单不全）</h2><h3 id="验证方式-2"><a href="#验证方式-2" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单的方式（黑名单不全）：</strong>通过指定不能上传的文件类型，在后端提取上传文件的后缀，然后与黑名单进行比对。</p>
+<h3 id="过程-2"><a class="markdownIt-Anchor" href="#过程-2"></a> 过程</h3>
+<img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232956.png" style="zoom: 50%;">
+<h2 id="pass-03黑名单不全"><a class="markdownIt-Anchor" href="#pass-03黑名单不全"></a> Pass-03（黑名单不全）</h2>
+<h3 id="验证方式-3"><a class="markdownIt-Anchor" href="#验证方式-3"></a> 验证方式</h3>
+<p>**后端，黑名单的方式（黑名单不全）：**通过指定不能上传的文件类型，在后端提取上传文件的后缀，然后与黑名单进行比对。</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1165,28 +1189,27 @@ $_FILES['myFile']['error'] 和该文件上传相关的错误代码。['error'] �
         <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>在Apache服务器中，在配置文件httpd.conf中有如下配置代码：AddType application/x-httpd-php .php .phtml .phps .php5 .pht，如果不配置他是无法解析php5代码的，访问的时候就是一个空白页。可以随便写一个后缀名，入.hhh,那么上传.hhh的文件都会被当成php来执行。</p>
+<h3 id="思路-3"><a class="markdownIt-Anchor" href="#思路-3"></a> 思路</h3>
+<p>在Apache服务器中，在配置文件httpd.conf中有如下配置代码：AddType application/x-httpd-php .php .phtml .phps .php5 .pht，如果不配置他是无法解析php5代码的，访问的时候就是一个空白页。可以随便写一个后缀名，入.hhh,那么上传.hhh的文件都会被当成php来执行。</p>
 <p>所以，就是在httpd.com的配置文件中，没有被黑名单限制的后缀。</p>
 <p>在上传的时候抓包，修改filename的文件后缀绕过黑名单限制</p>
-<h3 id="过程-2"><a href="#过程-2" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-3"><a class="markdownIt-Anchor" href="#过程-3"></a> 过程</h3>
+<ul>
 <li>配置phpstudy环境</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232957.png" style="zoom:67%;">
-
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232958.png" style="zoom:67%;">
-
 <ul>
 <li>上传php脚本，抓包修改后缀名</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232959.png" style="zoom:67%;">
-
 <ul>
 <li>访问图片链接</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233000.png" style="zoom:67%;">
-
-<h2 id="Pass-04（-htaccess）"><a href="#Pass-04（-htaccess）" class="headerlink" title="Pass-04（.htaccess）"></a>Pass-04（.htaccess）</h2><h3 id="验证方式-3"><a href="#验证方式-3" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单（黑名单齐全），.htacces解析：</strong></p>
+<h2 id="pass-04htaccess"><a class="markdownIt-Anchor" href="#pass-04htaccess"></a> Pass-04（.htaccess）</h2>
+<h3 id="验证方式-4"><a class="markdownIt-Anchor" href="#验证方式-4"></a> 验证方式</h3>
+<p><strong>后端：黑名单（黑名单齐全），.htacces解析：</strong></p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1215,32 +1238,34 @@ $_FILES['myFile']['error'] 和该文件上传相关的错误代码。['error'] �
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><p>针对Apache，有一个.htaccess的配置文件，</p>
+<h3 id="思路-4"><a class="markdownIt-Anchor" href="#思路-4"></a> 思路</h3>
+<p>针对Apache，有一个.htaccess的配置文件，</p>
 <blockquote>
 <p>.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。</p>
 </blockquote>
 <p>前提是在配置文件httpd.conf中有如下配置代码 不是AllowOverride None ，而是 AllowOverride  All</p>
 <p>可以先上传.htaccess文件，在文件指定某个文件以php格式运行，在上传木马图片，点击上传好的链接进行运行。</p>
-<h3 id="过程-3"><a href="#过程-3" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-4"><a class="markdownIt-Anchor" href="#过程-4"></a> 过程</h3>
+<ul>
 <li>配置.htaccess文件，并上传</li>
 </ul>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">&lt;FilesMatch "test4.jpg"&gt;
 SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>匹配到test4.jpg的文件，就以php格式运行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233001.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233001.png" alt=""></p>
 <ul>
 <li>制作图片密码（Linux）</li>
 </ul>
 <p>其中test3.php为木马代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233002.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233002.png" alt=""></p>
 <ul>
 <li>上传图片test4.jpg，并访问</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233003.png"></p>
-<h2 id="Pass-05（点绕过）"><a href="#Pass-05（点绕过）" class="headerlink" title="Pass-05（点绕过）"></a>Pass-05（点绕过）</h2><h3 id="验证方式-4"><a href="#验证方式-4" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单，点绕过：</strong>其实于04关代码相同</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233003.png" alt=""></p>
+<h2 id="pass-05点绕过"><a class="markdownIt-Anchor" href="#pass-05点绕过"></a> Pass-05（点绕过）</h2>
+<h3 id="验证方式-5"><a class="markdownIt-Anchor" href="#验证方式-5"></a> 验证方式</h3>
+<p>**后端：黑名单，点绕过：**其实于04关代码相同</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1268,77 +1293,102 @@ SetHandler application/x-httpd-php
         <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">UPLOAD_PATH</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'文件夹不存在,请手工创建！'</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><p><strong>点绕过：</strong>由于后端去除后缀名的点只有一次，所以构造“.  .”，点空格点的形式，由于Windows的特性，在文件后缀名过后追加一个点，或者一个空格，还是原文件本身。</p>
+<h3 id="思路-5"><a class="markdownIt-Anchor" href="#思路-5"></a> 思路</h3>
+<p>**点绕过：**由于后端去除后缀名的点只有一次，所以构造“.  .”，点空格点的形式，由于Windows的特性，在文件后缀名过后追加一个点，或者一个空格，还是原文件本身。</p>
 <p>比如绕过黑名单验证过后得到的文件后缀为.php.  ，由于Windows的特性最后在服务器的文件为.php</p>
-<h3 id="过程-4"><a href="#过程-4" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-5"><a class="markdownIt-Anchor" href="#过程-5"></a> 过程</h3>
+<ul>
 <li>上传php，抓包更改文件后缀</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233004.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233004.png" alt=""></p>
 <ul>
 <li>访问上传成功的链接</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233005.png"></p>
-<h2 id="Pass-06（大小写转换）"><a href="#Pass-06（大小写转换）" class="headerlink" title="Pass-06（大小写转换）"></a>Pass-06（大小写转换）</h2><h3 id="验证方式-5"><a href="#验证方式-5" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单（大小写转换）：</strong>后端给出了黑名单，但是代码中没有强制转换成小写</p>
-<h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h3><p>把上传的php文件用大小写混写上传。</p>
-<h3 id="过程-5"><a href="#过程-5" class="headerlink" title="过程"></a>过程</h3><ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233005.png" alt=""></p>
+<h2 id="pass-06大小写转换"><a class="markdownIt-Anchor" href="#pass-06大小写转换"></a> Pass-06（大小写转换）</h2>
+<h3 id="验证方式-6"><a class="markdownIt-Anchor" href="#验证方式-6"></a> 验证方式</h3>
+<p>**后端：黑名单（大小写转换）：**后端给出了黑名单，但是代码中没有强制转换成小写</p>
+<h3 id="思路-6"><a class="markdownIt-Anchor" href="#思路-6"></a> 思路</h3>
+<p>把上传的php文件用大小写混写上传。</p>
+<h3 id="过程-6"><a class="markdownIt-Anchor" href="#过程-6"></a> 过程</h3>
+<ul>
 <li>抓包更改后缀</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233006.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233006.png" alt=""></p>
 <ul>
 <li>访问上传的链接</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233007.png"></p>
-<h2 id="Pass-07（空格绕过）"><a href="#Pass-07（空格绕过）" class="headerlink" title="Pass-07（空格绕过）"></a>Pass-07（空格绕过）</h2><h3 id="验证方式-6"><a href="#验证方式-6" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单（空格绕过）：</strong>在这里，验证代码中没有最后一步的去掉后面的空格，</p>
-<h3 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h3><p>在黑名单中没有对”.php “，进行过滤。我们可以构造”.php .“来使得最后代码验证过后得到的文件后缀为，“.php ”（含空格）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233007.png" alt=""></p>
+<h2 id="pass-07空格绕过"><a class="markdownIt-Anchor" href="#pass-07空格绕过"></a> Pass-07（空格绕过）</h2>
+<h3 id="验证方式-7"><a class="markdownIt-Anchor" href="#验证方式-7"></a> 验证方式</h3>
+<p>**后端，黑名单（空格绕过）：**在这里，验证代码中没有最后一步的去掉后面的空格，</p>
+<h3 id="思路-7"><a class="markdownIt-Anchor" href="#思路-7"></a> 思路</h3>
+<p>在黑名单中没有对".php "，进行过滤。我们可以构造”.php .“来使得最后代码验证过后得到的文件后缀为，“.php ”（含空格）</p>
 <p>由于Windows的特性，在文件后缀加上空格，最终得到的文件还是源文件，最终在服务器上的为.php执行文件。</p>
-<h3 id="过程-6"><a href="#过程-6" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-7"><a class="markdownIt-Anchor" href="#过程-7"></a> 过程</h3>
+<ul>
 <li>抓包构造</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233008.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233008.png" alt=""></p>
 <ul>
 <li>访问上传好的链接</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233009.png"></p>
-<h2 id="Pass-08（点绕过）"><a href="#Pass-08（点绕过）" class="headerlink" title="Pass-08（点绕过）"></a>Pass-08（点绕过）</h2><h3 id="验证方式-7"><a href="#验证方式-7" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单（点绕过）：</strong>缺少去除后缀后的点</p>
-<h3 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h3><p>与第五关原理相同</p>
-<h3 id="过程-7"><a href="#过程-7" class="headerlink" title="过程"></a>过程</h3><ul>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233009.png" alt=""></p>
+<h2 id="pass-08点绕过"><a class="markdownIt-Anchor" href="#pass-08点绕过"></a> Pass-08（点绕过）</h2>
+<h3 id="验证方式-8"><a class="markdownIt-Anchor" href="#验证方式-8"></a> 验证方式</h3>
+<p>**后端，黑名单（点绕过）：**缺少去除后缀后的点</p>
+<h3 id="思路-8"><a class="markdownIt-Anchor" href="#思路-8"></a> 思路</h3>
+<p>与第五关原理相同</p>
+<h3 id="过程-8"><a class="markdownIt-Anchor" href="#过程-8"></a> 过程</h3>
+<ul>
 <li>抓包更改</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233010.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233010.png" alt=""></p>
 <ul>
 <li>访问链接</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233011.png"></p>
-<h2 id="Pass-09（-DATA）"><a href="#Pass-09（-DATA）" class="headerlink" title="Pass-09（::$DATA）"></a>Pass-09（::$DATA）</h2><h3 id="验证方式-8"><a href="#验证方式-8" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：黑名单，::$DATA：</strong>此次的验证代码中缺失</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233011.png" alt=""></p>
+<h2 id="pass-09data"><a class="markdownIt-Anchor" href="#pass-09data"></a> Pass-09（::$DATA）</h2>
+<h3 id="验证方式-9"><a class="markdownIt-Anchor" href="#验证方式-9"></a> 验证方式</h3>
+<p>**后端：黑名单，::$DATA：**此次的验证代码中缺失</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$file_ext</span> <span class="token operator">=</span> <span class="token function">str_ireplace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'::$DATA'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$file_ext</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去除字符串::$DATA</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h3><p>在window的时候如果文件名+<code>"::$DATA"</code>会把<code>::$DATA</code>之后的数据当成文件流处理,不会检测后缀名，且保持<code>::$DATA</code>之前的文件名，他的目的就是不检查后缀名</p>
+<h3 id="思路-9"><a class="markdownIt-Anchor" href="#思路-9"></a> 思路</h3>
+<p>在window的时候如果文件名+<code>"::$DATA"</code>会把<code>::$DATA</code>之后的数据当成文件流处理,不会检测后缀名，且保持<code>::$DATA</code>之前的文件名，他的目的就是不检查后缀名</p>
 <p>在文件中添加后缀就行了</p>
-<h3 id="过程-8"><a href="#过程-8" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-9"><a class="markdownIt-Anchor" href="#过程-9"></a> 过程</h3>
+<ul>
 <li>抓包添加::$DATA</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233012.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233012.png" alt=""></p>
 <ul>
 <li>访问图片链接</li>
 </ul>
 <p>注意url里面要删去图片链接的::$DATA</p>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233013.png" style="zoom:67%;">
-
-<h2 id="Pass-10（点绕过）-x3D-x3D-Pass-05"><a href="#Pass-10（点绕过）-x3D-x3D-Pass-05" class="headerlink" title="Pass-10（点绕过）==Pass-05"></a>Pass-10（点绕过）==Pass-05</h2><h3 id="验证方式-9"><a href="#验证方式-9" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单：</strong>验证代码只验证一次</p>
-<h3 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h3><p>因为后端的代码只验证了一次，所以是用双点，来进行绕过</p>
-<h3 id="过程-9"><a href="#过程-9" class="headerlink" title="过程"></a>过程</h3><p>见Pass-05</p>
-<h2 id="Pass-11（双后缀名绕过）"><a href="#Pass-11（双后缀名绕过）" class="headerlink" title="Pass-11（双后缀名绕过）"></a>Pass-11（双后缀名绕过）</h2><h3 id="验证方式-10"><a href="#验证方式-10" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，黑名单：</strong>一次性的验证，把上传的文件与黑名单相同的替换为空</p>
-<h3 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h3><p>因为是一次性的验证，且把上传文件中与黑名单相同的文件替换为空，那么可以构造后缀使得替换空过后得到的后缀就是php脚本的。</p>
-<h3 id="过程-10"><a href="#过程-10" class="headerlink" title="过程"></a>过程</h3><ul>
+<h2 id="pass-10点绕过pass-05"><a class="markdownIt-Anchor" href="#pass-10点绕过pass-05"></a> Pass-10（点绕过）==Pass-05</h2>
+<h3 id="验证方式-10"><a class="markdownIt-Anchor" href="#验证方式-10"></a> 验证方式</h3>
+<p>**后端，黑名单：**验证代码只验证一次</p>
+<h3 id="思路-10"><a class="markdownIt-Anchor" href="#思路-10"></a> 思路</h3>
+<p>因为后端的代码只验证了一次，所以是用双点，来进行绕过</p>
+<h3 id="过程-10"><a class="markdownIt-Anchor" href="#过程-10"></a> 过程</h3>
+<p>见Pass-05</p>
+<h2 id="pass-11双后缀名绕过"><a class="markdownIt-Anchor" href="#pass-11双后缀名绕过"></a> Pass-11（双后缀名绕过）</h2>
+<h3 id="验证方式-11"><a class="markdownIt-Anchor" href="#验证方式-11"></a> 验证方式</h3>
+<p>**后端，黑名单：**一次性的验证，把上传的文件与黑名单相同的替换为空</p>
+<h3 id="思路-11"><a class="markdownIt-Anchor" href="#思路-11"></a> 思路</h3>
+<p>因为是一次性的验证，且把上传文件中与黑名单相同的文件替换为空，那么可以构造后缀使得替换空过后得到的后缀就是php脚本的。</p>
+<h3 id="过程-11"><a class="markdownIt-Anchor" href="#过程-11"></a> 过程</h3>
+<ul>
 <li>抓包更改数据包</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233014.png" alt=""></p>
 <ul>
 <li>访问上传的链接</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233015.png" alt="23"></p>
-<h2 id="Pass-12（-00，0x00，-x2F-00截断）"><a href="#Pass-12（-00，0x00，-x2F-00截断）" class="headerlink" title="Pass-12（%00，0x00，/00截断）"></a>Pass-12（%00，0x00，/00截断）</h2><h3 id="验证方式-11"><a href="#验证方式-11" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>只有允许上传指定的文件</p>
+<h2 id="pass-12000x0000截断"><a class="markdownIt-Anchor" href="#pass-12000x0000截断"></a> Pass-12（%00，0x00，/00截断）</h2>
+<h3 id="验证方式-12"><a class="markdownIt-Anchor" href="#验证方式-12"></a> 验证方式</h3>
+<p>**后端，白名单：**只有允许上传指定的文件</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -1358,10 +1408,8 @@ SetHandler application/x-httpd-php
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h3><blockquote>
+<h3 id="思路-12"><a class="markdownIt-Anchor" href="#思路-12"></a> 思路</h3>
+<blockquote>
 <p>00截断是操作系统层的漏洞，由于操作系统是C语言或汇编语言编写的，这两种语言在定义字符串时，都是以\0（即0x00）作为字符串的结尾。</p>
 <p>操作系统在识别字符串时，当读取到\0字符时，就认为读取到了一个字符串的结束符号。</p>
 <p>因此，我们可以通过修改数据包，插入\0字符的方式，达到字符串截断的目的。00截断通常用来绕过web软waf的白名单限制</p>
@@ -1391,24 +1439,32 @@ SetHandler application/x-httpd-php
 <li>php.ini中的magic_quotes_gpc设置为Off</li>
 <li>上传路劲可控：据包中须含有上传后文件的目录情况才可以用，比如数据包中存在<code>path: uploads/</code>，那么攻击者可以通过修改path的值来构造paylod: <code>uploads/aa.php%00</code></li>
 </ol>
-<h3 id="过程-11"><a href="#过程-11" class="headerlink" title="过程"></a>过程</h3><p>本次实验需要的PHP版本小于5.3.4，而本次实验的php版本高于5.3.4</p>
+<h3 id="过程-12"><a class="markdownIt-Anchor" href="#过程-12"></a> 过程</h3>
+<p>本次实验需要的PHP版本小于5.3.4，而本次实验的php版本高于5.3.4</p>
 <ul>
 <li>代码是用GET的方式提交的，所以在进行%00截断的时候，%00是写在路径当中的。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233016.png"></p>
-<h2 id="Pass-13-同12"><a href="#Pass-13-同12" class="headerlink" title="Pass-13(同12)"></a>Pass-13(同12)</h2><h3 id="验证方式-12"><a href="#验证方式-12" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>只有允许上传指定的文件</p>
-<h3 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h3><p>13 关与12关有一些差别，12关是的上路劲是GET的方式，是在URL中的，浏览器会自动对其进行解码。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233016.png" alt=""></p>
+<h2 id="pass-13同12"><a class="markdownIt-Anchor" href="#pass-13同12"></a> Pass-13(同12)</h2>
+<h3 id="验证方式-13"><a class="markdownIt-Anchor" href="#验证方式-13"></a> 验证方式</h3>
+<p>**后端，白名单：**只有允许上传指定的文件</p>
+<h3 id="思路-13"><a class="markdownIt-Anchor" href="#思路-13"></a> 思路</h3>
+<p>13 关与12关有一些差别，12关是的上路劲是GET的方式，是在URL中的，浏览器会自动对其进行解码。</p>
 <p>此关卡是用的POST提交的方式，浏览器不会对器进行解码，需要自动编码一下</p>
-<h3 id="过程-12"><a href="#过程-12" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-13"><a class="markdownIt-Anchor" href="#过程-13"></a> 过程</h3>
+<ul>
 <li>抓包对参数进行修改</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233017.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233017.png" alt=""></p>
 <ul>
 <li>最终的修改方式</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233018.png"></p>
-<h2 id="Pass-14（文件包含）"><a href="#Pass-14（文件包含）" class="headerlink" title="Pass-14（文件包含）"></a>Pass-14（文件包含）</h2><h3 id="验证方式-13"><a href="#验证方式-13" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>但是可以利用文件包含</p>
-<h3 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233018.png" alt=""></p>
+<h2 id="pass-14文件包含"><a class="markdownIt-Anchor" href="#pass-14文件包含"></a> Pass-14（文件包含）</h2>
+<h3 id="验证方式-14"><a class="markdownIt-Anchor" href="#验证方式-14"></a> 验证方式</h3>
+<p>**后端，白名单：**但是可以利用文件包含</p>
+<h3 id="思路-14"><a class="markdownIt-Anchor" href="#思路-14"></a> 思路</h3>
+
         <div class="evoldown" id="文件包含" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -1420,26 +1476,29 @@ SetHandler application/x-httpd-php
 <p>开发人员将需要重复调用的函数写入一个文件，对该文件进行包含时产生的操作。文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。</p>
 </blockquote>
 <p>如果设置了fiel变量，则把file的文件包含进去，这个关卡的文件包含</p>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233019.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233019.png" alt=""></p>
 <p>通过设置图片马，把如片上传到网站，然后利用文件包含执行木马</p>
-<h3 id="过程-13"><a href="#过程-13" class="headerlink" title="过程"></a>过程</h3><ul>
+<h3 id="过程-14"><a class="markdownIt-Anchor" href="#过程-14"></a> 过程</h3>
+<ul>
 <li>制作图片码</li>
 </ul>
 <p>Linux</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">cat init.jpg test14.php &gt;&gt;webshell.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>windows</p>
 <pre class="line-numbers language-test" data-language="test"><code class="language-test">copy init.jpg /b + test14.php /a webshell.jpg <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <ul>
-<li><p>上传并获得文件路径</p>
+<li>
+<p>上传并获得文件路径</p>
 </li>
-<li><p>设置文件包含</p>
+<li>
+<p>设置文件包含</p>
 <p><strong>这里要特别注意文件包含的目录，是在include.php中的file进行设置。如果到别的地方去进行包含的话是不能执行脚本的。</strong></p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233020.png"></p>
-<h2 id="Pass-15（文件包含）"><a href="#Pass-15（文件包含）" class="headerlink" title="Pass-15（文件包含）"></a>Pass-15（文件包含）</h2><h3 id="验证方式-14"><a href="#验证方式-14" class="headerlink" title="验证方式"></a>验证方式</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">function</span> <span class="token function-definition function">isImage</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<p><img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328233020.png" alt=""></p>
+<h2 id="pass-15文件包含"><a class="markdownIt-Anchor" href="#pass-15文件包含"></a> Pass-15（文件包含）</h2>
+<h3 id="验证方式-15"><a class="markdownIt-Anchor" href="#验证方式-15"></a> 验证方式</h3>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">function</span> <span class="token function-definition function">isImage</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token variable">$types</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'.jpeg|.png|.gif'</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">file_exists</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">getimagesize</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取图像的信息</span>
@@ -1480,12 +1539,16 @@ SetHandler application/x-httpd-php
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h3><p>同14关一模一样的方式</p>
-<h3 id="过程-14"><a href="#过程-14" class="headerlink" title="过程"></a>过程</h3><p>参见14关</p>
-<h2 id="Pass-16"><a href="#Pass-16" class="headerlink" title="Pass-16"></a>Pass-16</h2><h3 id="验证方式-15"><a href="#验证方式-15" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端：exif_imagetype()</strong></p>
+<h3 id="思路-15"><a class="markdownIt-Anchor" href="#思路-15"></a> 思路</h3>
+<p>同14关一模一样的方式</p>
+<h3 id="过程-15"><a class="markdownIt-Anchor" href="#过程-15"></a> 过程</h3>
+<p>参见14关</p>
+<h2 id="pass-16"><a class="markdownIt-Anchor" href="#pass-16"></a> Pass-16</h2>
+<h3 id="验证方式-16"><a class="markdownIt-Anchor" href="#验证方式-16"></a> 验证方式</h3>
+<p><strong>后端：exif_imagetype()</strong></p>
 <blockquote>
-<p>知识补充： exif_imagetype()读取一个图像的第一个字节并检查其后缀名。<br>返回值与getimage()函数返回的索引2相同，但是速度比getimage快得多。需要开启<code>php_exif</code>模块。</p>
+<p>知识补充： exif_imagetype()读取一个图像的第一个字节并检查其后缀名。<br>
+返回值与getimage()函数返回的索引2相同，但是速度比getimage快得多。需要开启<code>php_exif</code>模块。</p>
 </blockquote>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">function</span> <span class="token function-definition function">isImage</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token comment">//需要开启php_exif模块</span>
@@ -1522,10 +1585,13 @@ SetHandler application/x-httpd-php
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h3><p>参见14，15关，主要是需要在php中开启相应的模块</p>
-<h3 id="过程-15"><a href="#过程-15" class="headerlink" title="过程"></a>过程</h3><p>参见14，15关</p>
-<h2 id="Pass-17-二次渲染"><a href="#Pass-17-二次渲染" class="headerlink" title="Pass-17(二次渲染)"></a>Pass-17(二次渲染)</h2><h3 id="验证方式-16"><a href="#验证方式-16" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>同时验证文件后缀，MIME文件类型。如果前两步验证成功，则使用imagecreatefromjpeg($target_path);函数对其进行二次渲染。根据图片的大小尺寸进行渲染，这样就会使得我们写的木马代码被渲染无效，不能执行。</p>
+<h3 id="思路-16"><a class="markdownIt-Anchor" href="#思路-16"></a> 思路</h3>
+<p>参见14，15关，主要是需要在php中开启相应的模块</p>
+<h3 id="过程-16"><a class="markdownIt-Anchor" href="#过程-16"></a> 过程</h3>
+<p>参见14，15关</p>
+<h2 id="pass-17二次渲染"><a class="markdownIt-Anchor" href="#pass-17二次渲染"></a> Pass-17(二次渲染)</h2>
+<h3 id="验证方式-17"><a class="markdownIt-Anchor" href="#验证方式-17"></a> 验证方式</h3>
+<p>**后端，白名单：**同时验证文件后缀，MIME文件类型。如果前两步验证成功，则使用imagecreatefromjpeg($target_path);函数对其进行二次渲染。根据图片的大小尺寸进行渲染，这样就会使得我们写的木马代码被渲染无效，不能执行。</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'submit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -1612,10 +1678,12 @@ SetHandler application/x-httpd-php
         <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"只允许上传后缀为.jpg|.png|.gif的图片文件！"</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h3><p>找到渲染前后没有改变的地方，然后把木马写在不变的位置。而且不同格式的修改方式是不一样的。在自己的多次尝试下，都未成功。先留着。</p>
+<h3 id="思路-17"><a class="markdownIt-Anchor" href="#思路-17"></a> 思路</h3>
+<p>找到渲染前后没有改变的地方，然后把木马写在不变的位置。而且不同格式的修改方式是不一样的。在自己的多次尝试下，都未成功。先留着。</p>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-2">upload-labs之pass 16详细分析 - 先知社区 (aliyun.com)</a></p>
-<h2 id="Pass-18"><a href="#Pass-18" class="headerlink" title="Pass-18"></a>Pass-18</h2><h3 id="验证方式-17"><a href="#验证方式-17" class="headerlink" title="验证方式"></a>验证方式</h3><p><strong>后端，白名单：</strong>先获上传文件的后缀，全名，类型。先把文件暂时上传，然后检验文件的后缀是否合理，如果合理就重新更改名字，否则就删除。</p>
+<h2 id="pass-18"><a class="markdownIt-Anchor" href="#pass-18"></a> Pass-18</h2>
+<h3 id="验证方式-18"><a class="markdownIt-Anchor" href="#验证方式-18"></a> 验证方式</h3>
+<p>**后端，白名单：**先获上传文件的后缀，全名，类型。先把文件暂时上传，然后检验文件的后缀是否合理，如果合理就重新更改名字，否则就删除。</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$is_upload</span> <span class="token operator">=</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
 <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
 
@@ -1639,8 +1707,8 @@ SetHandler application/x-httpd-php
         <span class="token variable">$msg</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'上传出错！'</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h3><p>知识点：当一个文件被修改的时候，是不能对这个文件进行修改的，所以当我们把文件上传上去，在后端还没开始验证的时候去访问这个文件，就不能删除了。</p>
+<h3 id="思路-18"><a class="markdownIt-Anchor" href="#思路-18"></a> 思路</h3>
+<p>知识点：当一个文件被修改的时候，是不能对这个文件进行修改的，所以当我们把文件上传上去，在后端还没开始验证的时候去访问这个文件，就不能删除了。</p>
 </body></html>
                 
             </div>
@@ -2067,7 +2135,7 @@ SetHandler application/x-httpd-php
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="xss实验">
+                        <img src="/medias/featureimages/8.png" class="responsive-img" alt="xss实验">
                         
                         <span class="card-title">xss实验</span>
                     </div>
@@ -2120,7 +2188,7 @@ SetHandler application/x-httpd-php
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="SQL注入实验">
+                        <img src="/medias/featureimages/3.png" class="responsive-img" alt="SQL注入实验">
                         
                         <span class="card-title">SQL注入实验</span>
                     </div>
@@ -2527,7 +2595,7 @@ SetHandler application/x-httpd-php
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">27.9k</span>
+                        class="white-color">27.8k</span>
             
             
             

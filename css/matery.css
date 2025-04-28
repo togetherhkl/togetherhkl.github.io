@@ -328,7 +328,7 @@ header .brand-logo .logo-img {
 }
 
 header .brand-logo .logo-span {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
 }
 
 /*修改顶部 logo 的文字垂直对齐为 top，避免默认 middle 看起来偏下*/
@@ -585,7 +585,11 @@ header .go-back i {
 .bg-cover:after {
     /*-webkit-animation: rainbow 60s infinite;*/
     /*animation: rainbow 60s infinite;*/
-    background-image: linear-gradient(to right, #0f919d 0%, #abd9dd 100%);
+    /* background-image: linear-gradient(to right, #0f919d 0%, #abd9dd 100%); */
+    content: "";
+    background-image: url('/medias/images/2.png');
+    background-size: cover;
+    background-position: center center;
 }
 
 .bg-cover:before,
@@ -769,6 +773,16 @@ header .go-back i {
     .recommend {
         margin-top: 20px;
         padding: 0 0.75rem;
+    }
+}
+@media only screen and (min-width: 993px) {
+    #main-content {
+        width: 90% !important;
+        margin-left: auto !important;
+    }
+    #toc-aside{
+        width: 10% !important;
+        margin-left: auto !important;
     }
 }
 
@@ -959,6 +973,26 @@ article .article-content .publish-author {
 .publish-author .icon-category {
     padding-left: 10px;
 }
+/* 首页文章更新展示时间 */
+/* 日期和分类信息横向排列 */
+.publish-info {
+    display: flex;
+    justify-content: space-between; /* 空白只在子元素之间均匀分配,两端不分配 */
+}
+/* 发布日期和更新日期纵向排列 */
+.publish-info .time-section {
+    display: flex;
+    flex-direction: column;
+}
+/* 已有的间距描述 */
+.publish-date .icon-date {
+    padding-right: 5px;
+}
+/* 新加的间距描述 */
+.update-date .icon-date {
+    padding-right: 5px;
+}
+
 
 .article-content .publish-author .post-category {
     padding-left: 5px;
@@ -2062,7 +2096,8 @@ p.search-result-summary {
 
 /*二级菜单*/
 
-.nav-menu {
+.nav-menu>li>a>span {
+    font-size: 1.4rem;
 }
 
 .nav-menu li .sub-nav {

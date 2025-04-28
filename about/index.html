@@ -35,7 +35,7 @@
     
     <style>
         body{
-            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-image: url(/medias/images/3.png);
             background-repeat:no-repeat;
             background-size: 100% 100%;
             background-attachment:fixed;
@@ -74,7 +74,11 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hkini" type="application/atom+xml">
 </head>
@@ -793,7 +797,7 @@
         <div class="brand">
             <div class="title center-align">
                 
-                Hkini的「学习学习再学习」
+                Hkini的「思想路」
                 
             </div>
 
@@ -1079,7 +1083,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"CTF练习","value":1},{"name":"Python","value":1},{"name":"Web安全","value":6},{"name":"catrename","value":1},{"name":"Web渗透","value":2},{"name":"Linux","value":1},{"name":"与C相关","value":1},{"name":"编程","value":2},{"name":"前端","value":1},{"name":"红蓝对抗","value":1},{"name":"视频记录","value":1},{"name":"计划和总结","value":2},{"name":"阅读","value":1},{"name":"Web安全工具","value":1},{"name":"Web漏洞","value":1}],
+                data: [{"name":"Web安全","value":6},{"name":"Linux","value":1},{"name":"Web渗透","value":2},{"name":"catrename","value":1},{"name":"Python","value":1},{"name":"Web安全工具","value":1},{"name":"与C相关","value":1},{"name":"编程","value":2},{"name":"CTF练习","value":1},{"name":"前端","value":1},{"name":"Web漏洞","value":1},{"name":"红蓝对抗","value":1},{"name":"视频记录","value":1},{"name":"计划和总结","value":2},{"name":"阅读","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -1103,7 +1107,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["编成学习","项目经历","安全攻防","项目","编程","平常联系","CSRF","文件上传","testfile","rename"]
+                data: ["编成学习","项目经历","安全攻防","项目","编程","编程学习","CSRF","SQL注入","testfile","rename"]
             }
         ],
         yAxis: [
@@ -1288,8 +1292,8 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/">
-                <span class="chip center-align waves-effect waves-light chip-default">平常联系</span>
+            <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
+                <span class="chip center-align waves-effect waves-light chip-default">项目经历</span>
             </a>
             
             
@@ -1300,8 +1304,8 @@
             
             
             
-            <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">
-                <span class="chip center-align waves-effect waves-light chip-default">项目经历</span>
+            <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+                <span class="chip center-align waves-effect waves-light chip-default">编程学习</span>
             </a>
             
             
@@ -1318,8 +1322,8 @@
             
             
             
-            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-                <span class="chip center-align waves-effect waves-light chip-default">文件上传</span>
+            <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
+                <span class="chip center-align waves-effect waves-light chip-default">SQL注入</span>
             </a>
             
             
@@ -1336,20 +1340,14 @@
             
             
             
+            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                <span class="chip center-align waves-effect waves-light chip-default">文件上传</span>
+            </a>
+            
+            
+            
             <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
                 <span class="chip center-align waves-effect waves-light chip-default">xss漏洞</span>
-            </a>
-            
-            
-            
-            <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
-                <span class="chip center-align waves-effect waves-light chip-default">SQL注入</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
-                <span class="chip center-align waves-effect waves-light chip-default">编程学习</span>
             </a>
             
             
@@ -1362,6 +1360,12 @@
             
             <a href="/tags/%E9%A1%B9%E7%9B%AE/">
                 <span class="chip center-align waves-effect waves-light chip-default">项目</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%B9%B3%E5%B8%B8%E8%81%94%E7%B3%BB/">
+                <span class="chip center-align waves-effect waves-light chip-default">平常联系</span>
             </a>
             
             
@@ -1415,20 +1419,20 @@
         
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/0.jpg">
-                <img src="/medias/featureimages/0.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/images/0.jpg">
+                <img src="/medias/images/0.jpg" class="responsive-img">
             </div>
         </div>
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/1.jpg">
-                <img src="/medias/featureimages/1.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/images/1.jpg">
+                <img src="/medias/images/1.jpg" class="responsive-img">
             </div>
         </div>
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/2.jpg">
-                <img src="/medias/featureimages/2.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/images/2.jpg">
+                <img src="/medias/images/2.jpg" class="responsive-img">
             </div>
         </div>
         
@@ -1528,7 +1532,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">27.9k</span>
+                        class="white-color">27.8k</span>
             
             
             

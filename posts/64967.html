@@ -35,7 +35,7 @@
     
     <style>
         body{
-            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-image: url(/medias/images/3.png);
             background-repeat:no-repeat;
             background-size: 100% 100%;
             background-attachment:fixed;
@@ -74,7 +74,11 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hkini" type="application/atom+xml">
 </head>
@@ -796,7 +800,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -856,6 +860,7 @@
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2023-03-28
                 </div>
+
                 
 
                 
@@ -868,7 +873,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    324
+                    325
                 </div>
                 
 
@@ -900,7 +905,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <html><head></head><body><h1 id="CSRF实验"><a href="#CSRF实验" class="headerlink" title="CSRF实验"></a>CSRF实验</h1><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2>
+                <html><head></head><body><h1 id="csrf实验"><a class="markdownIt-Anchor" href="#csrf实验"></a> CSRF实验</h1>
+<h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点</h2>
+
         <div class="evoldown" id="什么是csrf" type="d">
           <span class="icon">
             <svg type="d" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" version="1.1" aria-hidden="true" class=""><path d="m21.15 6.85c0-2.2056-1.7944-4-4-4-4.1765-0.01989-5.4993 5.7322-1.8147 7.5629-0.263 0.63631-0.4627 1.4421-0.6559 2.2215-0.1397 0.56337-0.2841 1.1459-0.4405 1.6084-0.0728 0.2155-0.1286 0.4813-0.1891 0.4813-0.5072-0.7362-0.8126-2.2507-1.0979-3.3161-0.47879-1.5358-0.72936-4.4237-2.8018-4.558-0.77422 7e-5 -1.3844 0.52253-1.8138 1.553-0.55019 1.254-0.75064 3.2421-1.3784 4.4472-0.39648 3e-4 -0.79576 0.0045-1.1877 0.0703-0.67978 0.1073-1.3339 0.4195-1.798 0.9347-0.39707 0.4315-0.6427 0.9874-0.74275 1.5623-0.063545 0.351-0.07691 0.7094-0.07883 1.0654 0.001935 0.4718-0.01324 0.9457 0.027745 1.4163 0.09435 1.151 0.65732 2.1308 1.7281 2.6237 0.43467 0.1975 0.91053 0.2877 1.3854 0.3129 0.40096 0.0215 0.80345 0.0129 1.2048 0.0139 0.6491 2e-4 1.2891-0.0515 1.888-0.3229 0.90042-0.4067 1.4845-1.2039 1.6712-2.1666 0.0761-0.3779 0.09179-0.7654 0.09344-1.15 7.7e-4 -0.2699 0.00148-0.5413-7.8e-4 -0.8111-0.00379-0.4854-0.04143-0.9771-0.19121-1.4414-0.28748-0.9172-0.98053-1.616-1.8964-1.909 0.43984-1.1576 0.66815-2.7594 1.1268-3.8895 0.3537 0.72804 0.57113 1.7669 0.82283 2.7298 0.26567 1.0724 0.5404 2.1814 0.90896 3.0557 0.87204 2.2985 3.1124 2.7586 4.0452 0.392 0.5508-1.2642 0.7508-3.279 1.3828-4.4916 2.1142-0.10339 3.8024-1.8557 3.8024-3.995zm-12.073 8.8023c0.05605 0.2275 0.06623 0.465 0.07092 0.6983 0.00363 0.2444 0.00195 0.4906 0.00214 0.735-0.0063 0.408 0.01486 0.882-0.18359 1.2496-0.24573 0.4539-0.8026 0.501-1.2651 0.5114-0.33714 0.0058-0.67525 0.0041-1.0124 0.0018-0.46455-0.0092-1.0361-0.0245-1.3192-0.4545-0.16612-0.2552-0.19733-0.5702-0.21202-0.8673-0.01004-0.2443-0.00683-0.4906-0.0075-0.735 5.9e-4 -0.2322-0.00201-0.4664 0.01171-0.6983 0.01886-0.2936 0.06332-0.6069 0.24969-0.8453 0.34185-0.4331 1.0226-0.3889 1.5228-0.3979 0.38828 0.0035 0.77905-0.0131 1.1658 0.0285 0.49865 0.0566 0.85211 0.2621 0.97684 0.7737zm8.0732-6.8023c-2.6379-0.06696-2.6373-3.9334 0-4 2.6378 0.06697 2.6373 3.9334 0 4z" fill="currentColor"></path></svg>
@@ -918,34 +925,36 @@
         </div>
       
 <p>低威漏洞，因为漏洞利用有条件限制，①需要用户登录上我们想攻击的网站，②还要使用户点击我们构造的网站</p>
-<h2 id="实验一：-pikachu靶场复现CSRF漏洞"><a href="#实验一：-pikachu靶场复现CSRF漏洞" class="headerlink" title="实验一： pikachu靶场复现CSRF漏洞"></a>实验一： pikachu靶场复现CSRF漏洞</h2><h3 id="1-环境"><a href="#1-环境" class="headerlink" title="1.环境"></a>1.环境</h3><ul>
+<h2 id="实验一-pikachu靶场复现csrf漏洞"><a class="markdownIt-Anchor" href="#实验一-pikachu靶场复现csrf漏洞"></a> 实验一： pikachu靶场复现CSRF漏洞</h2>
+<h3 id="1环境"><a class="markdownIt-Anchor" href="#1环境"></a> 1.环境</h3>
+<ul>
 <li>pikachu靶场</li>
 <li>win2008:192.168.61.145</li>
 <li>win7:192.168.61.145</li>
 </ul>
-<h3 id="2-流程"><a href="#2-流程" class="headerlink" title="2.流程"></a>2.流程</h3><ul>
+<h3 id="2流程"><a class="markdownIt-Anchor" href="#2流程"></a> 2.流程</h3>
+<ul>
 <li>在win2008中进入pikachu的csrf，在进入信息修改的界面</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232735.png" style="zoom:50%;">
-
 <ul>
-<li><p>点击submit，然后抓包查看头部信息</p>
+<li>
+<p>点击submit，然后抓包查看头部信息</p>
 <p>可见请求信息为</p>
-<pre class="line-numbers language-txet" data-language="txet"><code class="language-txet">http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=123567898&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-txet" data-language="txet"><code class="language-txet">http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=123567898&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ul>
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232751.png" style="zoom:50%;">
-
 <img src="https://cdn.jsdelivr.net/gh/togetherhkl/Mypictures/20230328232752.png" style="zoom:50%;">
-
 <ul>
 <li>在win7(192.168.61.146)中设计一个含有同样请求（修改数据：手机号为11111111）的网站。</li>
 </ul>
 <p>test.html</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>http://192.168.61.145:88/vul/csrf/csrfget/csrf_get_edit.php?sex=boy&amp;phonenum=11111111&amp;add=nba+lakes&amp;email=nihao%40pikachu.com&amp;submit=submit<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>hello word<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>在win2008中模拟访问该网站实现跨站请求</p>
+<li>
+<p>在win2008中模拟访问该网站实现跨站请求</p>
 <p>通过检查发现，发现该网站发送了一个数据包，其结构与我们在pikachu修改时抓包一样，只是修改了手机号。</p>
 </li>
 </ul>
@@ -1375,7 +1384,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="SQL注入实验">
+                        <img src="/medias/featureimages/3.png" class="responsive-img" alt="SQL注入实验">
                         
                         <span class="card-title">SQL注入实验</span>
                     </div>
@@ -1428,7 +1437,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="2022年编程框架的使用总结">
+                        <img src="/medias/featureimages/0.png" class="responsive-img" alt="2022年编程框架的使用总结">
                         
                         <span class="card-title">2022年编程框架的使用总结</span>
                     </div>
@@ -1835,7 +1844,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">27.9k</span>
+                        class="white-color">27.8k</span>
             
             
             
