@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2025-05-13T15:19:14.360Z</updated>
+  <updated>2025-05-21T08:50:20.107Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FastAPI：(1)并发async与await</title>
+    <link href="https://www.hkini.top/posts/59361.html"/>
+    <id>https://www.hkini.top/posts/59361.html</id>
+    <published>2025-05-18T12:35:00.000Z</published>
+    <updated>2025-05-21T08:50:20.107Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi1并发async与await&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi1并发async与await&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+  </entry>
   
   <entry>
     <title>《非暴力沟通》（四）感受、想法、情感勒索、情绪颗粒度</title>
@@ -583,33 +612,6 @@
     <category term="文学" scheme="https://www.hkini.top/tags/%E6%96%87%E5%AD%A6/"/>
     
     <category term="《悉达多》" scheme="https://www.hkini.top/tags/%E3%80%8A%E6%82%89%E8%BE%BE%E5%A4%9A%E3%80%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nvm 管理 Node.js 版本</title>
-    <link href="https://www.hkini.top/posts/39978.html"/>
-    <id>https://www.hkini.top/posts/39978.html</id>
-    <published>2024-11-23T02:17:00.000Z</published>
-    <updated>2025-05-03T10:30:45.064Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h3 id=&quot;使用-node-version-manager-nvm&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#使用-node-version-manager-nvm&quot;&gt;&lt;/a&gt; 使用 Node</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="配置记录" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="Node" scheme="https://www.hkini.top/tags/Node/"/>
     
   </entry>
   
