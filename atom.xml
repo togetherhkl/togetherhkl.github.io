@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2025-05-21T08:50:20.107Z</updated>
+  <updated>2025-05-21T10:07:07.517Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.hkini.top/posts/59361.html"/>
     <id>https://www.hkini.top/posts/59361.html</id>
     <published>2025-05-18T12:35:00.000Z</published>
-    <updated>2025-05-21T08:50:20.107Z</updated>
+    <updated>2025-05-21T10:07:07.517Z</updated>
     
     
       
@@ -39,9 +39,9 @@
     <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
     
     
-    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
-    
     <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
     
   </entry>
   
@@ -552,37 +552,6 @@
   </entry>
   
   <entry>
-    <title>《浪潮之巅-第四版》</title>
-    <link href="https://www.hkini.top/posts/19933.html"/>
-    <id>https://www.hkini.top/posts/19933.html</id>
-    <published>2024-12-02T14:36:00.000Z</published>
-    <updated>2025-05-13T14:41:07.019Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;浪潮之巅-第四版&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#浪潮之巅-第四版&quot;&gt;&lt;/a&gt; 《浪潮之巅-第四版》&lt;/h1&gt;
-
-        &lt;div</summary>
-        
-      
-    
-    
-    
-    <category term="兴趣" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/"/>
-    
-    <category term="阅读" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/"/>
-    
-    <category term="阅读整理" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/%E9%98%85%E8%AF%BB%E6%95%B4%E7%90%86/"/>
-    
-    
-    <category term="历史" scheme="https://www.hkini.top/tags/%E5%8E%86%E5%8F%B2/"/>
-    
-  </entry>
-  
-  <entry>
     <title>《悉达多》</title>
     <link href="https://www.hkini.top/posts/7129.html"/>
     <id>https://www.hkini.top/posts/7129.html</id>
@@ -612,6 +581,37 @@
     <category term="文学" scheme="https://www.hkini.top/tags/%E6%96%87%E5%AD%A6/"/>
     
     <category term="《悉达多》" scheme="https://www.hkini.top/tags/%E3%80%8A%E6%82%89%E8%BE%BE%E5%A4%9A%E3%80%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《浪潮之巅-第四版》</title>
+    <link href="https://www.hkini.top/posts/19933.html"/>
+    <id>https://www.hkini.top/posts/19933.html</id>
+    <published>2024-12-02T14:36:00.000Z</published>
+    <updated>2025-05-13T14:41:07.019Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;浪潮之巅-第四版&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#浪潮之巅-第四版&quot;&gt;&lt;/a&gt; 《浪潮之巅-第四版》&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="兴趣" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/"/>
+    
+    <category term="阅读" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="阅读整理" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/%E9%98%85%E8%AF%BB%E6%95%B4%E7%90%86/"/>
+    
+    
+    <category term="历史" scheme="https://www.hkini.top/tags/%E5%8E%86%E5%8F%B2/"/>
     
   </entry>
   

@@ -73,6 +73,12 @@
 
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
 
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
@@ -970,7 +976,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"个人成长","value":3},{"name":"专业","value":31},{"name":"基础理论","value":1},{"name":"框架","value":13},{"name":"编程语言","value":3},{"name":"配置记录","value":6},{"name":"实践项目","value":8},{"name":"计划与总结","value":2},{"name":"兴趣","value":7},{"name":"阅读","value":7},{"name":"阅读整理","value":7}],
+                data: [{"name":"个人成长","value":3},{"name":"专业","value":31},{"name":"框架","value":13},{"name":"基础理论","value":1},{"name":"实践项目","value":8},{"name":"编程语言","value":3},{"name":"配置记录","value":6},{"name":"计划与总结","value":2},{"name":"兴趣","value":7},{"name":"阅读","value":7},{"name":"阅读整理","value":7}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -994,7 +1000,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["人工智能","Pytorch","Python","Web安全","《非暴力沟通》","Numpy","Vue","编程","文学","Hexo"]
+                data: ["人工智能","Pytorch","Python","Web安全","《非暴力沟通》","Numpy","Vue","Hexo","Obsidian","编程"]
             }
         ],
         yAxis: [
@@ -1185,6 +1191,14 @@
             
             
             
+            <a href="/tags/FastAPI/">
+                <span class="chip center-align waves-effect waves-light chip-default">FastAPI</span>
+            </a>
+            
+            
+            
+            
+            
             <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
                 <span class="chip center-align waves-effect waves-light chip-default">人工智能</span>
             </a>
@@ -1217,6 +1231,60 @@
             
             
             
+            <a href="/tags/Web%E5%AE%89%E5%85%A8/">
+                <span class="chip center-align waves-effect waves-light chip-default">Web安全</span>
+            </a>
+            
+            
+            
+            <a href="/tags/CSRF/">
+                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                <span class="chip center-align waves-effect waves-light chip-default">文件上传</span>
+            </a>
+            
+            
+            
+            <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
+                <span class="chip center-align waves-effect waves-light chip-default">xss漏洞</span>
+            </a>
+            
+            
+            
+            <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
+                <span class="chip center-align waves-effect waves-light chip-default">SQL注入</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                <span class="chip center-align waves-effect waves-light chip-default">微信小程序</span>
+            </a>
+            
+            
+            
+            <a href="/tags/C/">
+                <span class="chip center-align waves-effect waves-light chip-default">C#</span>
+            </a>
+            
+            
+            
+            
+            
+            <a href="/tags/Qt/">
+                <span class="chip center-align waves-effect waves-light chip-default">Qt</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+                <span class="chip center-align waves-effect waves-light chip-default">人脸识别</span>
+            </a>
+            
             
             
             <a href="/tags/C%E8%AF%AD%E8%A8%80/">
@@ -1237,64 +1305,32 @@
             
             
             
+            <a href="/tags/Hexo/">
+                <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Obsidian/">
+                <span class="chip center-align waves-effect waves-light chip-default">Obsidian</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%90%8C%E6%AD%A5/">
+                <span class="chip center-align waves-effect waves-light chip-default">同步</span>
+            </a>
+            
+            
+            
             <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
                 <span class="chip center-align waves-effect waves-light chip-default">服务器配置</span>
             </a>
             
             
             
-            <a href="/tags/Web%E5%AE%89%E5%85%A8/">
-                <span class="chip center-align waves-effect waves-light chip-default">Web安全</span>
-            </a>
-            
-            
-            
-            <a href="/tags/CSRF/">
-                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
-            </a>
-            
-            
-            
-            <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
-                <span class="chip center-align waves-effect waves-light chip-default">SQL注入</span>
-            </a>
-            
-            
-            
-            <a href="/tags/xss%E6%BC%8F%E6%B4%9E/">
-                <span class="chip center-align waves-effect waves-light chip-default">xss漏洞</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
-                <span class="chip center-align waves-effect waves-light chip-default">人脸识别</span>
-            </a>
-            
-            
-            
-            <a href="/tags/C/">
-                <span class="chip center-align waves-effect waves-light chip-default">C#</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                <span class="chip center-align waves-effect waves-light chip-default">微信小程序</span>
-            </a>
-            
-            
-            
-            
-            
-            <a href="/tags/Qt/">
-                <span class="chip center-align waves-effect waves-light chip-default">Qt</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-                <span class="chip center-align waves-effect waves-light chip-default">文件上传</span>
+            <a href="/tags/Matery/">
+                <span class="chip center-align waves-effect waves-light chip-default">Matery</span>
             </a>
             
             
@@ -1329,50 +1365,20 @@
             
             
             
-            <a href="/tags/%E5%8E%86%E5%8F%B2/">
-                <span class="chip center-align waves-effect waves-light chip-default">历史</span>
-            </a>
-            
-            
-            
             <a href="/tags/%E3%80%8A%E6%82%89%E8%BE%BE%E5%A4%9A%E3%80%8B/">
                 <span class="chip center-align waves-effect waves-light chip-default">《悉达多》</span>
             </a>
             
             
             
-            <a href="/tags/Hexo/">
-                <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Matery/">
-                <span class="chip center-align waves-effect waves-light chip-default">Matery</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Obsidian/">
-                <span class="chip center-align waves-effect waves-light chip-default">Obsidian</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%90%8C%E6%AD%A5/">
-                <span class="chip center-align waves-effect waves-light chip-default">同步</span>
+            <a href="/tags/%E5%8E%86%E5%8F%B2/">
+                <span class="chip center-align waves-effect waves-light chip-default">历史</span>
             </a>
             
             
             
             <a href="/tags/%E3%80%8A%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A%E3%80%8B/">
                 <span class="chip center-align waves-effect waves-light chip-default">《非暴力沟通》</span>
-            </a>
-            
-            
-            
-            <a href="/tags/FastAPI/">
-                <span class="chip center-align waves-effect waves-light chip-default">FastAPI</span>
             </a>
             
             
@@ -1776,6 +1782,14 @@ $(function () {
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
 
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
     
 
     

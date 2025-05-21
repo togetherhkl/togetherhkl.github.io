@@ -777,6 +777,28 @@ header .go-back i {
 }
 @media only screen and (min-width: 993px) {
     #main-content {
+        width: 80% !important;
+        margin-left: auto !important;
+    }
+    #toc-aside{
+        width: 20% !important;
+        margin-left: auto !important;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    #main-content {
+        width: 80% !important;
+        margin-left: auto !important;
+    }
+    #toc-aside{
+        width: 20% !important;
+        margin-left: auto !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    #main-content {
         width: 90% !important;
         margin-left: auto !important;
     }
