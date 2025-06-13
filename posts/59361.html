@@ -824,10 +824,18 @@
       
 <p>文章围绕 FastAPI 的并发与异步机制展开，系统讲解了以下几个关键概念及其关系：</p>
 <ul>
-<li><strong>I/O 密集 vs CPU 密集</strong>：帮助选择合适的并发模型。</li>
-<li><strong>并发 vs 并行</strong>：揭示异步与多核处理的本质区别。</li>
-<li><strong>进程、线程、协程</strong>：比较三者在资源、调度、开销上的异同。</li>
-<li><strong>async/await 语法</strong>：结合 FastAPI 实例，演示如何高效处理并发请求。</li>
+<li>
+<p><strong>I/O 密集 vs CPU 密集</strong>：帮助选择合适的并发模型。</p>
+</li>
+<li>
+<p><strong>并发 vs 并行</strong>：揭示异步与多核处理的本质区别。</p>
+</li>
+<li>
+<p><strong>进程、线程、协程</strong>：比较三者在资源、调度、开销上的异同。</p>
+</li>
+<li>
+<p><strong>async/await 语法</strong>：结合 FastAPI 实例，演示如何高效处理并发请求。</p>
+</li>
 </ul>
 <pre class="mermaid">graph TD
     A[I/O密集型] --&gt;|适合| B[异步代码]
@@ -854,10 +862,18 @@
 <p><strong>「I/O密集型」</strong> 是指一种程序或任务，其执行过程中主要<strong>时间花费在输入/输出操作上，而不是在中央处理器（CPU）上</strong>的计算。这类任务通常频繁地等待外部设备（如磁盘、网络、键盘等）的数据传输完成，而在此期间CPU处于空闲状态。</p>
 <p><strong>特征包括</strong>：</p>
 <ul>
-<li>高频I/O操作：任务频繁进行输入/输出操作。</li>
-<li>CPU利用率低：程序运行时CPU计算时间占比小，大部分时间在等待I/O完成。</li>
-<li>等待时间主导：整体执行时间由I/O延迟决定，而非计算复杂度。</li>
-<li>依赖外部资源：性能瓶颈在于外部设备的速度，而非CPU处理速度。</li>
+<li>
+<p>高频I/O操作：任务频繁进行输入/输出操作。</p>
+</li>
+<li>
+<p>CPU利用率低：程序运行时CPU计算时间占比小，大部分时间在等待I/O完成。</p>
+</li>
+<li>
+<p>等待时间主导：整体执行时间由I/O延迟决定，而非计算复杂度。</p>
+</li>
+<li>
+<p>依赖外部资源：性能瓶颈在于外部设备的速度，而非CPU处理速度。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="文件复制（正例）" type="e">
@@ -879,10 +895,18 @@
 <p><strong>「该现象」是「I/O密集型」</strong>。 因为复制过程需要大量读取源文件并写入目标位置，这两个动作都属于I/O操作，而实际CPU参与的运算非常少，整个过程的时间主要取决于硬盘的读写速度。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>高频I/O操作：多次读写硬盘。</li>
-<li>CPU利用率低：仅做简单缓冲处理，CPU几乎不忙碌。</li>
-<li>等待时间主导：耗时主要来自硬盘读写延迟。</li>
-<li>依赖外部资源：速度受限于硬盘性能。</li>
+<li>
+<p>高频I/O操作：多次读写硬盘。</p>
+</li>
+<li>
+<p>CPU利用率低：仅做简单缓冲处理，CPU几乎不忙碌。</p>
+</li>
+<li>
+<p>等待时间主导：耗时主要来自硬盘读写延迟。</p>
+</li>
+<li>
+<p>依赖外部资源：速度受限于硬盘性能。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="网络爬虫(正例)" type="e">
@@ -904,10 +928,18 @@
 <p><strong>「该现象」是「I/O密集型」</strong>。 因为程序的主要工作是通过网络请求获取数据，而这些请求往往需要等待服务器响应和网络传输，CPU仅用于解析URL和存储结果，利用率极低。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>高频I/O操作：频繁发起HTTP请求和接收响应。</li>
-<li>CPU利用率低：解析和存储开销小。</li>
-<li>等待时间主导：网络延迟占总时间90%以上。</li>
-<li>依赖外部资源：受网络带宽和服务器响应速度限制。</li>
+<li>
+<p>高频I/O操作：频繁发起HTTP请求和接收响应。</p>
+</li>
+<li>
+<p>CPU利用率低：解析和存储开销小。</p>
+</li>
+<li>
+<p>等待时间主导：网络延迟占总时间90%以上。</p>
+</li>
+<li>
+<p>依赖外部资源：受网络带宽和服务器响应速度限制。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="图像渲染(反例)" type="e">
@@ -929,10 +961,18 @@
 <p><strong>「该现象」不是「I/O密集型」</strong>。 因为图像渲染主要是复杂的数学计算和图形处理，虽然可能有少量I/O操作（如加载纹理），但整体执行时间主要消耗在计算上，CPU/GPU利用率极高。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>高频I/O操作：基本没有频繁I/O。</li>
-<li>CPU利用率低：不符合，GPU/CPU高度参与。</li>
-<li>等待时间主导：不符合，时间由计算主导。</li>
-<li>依赖外部资源：性能瓶颈在计算单元而非I/O。</li>
+<li>
+<p>高频I/O操作：基本没有频繁I/O。</p>
+</li>
+<li>
+<p>CPU利用率低：不符合，GPU/CPU高度参与。</p>
+</li>
+<li>
+<p>等待时间主导：不符合，时间由计算主导。</p>
+</li>
+<li>
+<p>依赖外部资源：性能瓶颈在计算单元而非I/O。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="I/O密集型1" type="c">
@@ -1120,8 +1160,12 @@
       
 <p>判断一个任务是否属于「CPU密集型」，有助于</p>
 <ol>
-<li>选择正确的并发与并行模型：CPU 密集型任务主要消耗的是处理器资源，适合采用<strong>多进程（multiprocessing） 或原生线程</strong>进行**真正的并行计算。</li>
-<li>做出合适的部署资源选择：应优先选择高主频、多核 CPU 的机器，甚至考虑使用 HPC（高性能计算）集群。例如：AWS c7g 实例（Graviton CPU，适合计算密集任务），GCP N2D 实例（AMD EPYC，适合并行计算）。</li>
+<li>
+<p>选择正确的并发与并行模型：CPU 密集型任务主要消耗的是处理器资源，适合采用<strong>多进程（multiprocessing） 或原生线程</strong>进行**真正的并行计算。</p>
+</li>
+<li>
+<p>做出合适的部署资源选择：应优先选择高主频、多核 CPU 的机器，甚至考虑使用 HPC（高性能计算）集群。例如：AWS c7g 实例（Graviton CPU，适合计算密集任务），GCP N2D 实例（AMD EPYC，适合并行计算）。</p>
+</li>
 </ol>
 <h2 id="2并行与并发"><a class="markdownIt-Anchor" href="#2并行与并发"></a> 2.并行与并发</h2>
 
@@ -1135,10 +1179,18 @@
 <p><strong>「异步代码」</strong> 是指在程序执行过程中，允许某些操作在“后台”进行而不阻塞主线程或后续代码执行的编程模式。这种机制通常用于处理耗时任务（如网络请求、文件读写等），以避免程序因等待任务完成而冻结。</p>
 <p><strong>特征包括</strong>：</p>
 <ul>
-<li>非阻塞：异步代码不会阻塞主线程或其他操作的执行。</li>
-<li>并发性：多个任务可以并发执行，而不是顺序执行。</li>
-<li>回调/承诺/async-await：通过回调函数、Promise 对象或 async/await 语法来处理异步操作的结果。</li>
-<li>耗时任务：常用于处理需要较长时间完成的任务，如 I/O 操作、网络请求等。</li>
+<li>
+<p>非阻塞：异步代码不会阻塞主线程或其他操作的执行。</p>
+</li>
+<li>
+<p>并发性：多个任务可以并发执行，而不是顺序执行。</p>
+</li>
+<li>
+<p>回调/承诺/async-await：通过回调函数、Promise 对象或 async/await 语法来处理异步操作的结果。</p>
+</li>
+<li>
+<p>耗时任务：常用于处理需要较长时间完成的任务，如 I/O 操作、网络请求等。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="async/await函数(正例)" type="e">
@@ -1163,10 +1215,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>「该现象」是「异步代码」</strong>。 因为它使用了 <code>async/await</code> 语法来处理异步操作，虽然看起来像同步代码，但底层仍是基于 Promise 的异步机制。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>非阻塞：函数内部的 <code>await</code> 不会阻塞主线程。</li>
-<li>并发性：可与其他异步任务并发执行。</li>
-<li>使用异步机制：使用了 <code>async/await</code>。</li>
-<li>处理耗时任务：网络请求属于典型耗时任务。</li>
+<li>
+<p>非阻塞：函数内部的 <code>await</code> 不会阻塞主线程。</p>
+</li>
+<li>
+<p>并发性：可与其他异步任务并发执行。</p>
+</li>
+<li>
+<p>使用异步机制：使用了 <code>async/await</code>。</p>
+</li>
+<li>
+<p>处理耗时任务：网络请求属于典型耗时任务。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="Promise请求(正例)" type="e">
@@ -1192,10 +1252,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>「该现象」是「异步代码」</strong>。 因为它使用了 Promise 来发起网络请求，并通过 <code>.then()</code> 来处理响应结果，整个过程不会阻塞主线程。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>非阻塞：主线程继续执行其他任务，不等待请求完成。</li>
-<li>并发性：请求与其它操作并行。</li>
-<li>使用异步机制：使用了 <code>Promise</code> 和 <code>.then()</code>。</li>
-<li>处理耗时任务：网络请求通常是耗时操作。</li>
+<li>
+<p>非阻塞：主线程继续执行其他任务，不等待请求完成。</p>
+</li>
+<li>
+<p>并发性：请求与其它操作并行。</p>
+</li>
+<li>
+<p>使用异步机制：使用了 <code>Promise</code> 和 <code>.then()</code>。</p>
+</li>
+<li>
+<p>处理耗时任务：网络请求通常是耗时操作。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="并行" type="d">
@@ -1208,10 +1276,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>并行（Parallelism）</strong> 是一种<strong>在同一时刻（同时）运行多个任务或指令</strong>的能力，通常依赖于多个处理单元（如多核 CPU、多个计算节点）来同时执行多个工作。</p>
 <p><strong>特征包括</strong>：</p>
 <ul>
-<li>同时发生：多个任务在物理时间上真正同时运行。</li>
-<li>独立性：任务之间可以独立执行，不需要等待彼此完成。</li>
-<li>资源共享：任务共享硬件资源（如CPU核心、内存）。</li>
-<li>无序执行：任务的执行顺序可能不确定，由调度器决定。</li>
+<li>
+<p>同时发生：多个任务在物理时间上真正同时运行。</p>
+</li>
+<li>
+<p>独立性：任务之间可以独立执行，不需要等待彼此完成。</p>
+</li>
+<li>
+<p>资源共享：任务共享硬件资源（如CPU核心、内存）。</p>
+</li>
+<li>
+<p>无序执行：任务的执行顺序可能不确定，由调度器决定。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="多核处理程序(正例)" type="e">
@@ -1233,10 +1309,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>「该现象」是「并行」</strong>。 因为四个不同的程序分别被分配到四个核心中，各自独立运行，没有互相等待，共享同一台设备的资源。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>同时发生：四个程序同时运行。</li>
-<li>独立性：各程序之间互不影响。</li>
-<li>资源共享：共享CPU、内存等硬件资源。</li>
-<li>无序执行：执行顺序由操作系统调度决定。</li>
+<li>
+<p>同时发生：四个程序同时运行。</p>
+</li>
+<li>
+<p>独立性：各程序之间互不影响。</p>
+</li>
+<li>
+<p>资源共享：共享CPU、内存等硬件资源。</p>
+</li>
+<li>
+<p>无序执行：执行顺序由操作系统调度决定。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="GPU渲染图像(正例)" type="e">
@@ -1258,10 +1342,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>「该现象」是「并行」</strong>。 因为每个像素块的处理任务相互独立，可以同时进行，且由GPU统一调度。</p>
 <p><strong>特征比对</strong>：</p>
 <ul>
-<li>同时发生：多个像素块同时被处理。</li>
-<li>独立性：每个像素块的处理与其他无关。</li>
-<li>资源共享：共享GPU的运算单元和显存。</li>
-<li>无序执行：像素块的处理顺序由GPU调度器决定。</li>
+<li>
+<p>同时发生：多个像素块同时被处理。</p>
+</li>
+<li>
+<p>独立性：每个像素块的处理与其他无关。</p>
+</li>
+<li>
+<p>资源共享：共享GPU的运算单元和显存。</p>
+</li>
+<li>
+<p>无序执行：像素块的处理顺序由GPU调度器决定。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="并行1" type="c">
@@ -1277,15 +1369,23 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>是否能有效提升性能（缩短总运行时间）</li>
 </ol>
 <ul>
-<li>并行的核心目的就是<strong>用多个处理单元并行执行</strong>多个独立任务，从而<strong>显著减少总耗时</strong>。</li>
-<li>若任务可并行，理论上可以做到“<strong>线性加速</strong>”：用 4 个核心让程序运行时间减少到 1/4。</li>
+<li>
+<p>并行的核心目的就是<strong>用多个处理单元并行执行</strong>多个独立任务，从而<strong>显著减少总耗时</strong>。</p>
+</li>
+<li>
+<p>若任务可并行，理论上可以做到“<strong>线性加速</strong>”：用 4 个核心让程序运行时间减少到 1/4。</p>
+</li>
 </ul>
 <ol start="2">
 <li>决定是否要进行任务划分（task decomposition）</li>
 </ol>
 <ul>
-<li>如果任务能并行，应将其拆分为<strong>多个独立、可同时运行的子任务（子进程/线程）</strong>。</li>
-<li>如图像渲染可分区处理，矩阵乘法可按行列块拆分，数据清洗可并发批处理。</li>
+<li>
+<p>如果任务能并行，应将其拆分为<strong>多个独立、可同时运行的子任务（子进程/线程）</strong>。</p>
+</li>
+<li>
+<p>如图像渲染可分区处理，矩阵乘法可按行列块拆分，数据清洗可并发批处理。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="并发" type="d">
@@ -1298,9 +1398,15 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>在一个时间段内，有多个任务“同时”进行</strong>，这些任务通过<strong>交替调度、共享资源</strong>的方式，在逻辑上并行执行，虽然它们不一定在物理上同时运行。</p>
 <p><strong>特征包括</strong>：</p>
 <ul>
-<li>任务重叠：多个任务在同一时间段被管理和推进，可能交错执行。</li>
-<li>交替调度：单核 CPU 上的任务快速切换，看似同时进行。</li>
-<li>共享资源：任务可能操作同一个数据结构或设备，需考虑同步问题。</li>
+<li>
+<p>任务重叠：多个任务在同一时间段被管理和推进，可能交错执行。</p>
+</li>
+<li>
+<p>交替调度：单核 CPU 上的任务快速切换，看似同时进行。</p>
+</li>
+<li>
+<p>共享资源：任务可能操作同一个数据结构或设备，需考虑同步问题。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="餐厅多桌点餐(正例)" type="e">
@@ -1320,14 +1426,24 @@ console<span class="token punctuation">.</span><span class="token function">log<
       
 <p>一个服务员面对 10 桌客人点餐，他：</p>
 <ul>
-<li>每桌问完一句就去下一个桌子记录 。</li>
-<li>然后统一提交厨房。</li>
-<li>再在等菜期间处理其他桌的请求。</li>
+<li>
+<p>每桌问完一句就去下一个桌子记录 。</p>
+</li>
+<li>
+<p>然后统一提交厨房。</p>
+</li>
+<li>
+<p>再在等菜期间处理其他桌的请求。</p>
+</li>
 </ul>
 <p><strong>特征对比：</strong></p>
 <ul>
-<li>任务重叠：服务员一个人不能“同时”服务所有人。</li>
-<li>交替调度：但他在一个时间段里<strong>交替处理多个桌子的请求</strong>。</li>
+<li>
+<p>任务重叠：服务员一个人不能“同时”服务所有人。</p>
+</li>
+<li>
+<p>交替调度：但他在一个时间段里<strong>交替处理多个桌子的请求</strong>。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="单核运行多程序(正例)" type="e">
@@ -1361,8 +1477,12 @@ console<span class="token punctuation">.</span><span class="token function">log<
       
 <p>判断一个任务是否属于「并发」，可以帮助做以下决策：</p>
 <ol>
-<li>是否可以提升任务的响应性与吞吐量：如果希望系统<strong>即使在处理慢任务时也能继续响应其他请求</strong>，就需要采用并发模型（如异步 I/O、线程池等）。</li>
-<li>是否可以使用异步编程替代多线程：对于  <strong>I/O 密集型任务（如请求接口、访问磁盘/数据库）</strong>，并发编程（如 <code>asyncio</code>）可以减少线程使用，避免线程调度开销。</li>
+<li>
+<p>是否可以提升任务的响应性与吞吐量：如果希望系统<strong>即使在处理慢任务时也能继续响应其他请求</strong>，就需要采用并发模型（如异步 I/O、线程池等）。</p>
+</li>
+<li>
+<p>是否可以使用异步编程替代多线程：对于  <strong>I/O 密集型任务（如请求接口、访问磁盘/数据库）</strong>，并发编程（如 <code>asyncio</code>）可以减少线程使用，避免线程调度开销。</p>
+</li>
 </ol>
 
         <div class="evoldown" id="并行vs并发" type="d">
@@ -1507,11 +1627,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>进程是操作系统中资源分配和调度的基本单位，是程序在某个数据集上的一次<strong>执行活动</strong>。它不仅包含可执行程序的代码，还包括程序执行过程中所需的资源，如内存、文件句柄、CPU时间、进程状态等。每个进程在运行时都是独立的，拥有自己的地址空间，并且可以通过进程间通信（IPC）与其他进程交互。</p>
 <p><strong>重要特征：</strong></p>
 <ul>
-<li><strong>独立性</strong>：每个进程拥有自己的私有资源（如地址空间），彼此之间互不干扰。</li>
-<li><strong>动态性</strong>：进程是程序的运行实例，具有生命周期（创建、就绪、运行、阻塞、终止）。</li>
-<li><strong>并发性</strong>：多个进程可同时存在于系统中，并可能并发执行（尤其在多核系统上）。</li>
-<li><strong>资源拥有者</strong>：进程拥有系统资源（如打开的文件、内存段、网络连接等）。</li>
-<li><strong>调度单位</strong>：操作系统调度的是进程而不是程序，决定其在CPU上的执行。</li>
+<li>
+<p><strong>独立性</strong>：每个进程拥有自己的私有资源（如地址空间），彼此之间互不干扰。</p>
+</li>
+<li>
+<p><strong>动态性</strong>：进程是程序的运行实例，具有生命周期（创建、就绪、运行、阻塞、终止）。</p>
+</li>
+<li>
+<p><strong>并发性</strong>：多个进程可同时存在于系统中，并可能并发执行（尤其在多核系统上）。</p>
+</li>
+<li>
+<p><strong>资源拥有者</strong>：进程拥有系统资源（如打开的文件、内存段、网络连接等）。</p>
+</li>
+<li>
+<p><strong>调度单位</strong>：操作系统调度的是进程而不是程序，决定其在CPU上的执行。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="客户端电子邮件(正例)" type="e">
@@ -1532,11 +1662,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>现象</strong>： 用户打开一个邮件客户端程序（如Outlook），系统会为此创建一个进程实例来管理界面显示、网络通信、数据处理等任务。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>独立性</strong>：该进程有自己的内存空间和文件句柄，与其他程序（如浏览器）隔离。</li>
-<li><strong>动态性</strong>：用户启动客户端时创建进程，关闭时进程终止。</li>
-<li><strong>并发性</strong>：用户可同时运行多个程序，每个都是一个独立进程。</li>
-<li><strong>资源拥有者</strong>：该进程拥有网络连接、缓存文件、图形资源等。</li>
-<li><strong>调度单位</strong>：操作系统调度该进程，使其在空闲时间段运行。</li>
+<li>
+<p><strong>独立性</strong>：该进程有自己的内存空间和文件句柄，与其他程序（如浏览器）隔离。</p>
+</li>
+<li>
+<p><strong>动态性</strong>：用户启动客户端时创建进程，关闭时进程终止。</p>
+</li>
+<li>
+<p><strong>并发性</strong>：用户可同时运行多个程序，每个都是一个独立进程。</p>
+</li>
+<li>
+<p><strong>资源拥有者</strong>：该进程拥有网络连接、缓存文件、图形资源等。</p>
+</li>
+<li>
+<p><strong>调度单位</strong>：操作系统调度该进程，使其在空闲时间段运行。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="后台数据库服务(正例)" type="e">
@@ -1557,11 +1697,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>现象</strong>：  一个运行中的数据库服务器（如MySQL或PostgreSQL）通常以服务进程的形式常驻内存，持续响应客户端请求。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>独立性</strong>：数据库进程拥有自己的内存缓存、连接池，与网页服务器进程相互隔离。</li>
-<li><strong>动态性</strong>：服务器启动后创建进程并在运行期间保持活跃；服务器停止后进程销毁。</li>
-<li><strong>并发性</strong>：可以和Web服务器、缓存系统等进程并发运行。</li>
-<li><strong>资源拥有者</strong>：拥有访问磁盘、管理连接的权限。</li>
-<li><strong>调度单位</strong>：操作系统分配CPU资源以响应数据库请求。</li>
+<li>
+<p><strong>独立性</strong>：数据库进程拥有自己的内存缓存、连接池，与网页服务器进程相互隔离。</p>
+</li>
+<li>
+<p><strong>动态性</strong>：服务器启动后创建进程并在运行期间保持活跃；服务器停止后进程销毁。</p>
+</li>
+<li>
+<p><strong>并发性</strong>：可以和Web服务器、缓存系统等进程并发运行。</p>
+</li>
+<li>
+<p><strong>资源拥有者</strong>：拥有访问磁盘、管理连接的权限。</p>
+</li>
+<li>
+<p><strong>调度单位</strong>：操作系统分配CPU资源以响应数据库请求。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="代码例子(正例)" type="e">
@@ -1637,11 +1787,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>现象</strong>：  一个静态HTML文件（如<code>index.html</code>）只是存储在磁盘上的代码文本文件，即使它代表一个网页，也不能单独构成进程。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>独立性（缺失）</strong>：HTML文件不具有资源隔离，它本质上是数据，而非运行实体。</li>
-<li><strong>动态性（缺失）</strong>：HTML文件不会“运行”，没有生命周期，除非被浏览器加载解释。</li>
-<li><strong>并发性（缺失）</strong>：多个HTML文件可被打开，但本身并不并发执行任何任务。</li>
-<li><strong>资源拥有者（缺失）</strong>：文件本身不拥有资源，而是被其他进程（如浏览器）访问。</li>
-<li><strong>调度单位（缺失）</strong>：不是系统调度的单位，不会出现在进程列表中。</li>
+<li>
+<p><strong>独立性（缺失）</strong>：HTML文件不具有资源隔离，它本质上是数据，而非运行实体。</p>
+</li>
+<li>
+<p><strong>动态性（缺失）</strong>：HTML文件不会“运行”，没有生命周期，除非被浏览器加载解释。</p>
+</li>
+<li>
+<p><strong>并发性（缺失）</strong>：多个HTML文件可被打开，但本身并不并发执行任何任务。</p>
+</li>
+<li>
+<p><strong>资源拥有者（缺失）</strong>：文件本身不拥有资源，而是被其他进程（如浏览器）访问。</p>
+</li>
+<li>
+<p><strong>调度单位（缺失）</strong>：不是系统调度的单位，不会出现在进程列表中。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="线程" type="d">
@@ -1654,11 +1814,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>线程是程序执行中的最小单位，是进程中的一个执行流。一个进程可以包含多个线程，这些线程共享进程的资源（如内存地址空间、文件句柄等），但每个线程拥有自己的执行栈、程序计数器和寄存器。线程的引入是为了提高程序的<strong>并发性和资源利用率</strong>，是<strong>操作系统调度的基本单位（在现代系统中）</strong>。</p>
 <p><strong>重要特征：</strong></p>
 <ul>
-<li><strong>轻量级性</strong>：线程比进程更轻量，线程间切换开销小，共享资源无需复杂通信。</li>
-<li><strong>共享性</strong>：同一进程内的所有线程共享内存空间和系统资源。</li>
-<li><strong>并发性</strong>：多个线程可并发执行，提高程序响应速度。</li>
-<li><strong>独立执行栈</strong>：每个线程有自己的栈空间和程序执行状态。</li>
-<li><strong>依赖性</strong>：线程依赖于进程而存在，不能脱离进程独立存在。</li>
+<li>
+<p><strong>轻量级性</strong>：线程比进程更轻量，线程间切换开销小，共享资源无需复杂通信。</p>
+</li>
+<li>
+<p><strong>共享性</strong>：同一进程内的所有线程共享内存空间和系统资源。</p>
+</li>
+<li>
+<p><strong>并发性</strong>：多个线程可并发执行，提高程序响应速度。</p>
+</li>
+<li>
+<p><strong>独立执行栈</strong>：每个线程有自己的栈空间和程序执行状态。</p>
+</li>
+<li>
+<p><strong>依赖性</strong>：线程依赖于进程而存在，不能脱离进程独立存在。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="浏览器渲染与加载(正例)" type="e">
@@ -1679,11 +1849,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>现象</strong>：  现代浏览器（如Chrome）在加载一个网页时会创建多个线程：主线程处理页面渲染，IO线程处理网络请求，JavaScript线程执行脚本等。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>轻量级性</strong>：多个线程协同处理页面加载任务，相比启动多个浏览器进程开销更小。</li>
-<li><strong>共享性</strong>：线程共享浏览器进程的内存，如DOM结构、缓存等。</li>
-<li><strong>并发性</strong>：JS执行、图片加载、用户输入可并行进行，提高用户体验。</li>
-<li><strong>独立执行栈</strong>：每个线程管理自己任务的调用栈。</li>
-<li><strong>依赖性</strong>：线程依赖于浏览器主进程运行，一旦主进程崩溃，线程全部终止。</li>
+<li>
+<p><strong>轻量级性</strong>：多个线程协同处理页面加载任务，相比启动多个浏览器进程开销更小。</p>
+</li>
+<li>
+<p><strong>共享性</strong>：线程共享浏览器进程的内存，如DOM结构、缓存等。</p>
+</li>
+<li>
+<p><strong>并发性</strong>：JS执行、图片加载、用户输入可并行进行，提高用户体验。</p>
+</li>
+<li>
+<p><strong>独立执行栈</strong>：每个线程管理自己任务的调用栈。</p>
+</li>
+<li>
+<p><strong>依赖性</strong>：线程依赖于浏览器主进程运行，一旦主进程崩溃，线程全部终止。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="代码例子" type="e">
@@ -1702,10 +1882,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </div>
       
 <ul>
-<li>单线程版本顺序执行，总耗时约5秒</li>
-<li>多线程版本并发执行，总耗时约1秒</li>
-<li>直观展示线程的并发优势</li>
-<li>注意：在CPU密集型任务中可能表现不同</li>
+<li>
+<p>单线程版本顺序执行，总耗时约5秒</p>
+</li>
+<li>
+<p>多线程版本并发执行，总耗时约1秒</p>
+</li>
+<li>
+<p>直观展示线程的并发优势</p>
+</li>
+<li>
+<p>注意：在CPU密集型任务中可能表现不同</p>
+</li>
 </ul>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> time
 <span class="token keyword">import</span> threading
@@ -1746,11 +1934,21 @@ threads <span class="token operator">=</span> <span class="token punctuation">[<
 <p>协程是一种比线程更轻量的用户级并发执行单元。它通过<strong>用户态的调度</strong>机制在多个任务之间切换，通常用于执行异步、非阻塞的操作。协程与线程不同，它们并不由操作系统调度，而是由程序自身控制的，可以<strong>在单线程内实现高并发</strong>。协程的运行可以被挂起和恢复，非常适合处理 I/O 密集型任务。</p>
 <p><strong>重要特征：</strong></p>
 <ul>
-<li><strong>轻量级切换</strong>：协程在用户态切换，开销极小，不需要内核态上下文切换。</li>
-<li><strong>可挂起与恢复</strong>：协程可通过 <code>yield</code>、<code>await</code> 等语法挂起并在合适时机恢复执行。</li>
-<li><strong>单线程并发</strong>：在单线程中实现并发执行，避免线程切换开销和锁竞争。</li>
-<li><strong>协作式调度</strong>：协程的切换依赖显式的让出控制权，非抢占式。</li>
-<li><strong>状态保持能力</strong>：协程可在挂起时保留上下文状态，恢复后从中断处继续运行。</li>
+<li>
+<p><strong>轻量级切换</strong>：协程在用户态切换，开销极小，不需要内核态上下文切换。</p>
+</li>
+<li>
+<p><strong>可挂起与恢复</strong>：协程可通过 <code>yield</code>、<code>await</code> 等语法挂起并在合适时机恢复执行。</p>
+</li>
+<li>
+<p><strong>单线程并发</strong>：在单线程中实现并发执行，避免线程切换开销和锁竞争。</p>
+</li>
+<li>
+<p><strong>协作式调度</strong>：协程的切换依赖显式的让出控制权，非抢占式。</p>
+</li>
+<li>
+<p><strong>状态保持能力</strong>：协程可在挂起时保留上下文状态，恢复后从中断处继续运行。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="游戏NPC" type="e">
@@ -1771,11 +1969,21 @@ threads <span class="token operator">=</span> <span class="token punctuation">[<
 <p><strong>现象</strong>：  在游戏开发中，NPC（非玩家角色）常用协程来执行连续动作，如“巡逻 → 停顿 → 追击 → 返回”。通过协程可以在游戏主线程中以异步方式调度角色行为而不阻塞其他逻辑。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>轻量级切换</strong>：无需创建线程，多个角色行为同时进行，调度代价小。</li>
-<li><strong>可挂起与恢复</strong>：巡逻状态执行到一定条件后可挂起，待触发恢复后继续。</li>
-<li><strong>单线程并发</strong>：所有角色行为在主线程协程中处理，避免多线程同步问题。</li>
-<li><strong>协作式调度</strong>：每个角色逻辑明确让出控制权，在主循环中协作切换。</li>
-<li><strong>状态保持能力</strong>：挂起时保留角色行为状态，恢复后自然过渡。</li>
+<li>
+<p><strong>轻量级切换</strong>：无需创建线程，多个角色行为同时进行，调度代价小。</p>
+</li>
+<li>
+<p><strong>可挂起与恢复</strong>：巡逻状态执行到一定条件后可挂起，待触发恢复后继续。</p>
+</li>
+<li>
+<p><strong>单线程并发</strong>：所有角色行为在主线程协程中处理，避免多线程同步问题。</p>
+</li>
+<li>
+<p><strong>协作式调度</strong>：每个角色逻辑明确让出控制权，在主循环中协作切换。</p>
+</li>
+<li>
+<p><strong>状态保持能力</strong>：挂起时保留角色行为状态，恢复后自然过渡。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="Web中的异步IO" type="e">
@@ -1796,11 +2004,21 @@ threads <span class="token operator">=</span> <span class="token punctuation">[<
 <p><strong>现象</strong>：  现代高并发Web服务器（如基于Python的<code>FastAPI</code>）通过协程处理HTTP请求，实现同时处理成千上万个客户端连接，而不会为每个请求创建线程。</p>
 <p><strong>特征对比</strong>：</p>
 <ul>
-<li><strong>轻量级切换</strong>：协程处理每个请求时的切换无需线程/进程切换。</li>
-<li><strong>可挂起与恢复</strong>：等待数据库或网络响应时挂起，资源得以释放，响应后继续。</li>
-<li><strong>单线程并发</strong>：整个服务器可运行在一个线程中，支持高并发。</li>
-<li><strong>协作式调度</strong>：协程通过 <code>await</code> 控制切换，不会强制打断。</li>
-<li><strong>状态保持能力</strong>：请求处理过程中的上下文状态可以保留在协程内部。</li>
+<li>
+<p><strong>轻量级切换</strong>：协程处理每个请求时的切换无需线程/进程切换。</p>
+</li>
+<li>
+<p><strong>可挂起与恢复</strong>：等待数据库或网络响应时挂起，资源得以释放，响应后继续。</p>
+</li>
+<li>
+<p><strong>单线程并发</strong>：整个服务器可运行在一个线程中，支持高并发。</p>
+</li>
+<li>
+<p><strong>协作式调度</strong>：协程通过 <code>await</code> 控制切换，不会强制打断。</p>
+</li>
+<li>
+<p><strong>状态保持能力</strong>：请求处理过程中的上下文状态可以保留在协程内部。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="代码例子(正例)" type="e">
@@ -2001,11 +2219,21 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
 <p>在 FastAPI 中，<code>async</code> 和 <code>await</code> 是 Python 原生的异步编程语法，用于构建<strong>非阻塞式 I/O 处理流程</strong>。通过将路由函数声明为 <code>async def</code> 并在其中使用 <code>await</code> 调用异步操作（如数据库、API 调用、文件I/O），FastAPI 可以在单线程内高效并发处理成千上万个 HTTP 请求，从而显著提升 Web 应用在 I/O 密集场景下的性能与伸缩性。</p>
 <p><strong>重要特征</strong>：</p>
 <ul>
-<li><strong>非阻塞性</strong>：<code>await</code> 表达式会挂起当前协程，让出控制权，从而使事件循环可以运行其他任务，实现并发。</li>
-<li><strong>协程声明语义</strong>：使用 <code>async def</code> 声明函数表示这是一个协程，只能通过 <code>await</code> 执行其异步结果。</li>
-<li><strong>高并发处理能力</strong>：无需为每个请求创建线程或进程，协程使得一个线程可以处理大量请求。</li>
-<li><strong>节省资源</strong>：相比线程，每个协程几乎不占用额外内存，切换开销低。</li>
-<li><strong>错误传播与异常处理清晰</strong>：协程函数在逻辑上仍是顺序执行，便于调试与错误处理。</li>
+<li>
+<p><strong>非阻塞性</strong>：<code>await</code> 表达式会挂起当前协程，让出控制权，从而使事件循环可以运行其他任务，实现并发。</p>
+</li>
+<li>
+<p><strong>协程声明语义</strong>：使用 <code>async def</code> 声明函数表示这是一个协程，只能通过 <code>await</code> 执行其异步结果。</p>
+</li>
+<li>
+<p><strong>高并发处理能力</strong>：无需为每个请求创建线程或进程，协程使得一个线程可以处理大量请求。</p>
+</li>
+<li>
+<p><strong>节省资源</strong>：相比线程，每个协程几乎不占用额外内存，切换开销低。</p>
+</li>
+<li>
+<p><strong>错误传播与异常处理清晰</strong>：协程函数在逻辑上仍是顺序执行，便于调试与错误处理。</p>
+</li>
 </ul>
 
         <div class="evoldown" id="Web请求聚合服务" type="e">
@@ -2026,10 +2254,18 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
 <p><strong>现象</strong>  ：一个汇总天气、股市、新闻的 Web API 服务通过 FastAPI 实现。使用 <code>async def</code> 定义路由函数，内部调用三个异步接口（天气、金融、资讯），并使用 <code>await</code> 同时挂起等待其结果。</p>
 <p><strong>特征对比</strong></p>
 <ul>
-<li>✅ 非阻塞性：多个请求并发时，不会互相等待。</li>
-<li>✅ 协程语义：所有异步接口使用 <code>await</code>。</li>
-<li>✅ 高并发能力：成千上万个请求可在单线程中流畅处理。</li>
-<li>✅ 符合 FastAPI 模式：充分利用事件循环模型。</li>
+<li>
+<p>✅ 非阻塞性：多个请求并发时，不会互相等待。</p>
+</li>
+<li>
+<p>✅ 协程语义：所有异步接口使用 <code>await</code>。</p>
+</li>
+<li>
+<p>✅ 高并发能力：成千上万个请求可在单线程中流畅处理。</p>
+</li>
+<li>
+<p>✅ 符合 FastAPI 模式：充分利用事件循环模型。</p>
+</li>
 </ul>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token triple-quoted-string string">'''
 使用 httpx.AsyncClient 实现 HTTP 请求异步化。
@@ -2082,10 +2318,18 @@ EXTERNAL_APIS <span class="token operator">=</span> <span class="token punctuati
 <p><strong>现象：</strong> 用户上传大文件至云端，FastAPI 路由函数异步读取上传内容，并通过 <code>await</code> 将数据块流式写入异步云存储 API（如 S3、OSS）。</p>
 <p><strong>特征对比</strong></p>
 <ul>
-<li>✅ 非阻塞：I/O（磁盘、网络）不阻塞服务器响应。</li>
-<li>✅ 协程函数：整个处理链 <code>async def</code>，资源占用极低。</li>
-<li>✅ 节省资源：不占用线程池，避免线程阻塞。</li>
-<li>✅ 错误处理清晰：协程异常可统一捕获处理。</li>
+<li>
+<p>✅ 非阻塞：I/O（磁盘、网络）不阻塞服务器响应。</p>
+</li>
+<li>
+<p>✅ 协程函数：整个处理链 <code>async def</code>，资源占用极低。</p>
+</li>
+<li>
+<p>✅ 节省资源：不占用线程池，避免线程阻塞。</p>
+</li>
+<li>
+<p>✅ 错误处理清晰：协程异常可统一捕获处理。</p>
+</li>
 </ul>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token triple-quoted-string string">'''
 使用 UploadFile + aiofiles 实现异步文件写入，避免阻塞线程。
@@ -2106,7 +2350,8 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
         <span class="token keyword">await</span> out_file<span class="token punctuation">.</span>write<span class="token punctuation">(</span>content<span class="token punctuation">)</span>
     
     <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"filename"</span><span class="token punctuation">:</span> <span class="token builtin">file</span><span class="token punctuation">.</span>filename<span class="token punctuation">,</span> <span class="token string">"status"</span><span class="token punctuation">:</span> <span class="token string">"uploaded successfully"</span><span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></body></html>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</body></html>
                 
             </div>
             <hr/>
@@ -2524,18 +2769,17 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/59361.html">
+                <a href="/posts/34575.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/27.png" class="responsive-img" alt="FastAPI：(1)并发async与await">
+                        <img src="/medias/featureimages/20.png" class="responsive-img" alt="FastAPI：(2)开启FastAPI">
                         
-                        <span class="card-title">FastAPI：(1)并发async与await</span>
+                        <span class="card-title">FastAPI：(2)开启FastAPI</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -2545,9 +2789,10 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-20
+                        </span>
+                        
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -2564,7 +2809,6 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -2999,7 +3243,7 @@ app <span class="token operator">=</span> FastAPI<span class="token punctuation"
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">133.5k</span>
+                        class="white-color">189.7k</span>
             
             
             

@@ -6,7 +6,7 @@
   <link href="https://www.hkini.top/atom.xml" rel="self"/>
   
   <link href="https://www.hkini.top/"/>
-  <updated>2025-05-21T10:07:07.517Z</updated>
+  <updated>2025-06-13T15:43:13.552Z</updated>
   <id>https://www.hkini.top/</id>
   
   <author>
@@ -17,11 +17,408 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>FastAPI：(14)静态文件，测试</title>
+    <link href="https://www.hkini.top/posts/47935.html"/>
+    <id>https://www.hkini.top/posts/47935.html</id>
+    <published>2025-06-12T14:01:00.000Z</published>
+    <updated>2025-06-13T15:43:13.552Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi14静态文件测试&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi14静态文件测试&quot;&gt;&lt;/a&gt; FastAPI：(14)静态文件，测试&lt;/h1&gt;
+
+     </summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(13)后台任务，元数据，文档URL</title>
+    <link href="https://www.hkini.top/posts/60779.html"/>
+    <id>https://www.hkini.top/posts/60779.html</id>
+    <published>2025-06-10T13:42:00.000Z</published>
+    <updated>2025-06-13T15:41:01.882Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi13后台任务元数据文档url&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi13后台任务元数据文档url&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(12)更大的应用（APIRouter）</title>
+    <link href="https://www.hkini.top/posts/32857.html"/>
+    <id>https://www.hkini.top/posts/32857.html</id>
+    <published>2025-06-09T14:01:00.000Z</published>
+    <updated>2025-06-13T15:39:13.889Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi12更大的应用apirouter&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi12更大的应用apirouter&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(11)SQL数据库</title>
+    <link href="https://www.hkini.top/posts/36464.html"/>
+    <id>https://www.hkini.top/posts/36464.html</id>
+    <published>2025-06-05T13:35:00.000Z</published>
+    <updated>2025-06-13T15:38:18.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi11sql数据库&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi11sql数据库&quot;&gt;&lt;/a&gt; FastAPI：(11)SQL数据库&lt;/h1&gt;
+
+      </summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(10)中间件与CORS</title>
+    <link href="https://www.hkini.top/posts/10582.html"/>
+    <id>https://www.hkini.top/posts/10582.html</id>
+    <published>2025-06-04T13:55:00.000Z</published>
+    <updated>2025-06-13T15:36:36.941Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi10中间件与cors&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi10中间件与cors&quot;&gt;&lt;/a&gt; FastAPI：(10)中间件与CORS&lt;/h1&gt;
+
+</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(9)安全性</title>
+    <link href="https://www.hkini.top/posts/30980.html"/>
+    <id>https://www.hkini.top/posts/30980.html</id>
+    <published>2025-06-02T14:33:00.000Z</published>
+    <updated>2025-06-13T15:35:19.418Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi9安全性&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi9安全性&quot;&gt;&lt;/a&gt; FastAPI：(9)安全性&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(8)依赖项</title>
+    <link href="https://www.hkini.top/posts/45756.html"/>
+    <id>https://www.hkini.top/posts/45756.html</id>
+    <published>2025-06-01T06:58:00.000Z</published>
+    <updated>2025-06-13T15:31:01.753Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi8依赖项&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi8依赖项&quot;&gt;&lt;/a&gt; FastAPI：(8)依赖项&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(7)路劲操作配置与JSON编码兼容</title>
+    <link href="https://www.hkini.top/posts/61316.html"/>
+    <id>https://www.hkini.top/posts/61316.html</id>
+    <published>2025-05-27T13:51:00.000Z</published>
+    <updated>2025-06-13T15:28:57.565Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi7路劲操作配置与json编码兼容&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi7路劲操作配置与json编码兼容&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(6)错误处理</title>
+    <link href="https://www.hkini.top/posts/4392.html"/>
+    <id>https://www.hkini.top/posts/4392.html</id>
+    <published>2025-05-26T14:42:00.000Z</published>
+    <updated>2025-06-13T15:26:46.563Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi6错误处理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi6错误处理&quot;&gt;&lt;/a&gt; FastAPI：(6)错误处理&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(5)表单与请求文件</title>
+    <link href="https://www.hkini.top/posts/64568.html"/>
+    <id>https://www.hkini.top/posts/64568.html</id>
+    <published>2025-05-26T06:44:00.000Z</published>
+    <updated>2025-06-13T15:24:52.746Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi5表单与请求文件&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi5表单与请求文件&quot;&gt;&lt;/a&gt; FastAPI：(5)表单与请求文件&lt;/h1&gt;
+
+      </summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(4)请求体</title>
+    <link href="https://www.hkini.top/posts/8816.html"/>
+    <id>https://www.hkini.top/posts/8816.html</id>
+    <published>2025-05-23T07:30:00.000Z</published>
+    <updated>2025-06-13T15:07:15.213Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi4请求体&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi4请求体&quot;&gt;&lt;/a&gt; FastAPI：(4)请求体&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(3)参数</title>
+    <link href="https://www.hkini.top/posts/42538.html"/>
+    <id>https://www.hkini.top/posts/42538.html</id>
+    <published>2025-05-21T13:37:00.000Z</published>
+    <updated>2025-06-13T15:07:23.781Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi3参数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi3参数&quot;&gt;&lt;/a&gt; FastAPI：(3)参数&lt;/h1&gt;
+
+        &lt;div</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastAPI：(2)开启FastAPI</title>
+    <link href="https://www.hkini.top/posts/34575.html"/>
+    <id>https://www.hkini.top/posts/34575.html</id>
+    <published>2025-05-20T15:11:00.000Z</published>
+    <updated>2025-06-13T15:39:36.484Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;fastapi2开启fastapi&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fastapi2开启fastapi&quot;&gt;&lt;/a&gt; FastAPI：(2)开启FastAPI&lt;/h1&gt;
+
+</summary>
+        
+      
+    
+    
+    
+    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
+    
+    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="FastAPI" scheme="https://www.hkini.top/tags/FastAPI/"/>
+    
+    <category term="Python" scheme="https://www.hkini.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>FastAPI：(1)并发async与await</title>
     <link href="https://www.hkini.top/posts/59361.html"/>
     <id>https://www.hkini.top/posts/59361.html</id>
     <published>2025-05-18T12:35:00.000Z</published>
-    <updated>2025-05-21T10:07:07.517Z</updated>
+    <updated>2025-05-21T13:41:08.782Z</updated>
     
     
       
@@ -223,395 +620,6 @@
     <category term="Obsidian" scheme="https://www.hkini.top/tags/Obsidian/"/>
     
     <category term="同步" scheme="https://www.hkini.top/tags/%E5%90%8C%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>个人博客搭建（一）：多级目录展示与渐构标签</title>
-    <link href="https://www.hkini.top/posts/17220.html"/>
-    <id>https://www.hkini.top/posts/17220.html</id>
-    <published>2025-05-04T13:48:00.000Z</published>
-    <updated>2025-05-13T14:28:25.191Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;个人博客搭建一hexo多级目录展示与渐构标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#个人博客搭建一hexo多级目录展示与渐构标签&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="配置记录" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="Hexo" scheme="https://www.hkini.top/tags/Hexo/"/>
-    
-    <category term="Matery" scheme="https://www.hkini.top/tags/Matery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xss实验</title>
-    <link href="https://www.hkini.top/posts/121.html"/>
-    <id>https://www.hkini.top/posts/121.html</id>
-    <published>2025-05-03T10:30:45.049Z</published>
-    <updated>2025-05-03T10:30:45.050Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;xss-labs&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#xss-labs&quot;&gt;&lt;/a&gt; xss-labs&lt;/h1&gt;
-&lt;h2 id=&quot;level1url中的参数修改&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="实践项目" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="Web安全" scheme="https://www.hkini.top/tags/Web%E5%AE%89%E5%85%A8/"/>
-    
-    <category term="xss漏洞" scheme="https://www.hkini.top/tags/xss%E6%BC%8F%E6%B4%9E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文件上传实验</title>
-    <link href="https://www.hkini.top/posts/59029.html"/>
-    <id>https://www.hkini.top/posts/59029.html</id>
-    <published>2025-05-03T10:30:45.047Z</published>
-    <updated>2025-05-03T10:30:45.047Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;upload-labs&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#upload-labs&quot;&gt;&lt;/a&gt; upload-labs&lt;/h1&gt;
-&lt;h2 id=&quot;知识点&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="实践项目" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="Web安全" scheme="https://www.hkini.top/tags/Web%E5%AE%89%E5%85%A8/"/>
-    
-    <category term="文件上传" scheme="https://www.hkini.top/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL注入实验</title>
-    <link href="https://www.hkini.top/posts/36173.html"/>
-    <id>https://www.hkini.top/posts/36173.html</id>
-    <published>2025-05-03T10:30:45.044Z</published>
-    <updated>2025-05-03T10:30:45.044Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;一sql注入&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#一sql注入&quot;&gt;&lt;/a&gt; 一.SQL注入&lt;/h1&gt;
-&lt;h2 id=&quot;一基础知识&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="实践项目" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="Web安全" scheme="https://www.hkini.top/tags/Web%E5%AE%89%E5%85%A8/"/>
-    
-    <category term="SQL注入" scheme="https://www.hkini.top/tags/SQL%E6%B3%A8%E5%85%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSRF实验</title>
-    <link href="https://www.hkini.top/posts/64967.html"/>
-    <id>https://www.hkini.top/posts/64967.html</id>
-    <published>2025-05-03T10:30:45.042Z</published>
-    <updated>2025-05-03T10:30:45.042Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;csrf实验&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#csrf实验&quot;&gt;&lt;/a&gt; CSRF实验&lt;/h1&gt;
-&lt;h2 id=&quot;知识点&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="实践项目" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="Web安全" scheme="https://www.hkini.top/tags/Web%E5%AE%89%E5%85%A8/"/>
-    
-    <category term="CSRF" scheme="https://www.hkini.top/tags/CSRF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>渐构标签展示</title>
-    <link href="https://www.hkini.top/posts/15211.html"/>
-    <id>https://www.hkini.top/posts/15211.html</id>
-    <published>2025-04-25T01:25:00.000Z</published>
-    <updated>2025-05-03T10:30:45.102Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;1-一级标题展示各个标签&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1-一级标题展示各个标签&quot;&gt;&lt;/a&gt; 1 一级标题（展示各个标签）&lt;/h1&gt;
-
-        &lt;div</summary>
-        
-      
-    
-    
-    
-    <category term="个人成长" scheme="https://www.hkini.top/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/"/>
-    
-    
-    <category term="杂项" scheme="https://www.hkini.top/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AI相关概念</title>
-    <link href="https://www.hkini.top/posts/45473.html"/>
-    <id>https://www.hkini.top/posts/45473.html</id>
-    <published>2025-03-11T08:27:00.000Z</published>
-    <updated>2025-05-03T10:30:45.006Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#&quot;&gt;&lt;/a&gt; &lt;/h1&gt;
-
-        &lt;div class=&quot;evoldown&quot; id=&quot;Top-1准确率&quot; type=&quot;d&quot;&gt;
-</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Yjango的神经网络设计原理</title>
-    <link href="https://www.hkini.top/posts/15973.html"/>
-    <id>https://www.hkini.top/posts/15973.html</id>
-    <published>2025-03-11T08:27:00.000Z</published>
-    <updated>2025-05-03T10:30:45.011Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;1课程介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1课程介绍&quot;&gt;&lt;/a&gt; 1.课程介绍&lt;/h1&gt;
-
-        &lt;div class=&quot;evoldown&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="基础理论" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/"/>
-    
-    
-    <category term="人工智能" scheme="https://www.hkini.top/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OpneCV（一）GUI特性</title>
-    <link href="https://www.hkini.top/posts/7035.html"/>
-    <id>https://www.hkini.top/posts/7035.html</id>
-    <published>2025-03-11T08:27:00.000Z</published>
-    <updated>2025-05-03T10:30:45.019Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;1-图片操作&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1-图片操作&quot;&gt;&lt;/a&gt; 1 图片操作&lt;/h1&gt;
-
-        &lt;div class=&quot;evoldown&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="人工智能" scheme="https://www.hkini.top/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="OpenCV" scheme="https://www.hkini.top/tags/OpenCV/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue：实战中学习的概念</title>
-    <link href="https://www.hkini.top/posts/40247.html"/>
-    <id>https://www.hkini.top/posts/40247.html</id>
-    <published>2025-02-24T14:55:00.000Z</published>
-    <updated>2025-05-03T10:30:45.035Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#&quot;&gt;&lt;/a&gt; &lt;/h1&gt;
-&lt;p&gt;#d 模块导入&lt;br&gt;
-&lt;strong&gt;概念内涵&lt;/strong&gt;： 在 Vue 项目中，导入模块和</summary>
-        
-      
-    
-    
-    
-    <category term="专业" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/"/>
-    
-    <category term="框架" scheme="https://www.hkini.top/categories/%E4%B8%93%E4%B8%9A/%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Vue" scheme="https://www.hkini.top/tags/Vue/"/>
-    
-    <category term="项目" scheme="https://www.hkini.top/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《娱乐至死》</title>
-    <link href="https://www.hkini.top/posts/22336.html"/>
-    <id>https://www.hkini.top/posts/22336.html</id>
-    <published>2024-12-02T14:36:00.000Z</published>
-    <updated>2025-05-13T14:41:04.514Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;娱乐至死&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#娱乐至死&quot;&gt;&lt;/a&gt; 《娱乐至死》&lt;/h1&gt;
-&lt;p&gt;[美]尼尔·波兹曼&lt;br&gt;
-15个笔记&lt;/p&gt;
-&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="兴趣" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/"/>
-    
-    <category term="阅读" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/"/>
-    
-    <category term="阅读整理" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/%E9%98%85%E8%AF%BB%E6%95%B4%E7%90%86/"/>
-    
-    
-    <category term="《娱乐至死》" scheme="https://www.hkini.top/tags/%E3%80%8A%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB%E3%80%8B/"/>
-    
-    <category term="文学" scheme="https://www.hkini.top/tags/%E6%96%87%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《悉达多》</title>
-    <link href="https://www.hkini.top/posts/7129.html"/>
-    <id>https://www.hkini.top/posts/7129.html</id>
-    <published>2024-12-02T14:36:00.000Z</published>
-    <updated>2025-05-13T14:41:05.421Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;悉达多果麦经典&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#悉达多果麦经典&quot;&gt;&lt;/a&gt; 《悉达多（果麦经典）》&lt;/h1&gt;
-&lt;p&gt;赫尔曼·黑塞&lt;/p&gt;
-&lt;h2 id=&quot;沙门&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="兴趣" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/"/>
-    
-    <category term="阅读" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/"/>
-    
-    <category term="阅读整理" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/%E9%98%85%E8%AF%BB%E6%95%B4%E7%90%86/"/>
-    
-    
-    <category term="文学" scheme="https://www.hkini.top/tags/%E6%96%87%E5%AD%A6/"/>
-    
-    <category term="《悉达多》" scheme="https://www.hkini.top/tags/%E3%80%8A%E6%82%89%E8%BE%BE%E5%A4%9A%E3%80%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《浪潮之巅-第四版》</title>
-    <link href="https://www.hkini.top/posts/19933.html"/>
-    <id>https://www.hkini.top/posts/19933.html</id>
-    <published>2024-12-02T14:36:00.000Z</published>
-    <updated>2025-05-13T14:41:07.019Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;浪潮之巅-第四版&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#浪潮之巅-第四版&quot;&gt;&lt;/a&gt; 《浪潮之巅-第四版》&lt;/h1&gt;
-
-        &lt;div</summary>
-        
-      
-    
-    
-    
-    <category term="兴趣" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/"/>
-    
-    <category term="阅读" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/"/>
-    
-    <category term="阅读整理" scheme="https://www.hkini.top/categories/%E5%85%B4%E8%B6%A3/%E9%98%85%E8%AF%BB/%E9%98%85%E8%AF%BB%E6%95%B4%E7%90%86/"/>
-    
-    
-    <category term="历史" scheme="https://www.hkini.top/tags/%E5%8E%86%E5%8F%B2/"/>
     
   </entry>
   
